@@ -1,0 +1,13 @@
+{
+  "debug": true,
+  "server": {
+    "port": ":3030"
+  },
+  "database": {
+      "host": "localhost",
+      "port": "3306",
+      "user": "root",
+      "pass": "password",
+      "name": "arput"
+  }
+}
