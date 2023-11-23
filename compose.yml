@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/go/src/app
+    tty: true
+    working_dir: /go/src/app
+    ports:
+      - "3000:3000"
+    command: sh -c 'go mod tidy && air'
