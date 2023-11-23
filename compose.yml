@@ -10,3 +10,23 @@ services:
     ports:
       - "3000:3000"
     command: sh -c 'go mod tidy && air'
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      interval: 10s
+      retries: 10
+      start_period: 10s
+    ports:
+      - "3306:3306"
