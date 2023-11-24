@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 public class MyRequestHeaderAuthenticationFilter extends RequestHeaderAuthenticationFilter {
     public MyRequestHeaderAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -11,7 +12,7 @@ public class MyRequestHeaderAuthenticationFilter extends RequestHeaderAuthentica
         setExceptionIfHeaderMissing(false); // ヘッダにauthorizationがなくても認証処理を続行する
         setAuthenticationManager(authenticationManager);
         setRequiresAuthenticationRequestMatcher(
-                new AntPathRequestMatcher("/user/secret")
+                new RegexRequestMatcher("/user/.*", null)
         );
 
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
