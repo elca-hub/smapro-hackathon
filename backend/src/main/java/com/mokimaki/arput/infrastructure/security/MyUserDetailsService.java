@@ -1,6 +1,8 @@
 package com.mokimaki.arput.infrastructure.security;
 
+import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.infrastructure.security.utils.UserSecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,9 +20,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public MyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("loadUserByUsername: {}", username);
-        var user = userRepository.findByMailAddress(username).orElseThrow(
+        User user = userRepository.findByMailAddress(username).orElseThrow(
                 () -> new UsernameNotFoundException("user not found")
         );
-        return new MyUserDetails(user);
+        return new MyUserDetails(new UserSecurity(user));
     }
 }

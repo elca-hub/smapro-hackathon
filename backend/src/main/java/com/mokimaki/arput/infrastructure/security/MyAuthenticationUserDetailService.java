@@ -4,8 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.mokimaki.arput.domain.model.user.User;
-import com.mokimaki.arput.domain.model.user.UserId;
+import com.mokimaki.arput.infrastructure.security.utils.UserSecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
@@ -32,13 +31,7 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
         }
 
         // TODO: いい感じの書き方にする
-        User user = new User(
-                new UserId(""),
-                decodedJWT.getClaim("username").asString(),
-                "",
-                "",
-                ""
-        );
+        UserSecurity user = new UserSecurity(decodedJWT.getClaim("username").asString(),"");
 
         return new MyUserDetails(user);
     }
