@@ -7,7 +7,9 @@ import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
     private final IUserRepository userRepository;
     public CreateUserUseCase(IUserRepository userRepository) {
