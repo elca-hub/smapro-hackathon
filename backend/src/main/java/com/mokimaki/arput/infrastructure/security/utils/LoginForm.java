@@ -1,4 +1,4 @@
-package com.mokimaki.arput.infrastructure.security;
+package com.mokimaki.arput.infrastructure.security.utils;
 
 import lombok.Getter;
 import lombok.Setter;
