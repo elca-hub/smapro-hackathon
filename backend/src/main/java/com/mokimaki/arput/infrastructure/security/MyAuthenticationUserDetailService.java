@@ -30,7 +30,6 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
             throw new UsernameNotFoundException("Authorization header must not be empty");
         }
 
-        // TODO: いい感じの書き方にする
         UserSecurity user = new UserSecurity(decodedJWT.getClaim("username").asString(),"");
 
         return new MyUserDetails(user);
