@@ -9,6 +9,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class UserRepository implements IUserRepository {
@@ -21,5 +23,16 @@ public class UserRepository implements IUserRepository {
         userEntity.convert(user);
 
         userContext.save(userEntity);
+    }
+
+    @Override
+    public Optional<User> findByMailAddress(String mailAddress) {
+        return userContext.findByMailAddress(mailAddress).map(entity -> new User(
+               new UserId(entity.id),
+               entity.mailAddress,
+               entity.userName,
+               entity.password,
+               entity.schoolName
+       ));
     }
 }
