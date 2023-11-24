@@ -1,4 +1,4 @@
-package com.mokimaki.arput.domain.model;
+package com.mokimaki.arput.domain.model.user;
 
 import lombok.Setter;
 
@@ -6,22 +6,25 @@ import java.util.UUID;
 
 @Setter
 public class User {
-    private String id;
+    private UserId id;
     private String mailAddress;
     private String name;
+    private String password;
     private String schoolName;
 
-    public User(String id, String mailAddress, String name, String schoolName) {
+    public User(UserId id, String mailAddress, String name, String password, String schoolName) {
         this.id = id;
         this.mailAddress = mailAddress;
         this.name = name;
+        this.password = password;
         this.schoolName = schoolName;
     }
 
-    public User(String mailAddress, String name, String schoolName) {
-        this.id = UUID.randomUUID().toString();
+    public User(String mailAddress, String name, String password, String schoolName) {
+        this.id = new UserId();
         this.mailAddress = mailAddress;
         this.name = name;
+        this.password = password;
         this.schoolName = schoolName;
     }
 }
