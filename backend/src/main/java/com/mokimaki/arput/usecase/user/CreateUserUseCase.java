@@ -23,7 +23,9 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
                 input.schoolName()
         );
 
-        UserId id = userRepository.create(user);
+        userRepository.create(user);
+
+        UserId id = user.getId();
 
         return new OutputData(id.getId());
     }

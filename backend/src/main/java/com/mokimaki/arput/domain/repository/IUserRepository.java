@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IUserRepository {
-    UserId create(User user);
+    void create(User user);
 }

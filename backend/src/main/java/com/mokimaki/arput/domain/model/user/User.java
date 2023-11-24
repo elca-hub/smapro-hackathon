@@ -1,10 +1,11 @@
 package com.mokimaki.arput.domain.model.user;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
 
-@Setter
+@Getter
 public class User {
     private UserId id;
     private String mailAddress;
