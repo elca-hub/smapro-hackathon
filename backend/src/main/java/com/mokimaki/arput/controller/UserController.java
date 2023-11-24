@@ -21,4 +21,9 @@ public class UserController implements UserRouting {
 
         return output.userId();
     }
+
+    @Override
+    public String secret() {
+        return "secret";
+    }
 }

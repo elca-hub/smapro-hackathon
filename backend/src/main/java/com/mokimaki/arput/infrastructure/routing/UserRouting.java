@@ -7,4 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public interface UserRouting {
     @PostMapping("/create")
     String createUser(@RequestBody InputData inputData);
+
+    @GetMapping("/secret")
+    String secret();
 }

@@ -1,5 +1,7 @@
 package com.mokimaki.arput.infrastructure.security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
+import java.util.Date;
 
 @Slf4j
 public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -22,8 +25,17 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
 
         setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login", "POST"));
 
+        var issuedAt = new Date();
+
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
-            log.info("login success");
+            String token = JWT.create()
+                    .withIssuer("arput")
+                    .withIssuedAt(issuedAt)
+                    .withExpiresAt(new Date(issuedAt.getTime() + 1000 * 60 * 60))
+                    .withClaim("username", authentication.getName())
+                    .sign(Algorithm.HMAC256("secret")); // TODO: secretを外部化する
+
+            response.setHeader("X-AUTH-TOKEN", token);
             response.setStatus(HttpServletResponse.SC_OK);
         });
     }
