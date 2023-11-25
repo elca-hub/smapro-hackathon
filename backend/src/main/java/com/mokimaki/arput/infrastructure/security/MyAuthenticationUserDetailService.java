@@ -6,6 +6,8 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.mokimaki.arput.infrastructure.security.utils.UserSecurity;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +18,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class MyAuthenticationUserDetailService implements AuthenticationUserDetailsService<PreAuthenticatedAuthenticationToken> {
+
+    @Value("${arput.secret}")
+    private String secret;
     @Override
     public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken token) throws UsernameNotFoundException {
         DecodedJWT decodedJWT;
 
         try {
-            decodedJWT = JWT.require(Algorithm.HMAC256("secret")).build().verify(token.getPrincipal().toString());
+            decodedJWT = JWT.require(Algorithm.HMAC256(secret)).build().verify(token.getPrincipal().toString());
         } catch (JWTDecodeException e) {
             throw new BadCredentialsException("Authorization header token is invalid");
         }

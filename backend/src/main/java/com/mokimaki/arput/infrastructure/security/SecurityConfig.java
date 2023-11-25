@@ -2,6 +2,7 @@ package com.mokimaki.arput.infrastructure.security;
 
 import com.mokimaki.arput.infrastructure.security.utils.CryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
@@ -43,7 +44,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, @Value("${arput.secret}") String secret) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/user/create", "user/login").permitAll()
                 .anyRequest().authenticated()
@@ -54,7 +55,7 @@ public class SecurityConfig {
 
         var authManager = authenticationManager((AuthenticationConfiguration) http.getSharedObject(AuthenticationManager.class));
 
-        http.addFilter(new MyUsernamePasswordAuthenticationFilter(authManager));
+        http.addFilter(new MyUsernamePasswordAuthenticationFilter(authManager, secret));
         http.addFilter(new MyRequestHeaderAuthenticationFilter(authManager));
 
         return http.build();
