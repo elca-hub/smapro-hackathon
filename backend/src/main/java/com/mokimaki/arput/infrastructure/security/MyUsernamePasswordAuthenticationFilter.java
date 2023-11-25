@@ -3,6 +3,7 @@ package com.mokimaki.arput.infrastructure.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.LoginForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,12 +17,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 @Slf4j
 public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
-    public MyUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager, String secret) {
+    public MyUsernamePasswordAuthenticationFilter(
+            AuthenticationManager authenticationManager,
+            String secret,
+            IUserRepository userRepository
+    ) {
         this.authenticationManager = authenticationManager;
 
         setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login", "POST"));
@@ -31,11 +37,17 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
         log.info(secret);
 
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
+            String email = authentication.getName(); // メールアドレスを取得
+            String contentToken = UUID.randomUUID().toString();
+
+            userRepository.updateToken(email, contentToken);
+
             String token = JWT.create()
                     .withIssuer("arput")
                     .withIssuedAt(issuedAt)
                     .withExpiresAt(new Date(issuedAt.getTime() + 1000 * 60 * 60))
                     .withClaim("username", authentication.getName())
+                    .withClaim("contentToken", contentToken)
                     .sign(Algorithm.HMAC256(secret));
 
             response.setHeader("X-AUTH-TOKEN", token);

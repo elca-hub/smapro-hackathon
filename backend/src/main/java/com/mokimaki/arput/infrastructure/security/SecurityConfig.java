@@ -1,5 +1,6 @@
 package com.mokimaki.arput.infrastructure.security;
 
+import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.CryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private final IUserRepository userRepository;
+
+    public SecurityConfig(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Autowired
     public void configureProvider(
             AuthenticationManagerBuilder auth,
@@ -57,8 +64,8 @@ public class SecurityConfig {
 
         var authManager = authenticationManager((AuthenticationConfiguration) http.getSharedObject(AuthenticationManager.class));
 
-        http.addFilter(new MyUsernamePasswordAuthenticationFilter(authManager, secret));
-        http.addFilter(new MyRequestHeaderAuthenticationFilter(authManager));
+        http.addFilter(new MyUsernamePasswordAuthenticationFilter(authManager, secret, userRepository));
+        http.addFilter(new MyRequestHeaderAuthenticationFilter(authManager, userRepository));
 
         return http.build();
     }

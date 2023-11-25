@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Setter
@@ -18,6 +17,7 @@ public class UserEntity {
     public String userName;
     public String password;
     public String schoolName;
+    public String token;
 
     public void convert(User user) {
         this.id = user.getId().getId();
@@ -25,5 +25,6 @@ public class UserEntity {
         this.userName = user.getName();
         this.password = CryptPasswordEncoder.fetch().encode(user.getPassword());
         this.schoolName = user.getSchoolName();
+        this.token = null;
     }
 }

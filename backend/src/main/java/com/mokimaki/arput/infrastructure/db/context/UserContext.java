@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserContext extends CrudRepository<UserEntity, String> {
     Optional<UserEntity> findByMailAddress(String mailAddress);
+    Optional<UserEntity> findByToken(String token);
 }

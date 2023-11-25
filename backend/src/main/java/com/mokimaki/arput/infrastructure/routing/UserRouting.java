@@ -10,4 +10,7 @@ public interface UserRouting {
 
     @GetMapping("/secret")
     String secret();
+
+    @GetMapping("/logout")
+    String logout();
 }

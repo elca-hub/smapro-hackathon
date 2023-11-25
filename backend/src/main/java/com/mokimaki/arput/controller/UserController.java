@@ -1,13 +1,11 @@
 package com.mokimaki.arput.controller;
 
-import com.mokimaki.arput.infrastructure.db.repository.UserRepository;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
 import com.mokimaki.arput.usecase.user.CreateUserUseCase;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,5 +23,10 @@ public class UserController implements UserRouting {
     @Override
     public String secret() {
         return "secret";
+    }
+
+    @Override
+    public String logout() {
+        return "logout";
     }
 }

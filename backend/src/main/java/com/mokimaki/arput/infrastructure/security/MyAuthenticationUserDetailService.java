@@ -4,10 +4,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.mokimaki.arput.domain.model.user.User;
+import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.UserSecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,12 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
 
     @Value("${arput.secret}")
     private String secret;
+
+    private IUserRepository userRepository;
+
+    public MyAuthenticationUserDetailService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     @Override
     public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken token) throws UsernameNotFoundException {
         DecodedJWT decodedJWT;
@@ -35,7 +42,16 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
             throw new UsernameNotFoundException("Authorization header must not be empty");
         }
 
-        UserSecurity user = new UserSecurity(decodedJWT.getClaim("username").asString(),"");
+        var contentToken = decodedJWT.getClaim("contentToken").asString();
+        var username = decodedJWT.getClaim("username").asString();
+
+        User userByToken = userRepository.findByToken(contentToken).orElseThrow(() -> new UsernameNotFoundException("user not found"));
+
+        if (!userByToken.getMailAddress().equals(username)) {
+            throw new IllegalAccessError("Authorization header token is invalid");
+        }
+
+        UserSecurity user = new UserSecurity(username,"");
 
         return new MyUserDetails(user);
     }
