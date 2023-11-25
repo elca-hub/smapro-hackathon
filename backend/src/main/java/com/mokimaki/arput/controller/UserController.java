@@ -1,5 +1,7 @@
 package com.mokimaki.arput.controller;
 
+import com.mokimaki.arput.infrastructure.response.user.create.UserCreateResponse;
+import com.mokimaki.arput.infrastructure.response.user.logout.UserLogoutResponse;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
@@ -14,10 +16,10 @@ public class UserController implements UserRouting {
     @NonNull
     private final CreateUserUseCase createUserUseCase;
     @Override
-    public String createUser(InputData inputData) {
+    public UserCreateResponse createUser(InputData inputData) {
         OutputData output = createUserUseCase.execute(inputData);
 
-        return output.userId();
+        return new UserCreateResponse(output.userId());
     }
 
     @Override
@@ -26,7 +28,7 @@ public class UserController implements UserRouting {
     }
 
     @Override
-    public String logout() {
-        return "logout";
+    public UserLogoutResponse logout() {
+        return new UserLogoutResponse("logout");
     }
 }
