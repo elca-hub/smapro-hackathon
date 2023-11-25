@@ -1,5 +1,6 @@
 package com.mokimaki.arput.controller;
 
+import com.mokimaki.arput.infrastructure.response.user.logout.UserLogoutResponse;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
@@ -26,7 +27,7 @@ public class UserController implements UserRouting {
     }
 
     @Override
-    public String logout() {
-        return "logout";
+    public UserLogoutResponse logout() {
+        return new UserLogoutResponse("logout");
     }
 }

@@ -1,5 +1,6 @@
 package com.mokimaki.arput.infrastructure.routing;
 
+import com.mokimaki.arput.infrastructure.response.user.logout.UserLogoutResponse;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,5 +13,5 @@ public interface UserRouting {
     String secret();
 
     @GetMapping("/logout")
-    String logout();
+    UserLogoutResponse logout();
 }
