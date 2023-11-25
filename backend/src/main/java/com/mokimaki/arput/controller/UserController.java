@@ -1,7 +1,7 @@
 package com.mokimaki.arput.controller;
 
-import com.mokimaki.arput.infrastructure.response.user.create.UserCreateResponse;
-import com.mokimaki.arput.infrastructure.response.user.logout.UserLogoutResponse;
+import com.mokimaki.arput.presentation.user.create.response.user.create.UserCreateResponse;
+import com.mokimaki.arput.presentation.user.create.response.user.logout.UserLogoutResponse;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
