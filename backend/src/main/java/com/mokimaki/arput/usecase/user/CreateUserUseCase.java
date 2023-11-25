@@ -6,7 +6,6 @@ import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
 import com.mokimaki.arput.usecase.IUseCase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +21,10 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
                 input.password(),
                 input.schoolName()
         );
+
+        if (!input.password().equals(input.passwordConfirmation())) {
+            throw new RuntimeException("パスワードが一致しません");
+        }
 
         userRepository.create(user);
 
