@@ -26,6 +26,8 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
             throw new RuntimeException("パスワードが一致しません");
         }
 
+        // TODO: 同じメールアドレスのユーザーがいる場合はエラーを返す
+
         userRepository.create(user);
 
         UserId id = user.getId();
