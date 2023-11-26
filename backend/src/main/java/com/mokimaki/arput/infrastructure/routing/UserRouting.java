@@ -13,7 +13,7 @@ public interface UserRouting {
     @PostMapping("/create")
     UserCreateResponse createUser(@RequestBody InputData inputData);
 
-    @GetMapping("/secret")
+    @PostMapping("/secret")
     String secret();
 
     @GetMapping("/logout")

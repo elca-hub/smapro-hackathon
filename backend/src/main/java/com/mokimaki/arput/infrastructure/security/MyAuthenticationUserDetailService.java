@@ -23,7 +23,7 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
     @Value("${arput.secret}")
     private String secret;
 
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
 
     public MyAuthenticationUserDetailService(IUserRepository userRepository) {
         this.userRepository = userRepository;
