@@ -1,31 +1,51 @@
 package com.mokimaki.arput.domain.model.user;
 
 import lombok.Getter;
-import lombok.Setter;
-
-import java.util.UUID;
+import lombok.NonNull;
 
 @Getter
 public class User {
-    private UserId id;
-    private String mailAddress;
-    private String name;
-    private String password;
-    private String schoolName;
+    @NonNull
+    private final UserId id;
+    @NonNull
+    private final String mailAddress;
+    @NonNull
+    private final String name;
+    @NonNull
+    private final String password;
+    @NonNull
+    private final String schoolName;
 
-    public User(UserId id, String mailAddress, String name, String password, String schoolName) {
+    private final String bio;
+
+    public User(
+            @NonNull UserId id,
+            @NonNull String mailAddress,
+            @NonNull String name,
+            @NonNull String password,
+            @NonNull String schoolName,
+            String bio
+    ) {
         this.id = id;
         this.mailAddress = mailAddress;
         this.name = name;
         this.password = password;
         this.schoolName = schoolName;
+        this.bio = bio;
     }
 
-    public User(String mailAddress, String name, String password, String schoolName) {
+    public User(
+            @NonNull String mailAddress,
+            @NonNull String name,
+            @NonNull String password,
+            @NonNull String schoolName,
+            String bio
+    ) {
         this.id = new UserId();
         this.mailAddress = mailAddress;
         this.name = name;
         this.password = password;
         this.schoolName = schoolName;
+        this.bio = bio;
     }
 }

@@ -28,11 +28,12 @@ public class UserRepository implements IUserRepository {
     @Override
     public Optional<User> findByMailAddress(String mailAddress) {
         return userContext.findByMailAddress(mailAddress).map(entity -> new User(
-               new UserId(entity.id),
-               entity.mailAddress,
-               entity.userName,
-               entity.password,
-               entity.schoolName
+                new UserId(entity.id),
+                entity.mailAddress,
+                entity.userName,
+                entity.password,
+                entity.schoolName,
+                entity.bio
        ));
     }
 
@@ -43,7 +44,8 @@ public class UserRepository implements IUserRepository {
                 entity.mailAddress,
                 entity.userName,
                 entity.password,
-                entity.schoolName
+                entity.schoolName,
+                entity.bio
         ));
     }
 

@@ -1,4 +1,4 @@
-package com.mokimaki.arput.infrastructure.response.user.logout;
+package com.mokimaki.arput.presentation.response.user.logout;
 
 public class UserLogoutResponse {
     public String message;

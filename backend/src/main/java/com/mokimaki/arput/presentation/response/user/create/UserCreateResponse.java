@@ -1,4 +1,4 @@
-package com.mokimaki.arput.infrastructure.response.user.create;
+package com.mokimaki.arput.presentation.response.user.create;
 
 public class UserCreateResponse {
     private String userId;
