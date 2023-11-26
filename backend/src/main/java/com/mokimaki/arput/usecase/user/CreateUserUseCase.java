@@ -19,7 +19,8 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
                 input.mailAddress(),
                 input.name(),
                 input.password(),
-                input.schoolName()
+                input.schoolName(),
+                input.bio()
         );
 
         if (!input.password().equals(input.passwordConfirmation())) {

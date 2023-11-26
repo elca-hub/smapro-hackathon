@@ -18,6 +18,7 @@ public class UserEntity {
     public String password;
     public String schoolName;
     public String token;
+    public String bio;
 
     public void convert(User user) {
         this.id = user.getId().getId();
@@ -26,5 +27,6 @@ public class UserEntity {
         this.password = CryptPasswordEncoder.fetch().encode(user.getPassword());
         this.schoolName = user.getSchoolName();
         this.token = null;
+        this.bio = user.getBio();
     }
 }

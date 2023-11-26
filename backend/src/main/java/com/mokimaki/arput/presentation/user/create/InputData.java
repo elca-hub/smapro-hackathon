@@ -17,5 +17,8 @@ public record InputData(
         String passwordConfirmation,
 
         @Length(min = 1, max = 30)
-        String schoolName
+        String schoolName,
+
+        @Length(min = 0, max = 100)
+        String bio
 ) { }
