@@ -64,3 +64,33 @@ paths:
                     type: string
                     description: "ユーザID"
                     example: "1"
+  "/user/login":
+    post:
+      tags: ["users"]
+      summary: "ユーザのログイン"
+      deprecated: false
+      requestBody:
+        description: "ユーザのログインに必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mailAddress:
+                  type: string
+                  description: "ユーザのメールアドレス"
+                  example: "test-swagger@ado.com"
+                password:
+                  type: string
+                  description: "ユーザのパスワード"
+                  example: "password"
+      responses:
+        "200":
+          description: "ユーザのログインに成功した場合"
+          headers:
+            X-AUTH-TOKEN:
+              schema:
+                type: string
+                description: "認証トークン"
+                example: "token"
