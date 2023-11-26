@@ -14,6 +14,14 @@ tags:
   - name: "users"
     description: "ユーザに関する操作"
 
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+
+
 paths:
   "/user/create":
     post:
@@ -94,3 +102,24 @@ paths:
                 type: string
                 description: "認証トークン"
                 example: "token"
+  "/user/logout":
+    get:
+      tags: ["users"]
+      summary: "ユーザのログアウト"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: "ユーザのログアウトに成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "メッセージ"
+                    example: "logout"
+        "403":
+          description: "ユーザのログアウトに失敗した場合"
