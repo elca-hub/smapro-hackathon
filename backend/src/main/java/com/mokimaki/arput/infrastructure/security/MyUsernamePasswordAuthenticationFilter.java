@@ -30,11 +30,9 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
     ) {
         this.authenticationManager = authenticationManager;
 
-        setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login", "POST"));
+        setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login"));
 
         var issuedAt = new Date();
-
-        log.info(secret);
 
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
             String email = authentication.getName(); // メールアドレスを取得
