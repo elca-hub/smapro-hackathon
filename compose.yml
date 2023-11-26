@@ -34,6 +34,9 @@ services:
       - ./swagger/openapi.yaml:/openapi.yaml
     environment:
       SWAGGER_JSON: /openapi.yaml
+    depends_on:
+      - swagger-api
+    
 
   swagger-api:
     image: stoplight/prism:3
