@@ -123,3 +123,52 @@ paths:
                     example: "logout"
         "403":
           description: "ユーザのログアウトに失敗した場合"
+  "/user/update":
+    put:
+      tags: ["users"]
+      summary: "ユーザの情報更新"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: "ユーザの情報更新に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "ユーザの名前"
+                  example: "arput"
+                mailAddress:
+                  type: string
+                  description: "ユーザのメールアドレス"
+                  example: "test-swagger@ado.com"
+                password:
+                  type: string
+                  description: "ユーザのパスワード"
+                  example: "password"
+                schoolName:
+                  type: string
+                  description: "ユーザの所属する学校名"
+                  example: "金沢工業大学"
+                bio:
+                  type: string
+                  description: "ユーザの自己紹介"
+                  example: "こんにちは！"
+      responses:
+        "200":
+          description: "ユーザの情報更新に成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: "状態"
+                    example: "SUCCESS"
+        "403":
+          description: "ユーザの情報更新に失敗した場合"

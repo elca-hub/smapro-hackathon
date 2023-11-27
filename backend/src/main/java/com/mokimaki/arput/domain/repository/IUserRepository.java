@@ -14,4 +14,6 @@ public interface IUserRepository {
     void updateToken(String mailAddress, String token);
 
     void resetToken(String mailAddress);
+
+    void update(User user);
 }

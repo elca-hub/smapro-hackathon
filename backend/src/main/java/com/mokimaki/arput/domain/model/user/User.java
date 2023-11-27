@@ -2,27 +2,29 @@ package com.mokimaki.arput.domain.model.user;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class User {
     @NonNull
     private final UserId id;
     @NonNull
-    private final String mailAddress;
+    private String mailAddress;
     @NonNull
-    private final String name;
+    private String name;
     @NonNull
-    private final String password;
+    private Password password;
     @NonNull
-    private final String schoolName;
+    private String schoolName;
 
-    private final String bio;
+    private String bio;
 
     public User(
             @NonNull UserId id,
             @NonNull String mailAddress,
             @NonNull String name,
-            @NonNull String password,
+            @NonNull Password password,
             @NonNull String schoolName,
             String bio
     ) {
@@ -37,7 +39,7 @@ public class User {
     public User(
             @NonNull String mailAddress,
             @NonNull String name,
-            @NonNull String password,
+            @NonNull Password password,
             @NonNull String schoolName,
             String bio
     ) {

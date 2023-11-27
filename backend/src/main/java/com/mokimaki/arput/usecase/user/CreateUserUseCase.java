@@ -1,17 +1,18 @@
 package com.mokimaki.arput.usecase.user;
 
+import com.mokimaki.arput.domain.model.user.Password;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.domain.service.user.UserService;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.user.create.InputData;
-import com.mokimaki.arput.presentation.user.create.OutputData;
+import com.mokimaki.arput.presentation.user.create.UserCreateInputData;
+import com.mokimaki.arput.presentation.user.create.UserCreateOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
+public class CreateUserUseCase implements IUseCase<UserCreateInputData, UserCreateOutputData> {
     private final IUserRepository userRepository;
 
     private final UserService userService;
@@ -19,11 +20,11 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
         this.userRepository = userRepository;
         this.userService = userService;
     }
-    public OutputData execute(InputData input) throws UseCaseException {
+    public UserCreateOutputData execute(UserCreateInputData input) throws UseCaseException {
         var user = new User(
                 input.mailAddress(),
                 input.name(),
-                input.password(),
+                new Password(input.password()),
                 input.schoolName(),
                 input.bio()
         );
@@ -40,6 +41,6 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
 
         UserId id = user.getId();
 
-        return new OutputData(id.getId());
+        return new UserCreateOutputData(id.getId());
     }
 }

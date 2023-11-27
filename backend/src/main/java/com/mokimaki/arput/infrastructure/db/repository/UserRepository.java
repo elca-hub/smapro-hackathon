@@ -1,5 +1,6 @@
 package com.mokimaki.arput.infrastructure.db.repository;
 
+import com.mokimaki.arput.domain.model.user.Password;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IUserRepository;
@@ -31,7 +32,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                entity.password,
+                new Password(entity.password),
                 entity.schoolName,
                 entity.bio
        ));
@@ -43,7 +44,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                entity.password,
+                new Password(entity.password),
                 entity.schoolName,
                 entity.bio
         ));
@@ -64,6 +65,15 @@ public class UserRepository implements IUserRepository {
                 () -> new RuntimeException("user not found")
         );
         userEntity.setToken(null);
+        userContext.save(userEntity);
+    }
+
+    @Override
+    public void update(User user) {
+        var userEntity = userContext.findById(user.getId().getId()).orElseThrow(
+                () -> new RuntimeException("user not found")
+        );
+        userEntity.convert(user);
         userContext.save(userEntity);
     }
 }

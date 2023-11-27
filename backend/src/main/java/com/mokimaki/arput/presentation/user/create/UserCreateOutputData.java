@@ -1,3 +1,3 @@
 package com.mokimaki.arput.presentation.user.create;
 
-public record OutputData(String userId) { }
+public record UserCreateOutputData(String userId) { }

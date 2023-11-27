@@ -24,7 +24,7 @@ public class UserEntity {
         this.id = user.getId().getId();
         this.mailAddress = user.getMailAddress();
         this.userName = user.getName();
-        this.password = CryptPasswordEncoder.fetch().encode(user.getPassword());
+        this.password = CryptPasswordEncoder.fetch().encode(user.getPassword().getPassword());
         this.schoolName = user.getSchoolName();
         this.token = null;
         this.bio = user.getBio();
