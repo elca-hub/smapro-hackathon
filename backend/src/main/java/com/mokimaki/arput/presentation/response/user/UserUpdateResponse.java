@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.response.user.update;
+package com.mokimaki.arput.presentation.response.user;
 
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.ResponseStatus;

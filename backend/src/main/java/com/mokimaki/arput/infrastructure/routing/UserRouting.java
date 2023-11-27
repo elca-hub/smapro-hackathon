@@ -1,8 +1,8 @@
 package com.mokimaki.arput.infrastructure.routing;
 
-import com.mokimaki.arput.presentation.response.user.create.UserCreateResponse;
-import com.mokimaki.arput.presentation.response.user.logout.UserLogoutResponse;
-import com.mokimaki.arput.presentation.response.user.update.UserUpdateResponse;
+import com.mokimaki.arput.presentation.response.user.UserCreateResponse;
+import com.mokimaki.arput.presentation.response.user.UserLogoutResponse;
+import com.mokimaki.arput.presentation.response.user.UserUpdateResponse;
 import com.mokimaki.arput.presentation.user.create.UserCreateInputData;
 import com.mokimaki.arput.presentation.user.update.UserUpdateInputData;
 import org.springframework.web.bind.annotation.*;
