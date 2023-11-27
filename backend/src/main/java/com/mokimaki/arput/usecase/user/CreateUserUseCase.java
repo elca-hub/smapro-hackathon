@@ -4,6 +4,7 @@ import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.domain.service.user.UserService;
+import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.user.create.InputData;
 import com.mokimaki.arput.presentation.user.create.OutputData;
 import com.mokimaki.arput.usecase.IUseCase;
@@ -18,7 +19,7 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
         this.userRepository = userRepository;
         this.userService = userService;
     }
-    public OutputData execute(InputData input) {
+    public OutputData execute(InputData input) throws UseCaseException {
         var user = new User(
                 input.mailAddress(),
                 input.name(),
@@ -28,11 +29,11 @@ public class CreateUserUseCase implements IUseCase<InputData, OutputData> {
         );
 
         if (!input.password().equals(input.passwordConfirmation())) {
-            throw new RuntimeException("パスワードが一致しません");
+            throw new UseCaseException("パスワードが一致しません");
         }
 
         if (userService.isExistMailAddress(input.mailAddress())) {
-            throw new RuntimeException("メールアドレスが既に登録されています");
+            throw new UseCaseException("メールアドレスが既に登録されています");
         }
 
         userRepository.create(user);

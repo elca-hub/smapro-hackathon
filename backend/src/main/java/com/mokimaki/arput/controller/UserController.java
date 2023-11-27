@@ -1,5 +1,6 @@
 package com.mokimaki.arput.controller;
 
+import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
 import com.mokimaki.arput.presentation.response.user.create.UserCreateResponse;
 import com.mokimaki.arput.presentation.response.user.logout.UserLogoutResponse;
@@ -19,9 +20,12 @@ public class UserController implements UserRouting {
     }
     @Override
     public UserCreateResponse createUser(@RequestBody InputData inputData) {
-        OutputData output = createUserUseCase.execute(inputData);
-
-        return new UserCreateResponse(output.userId());
+        try {
+            OutputData output = createUserUseCase.execute(inputData);
+            return new UserCreateResponse(output);
+        } catch (UseCaseException e) {
+            return new UserCreateResponse(e);
+        }
     }
 
     @Override
