@@ -13,6 +13,8 @@ servers:
 tags:
   - name: "users"
     description: "ユーザに関する操作"
+  - name: "communities"
+    description: "コミュニティに関する操作"
 
 components:
   securitySchemes:
@@ -248,3 +250,36 @@ paths:
       responses:
         "200":
           description: "ユーザの削除に成功した場合"
+  "/user/{userId}/community/":
+    post:
+      tags: ["communities"]
+      summary: "コミュニティの新規作成"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "コミュニティの新規作成に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "コミュニティの名前"
+                  example: "テストコミュニティ"
+                description:
+                  type: string
+                  description: "コミュニティの説明"
+                  example: "金工大生限定コミュニティです"
+      responses:
+        "200":
+          description: "コミュニティの新規作成に成功した場合"

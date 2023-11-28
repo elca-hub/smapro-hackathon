@@ -17,11 +17,11 @@ public interface UserRouting {
     UserLogoutResponse logout();
 
     @GetMapping("/{userId}")
-    UserShowResponse getUser(@PathVariable String userId);
+    UserShowResponse getUser(String userId);
 
     @PutMapping("/{userId}")
-    UserUpdateResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest inputData);
+    UserUpdateResponse updateUser(String userId, @RequestBody UserUpdateRequest inputData);
 
     @DeleteMapping("/{userId}")
-    UserDeleteResponse deleteUser(@PathVariable String userId);
+    UserDeleteResponse deleteUser(String userId);
 }

@@ -6,7 +6,7 @@ import com.mokimaki.arput.presentation.response.ResponseStatus;
 import com.mokimaki.arput.presentation.user.show.UserShowOutputData;
 
 public class UserShowResponse extends ArputResponse<UserShowOutputData> {
-    public UserShowOutputData data = null;
+    public UserShowOutputData data;
     @Override
     public UserShowResponse success(UserShowOutputData outputData) {
         this.status = ResponseStatus.SUCCESS;

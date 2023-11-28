@@ -11,9 +11,8 @@ public class MyRequestHeaderAuthenticationFilter extends RequestHeaderAuthentica
         setPrincipalRequestHeader("Authorization");
         setExceptionIfHeaderMissing(false); // ヘッダにauthorizationがなくても認証処理を続行する
         setAuthenticationManager(authenticationManager);
-        setRequiresAuthenticationRequestMatcher(
-                new RegexRequestMatcher("/user/.*", null)
-        );
+        // /user以下のパスと/community以下のパスに対しては認証処理を行う
+        setRequiresAuthenticationRequestMatcher(new RegexRequestMatcher("/user.*|/community.*", null));
 
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
             if (request.getRequestURI().equals("/user/logout")) {
