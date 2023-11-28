@@ -18,4 +18,6 @@ public interface ICommunityRepository {
     List<Community> findByUserId(UserId userId);
 
     void update(Community community);
+
+    void delete(Community community);
 }

@@ -71,4 +71,15 @@ public class CommunityRepository implements ICommunityRepository {
     public Optional<Community> findById(String communityId) {
         return communityContext.findById(communityId).map(CommunityEntity::convert);
     }
+
+    @Override
+    public void delete(Community community) {
+        var communityEntity = new CommunityEntity();
+        communityEntity.convert(community);
+
+        var joinedCommunityEntities = joinedCommunityContext.findByCommunity(communityEntity);
+        joinedCommunityContext.deleteAll(joinedCommunityEntities);
+
+        communityContext.delete(communityEntity);
+    }
 }

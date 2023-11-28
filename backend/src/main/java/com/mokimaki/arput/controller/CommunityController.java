@@ -6,20 +6,16 @@ import com.mokimaki.arput.presentation.dto.community.create.CommunityCreateInput
 import com.mokimaki.arput.presentation.dto.community.create.CommunityCreateOutputData;
 import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboardInputData;
 import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboardOutputData;
+import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteInputData;
+import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteOutputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexInputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexOutputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateInputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateOutputData;
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
 import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
-import com.mokimaki.arput.presentation.response.community.CommunityCreateResponse;
-import com.mokimaki.arput.presentation.response.community.CommunityDashboardResponse;
-import com.mokimaki.arput.presentation.response.community.CommunityIndexResponse;
-import com.mokimaki.arput.presentation.response.community.CommunityUpdateResponse;
-import com.mokimaki.arput.usecase.community.CommunityDashboardUseCase;
-import com.mokimaki.arput.usecase.community.CommunityIndexUseCase;
-import com.mokimaki.arput.usecase.community.CommunityUpdateUseCase;
-import com.mokimaki.arput.usecase.community.CreateCommunityUseCase;
+import com.mokimaki.arput.presentation.response.community.*;
+import com.mokimaki.arput.usecase.community.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,17 +28,20 @@ public class CommunityController implements CommunityRouting {
     private final CommunityDashboardUseCase communityDashboardUseCase;
     private final CommunityIndexUseCase communityIndexUseCase;
     private final CommunityUpdateUseCase communityUpdateUseCase;
+    private final DeleteCommunityUseCase communityDeleteUseCase;
 
     public CommunityController(
             CreateCommunityUseCase createCommunityUseCase,
             CommunityDashboardUseCase communityDashboardUseCase,
             CommunityIndexUseCase communityIndexUseCase,
-            CommunityUpdateUseCase communityUpdateUseCase
+            CommunityUpdateUseCase communityUpdateUseCase,
+            DeleteCommunityUseCase communityDeleteUseCase
     ) {
         this.createCommunityUseCase = createCommunityUseCase;
         this.communityDashboardUseCase = communityDashboardUseCase;
         this.communityIndexUseCase = communityIndexUseCase;
         this.communityUpdateUseCase = communityUpdateUseCase;
+        this.communityDeleteUseCase = communityDeleteUseCase;
     }
 
     @Override
@@ -91,6 +90,20 @@ public class CommunityController implements CommunityRouting {
         var response = new CommunityUpdateResponse();
         try {
             CommunityUpdateOutputData output = communityUpdateUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public CommunityDeleteResponse deleteCommunity(@PathVariable String userId, @PathVariable String communityId) {
+        var input = new CommunityDeleteInputData(userId, communityId);
+        var response = new CommunityDeleteResponse();
+
+        try {
+            CommunityDeleteOutputData output = communityDeleteUseCase.execute(input);
 
             return response.success(output);
         } catch (UseCaseException e) {

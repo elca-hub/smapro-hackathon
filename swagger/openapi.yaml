@@ -355,3 +355,25 @@ paths:
       responses:
         "200":
           description: "コミュニティの情報更新に成功した場合"
+    delete:
+      tags: ["communities"]
+      summary: "コミュニティの削除"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+        - name: "communityId"
+          in: "path"
+          description: "コミュニティID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの削除に成功した場合"
