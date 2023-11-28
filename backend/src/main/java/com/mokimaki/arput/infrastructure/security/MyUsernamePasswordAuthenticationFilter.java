@@ -51,6 +51,12 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
             response.setHeader("X-AUTH-TOKEN", token);
             response.setStatus(HttpServletResponse.SC_OK);
         });
+
+        this.setAuthenticationFailureHandler((request, response, authentication) -> {
+            log.info("login failure");
+            log.warn(authentication.getMessage());
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        });
     }
 
     @Override
