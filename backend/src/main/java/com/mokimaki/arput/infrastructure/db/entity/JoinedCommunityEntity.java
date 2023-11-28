@@ -10,11 +10,11 @@ import lombok.Setter;
 public class JoinedCommunityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    private int id;
 
     @ManyToOne
-    public UserEntity user;
+    private UserEntity userEntity;
 
     @ManyToOne
-    public CommunityEntity community;
+    private CommunityEntity communityEntity;
 }

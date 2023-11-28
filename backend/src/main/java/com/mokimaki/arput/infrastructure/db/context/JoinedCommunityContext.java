@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface JoinedCommunityContext extends CrudRepository<JoinedCommunityEntity, Integer> {
-    List<JoinedCommunityEntity> findByUser(UserEntity user);
+    List<JoinedCommunityEntity> findByUserEntity(UserEntity user);
 
-    List<JoinedCommunityEntity> findByCommunity(CommunityEntity community);
+    List<JoinedCommunityEntity> findByCommunityEntity(CommunityEntity community);
 }

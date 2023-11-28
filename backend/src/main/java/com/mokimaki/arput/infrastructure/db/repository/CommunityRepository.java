@@ -37,8 +37,8 @@ public class CommunityRepository implements ICommunityRepository {
         communityContext.save(communityEntity);
 
         JoinedCommunityEntity joinedCommunityEntity = new JoinedCommunityEntity();
-        joinedCommunityEntity.setCommunity(communityEntity);
-        joinedCommunityEntity.setUser(user);
+        joinedCommunityEntity.setCommunityEntity(communityEntity);
+        joinedCommunityEntity.setUserEntity(user);
 
         joinedCommunityContext.save(joinedCommunityEntity);
     }
@@ -54,7 +54,7 @@ public class CommunityRepository implements ICommunityRepository {
     public List<Community> findByUserId(UserId userId) {
         UserEntity user = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザーが存在しません"));
 
-        List<CommunityEntity> communityEntities = joinedCommunityContext.findByUser(user).stream().map(JoinedCommunityEntity::getCommunity).toList();
+        List<CommunityEntity> communityEntities = joinedCommunityContext.findByUserEntity(user).stream().map(JoinedCommunityEntity::getCommunityEntity).toList();
 
         return communityEntities.stream().map(CommunityEntity::convert).toList();
     }
@@ -77,7 +77,7 @@ public class CommunityRepository implements ICommunityRepository {
         var communityEntity = new CommunityEntity();
         communityEntity.convert(community);
 
-        var joinedCommunityEntities = joinedCommunityContext.findByCommunity(communityEntity);
+        var joinedCommunityEntities = joinedCommunityContext.findByCommunityEntity(communityEntity);
         joinedCommunityContext.deleteAll(joinedCommunityEntities);
 
         communityContext.delete(communityEntity);
