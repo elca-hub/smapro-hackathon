@@ -2,17 +2,20 @@ openapi: 3.0.0
 
 info:
   title: Arput API
+  description: ArputのAPI仕様書です。
   version: 1.0.0
 
 servers:
-  - url: "http://localhost:8003"
-    description: "モックサーバ"
   - url: "http://localhost:5050"
     description: "開発サーバ"
+  - url: "http://localhost:8003"
+    description: "モックサーバ"
 
 tags:
   - name: "users"
     description: "ユーザに関する操作"
+  - name: "communities"
+    description: "コミュニティに関する操作"
 
 components:
   securitySchemes:
@@ -248,3 +251,130 @@ paths:
       responses:
         "200":
           description: "ユーザの削除に成功した場合"
+  "/user/{userId}/community/":
+    post:
+      tags: ["communities"]
+      summary: "コミュニティの新規作成"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "コミュニティの新規作成に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "コミュニティの名前"
+                  example: "テストコミュニティ"
+                description:
+                  type: string
+                  description: "コミュニティの説明"
+                  example: "金工大生限定コミュニティです"
+      responses:
+        "200":
+          description: "コミュニティの新規作成に成功した場合"
+    get:
+      tags: ["communities"]
+      summary: "ユーザが参加しているコミュニティの一覧を取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの一覧取得に成功した場合"
+  "/user/{userId}/community/dashboard":
+    get:
+      tags: ["communities"]
+      summary: "現在ユーザが登録したコミュニティの一覧を取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの一覧取得に成功した場合"
+  "/user/{userId}/community/{communityId}":
+    put:
+      tags: ["communities"]
+      summary: "コミュニティの情報更新"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+        - name: "communityId"
+          in: "path"
+          description: "コミュニティID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "コミュニティの情報更新に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "コミュニティの名前"
+                  example: "テストコミュニティ"
+                description:
+                  type: string
+                  description: "コミュニティの説明"
+                  example: "金工大生限定コミュニティです"
+      responses:
+        "200":
+          description: "コミュニティの情報更新に成功した場合"
+    delete:
+      tags: ["communities"]
+      summary: "コミュニティの削除"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+        - name: "communityId"
+          in: "path"
+          description: "コミュニティID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの削除に成功した場合"

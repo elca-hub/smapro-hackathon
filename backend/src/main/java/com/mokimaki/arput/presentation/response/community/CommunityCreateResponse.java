@@ -1,23 +1,20 @@
-package com.mokimaki.arput.presentation.response.user;
+package com.mokimaki.arput.presentation.response.community;
 
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
+import com.mokimaki.arput.presentation.dto.community.create.CommunityCreateOutputData;
 import com.mokimaki.arput.presentation.response.ArputResponse;
 import com.mokimaki.arput.presentation.response.ResponseStatus;
-import com.mokimaki.arput.presentation.dto.user.create.UserCreateOutputData;
 
-public class UserCreateResponse extends ArputResponse<UserCreateOutputData> {
-    public String userId;
-
+public class CommunityCreateResponse extends ArputResponse<CommunityCreateOutputData> {
     @Override
-    public UserCreateResponse success(UserCreateOutputData outputData) {
-        this.userId = outputData.userId();
+    public CommunityCreateResponse success(CommunityCreateOutputData outputData) {
         this.status = ResponseStatus.SUCCESS;
 
         return this;
     }
 
     @Override
-    public UserCreateResponse error(UseCaseException e) {
+    public CommunityCreateResponse error(UseCaseException e) {
         this.status = ResponseStatus.ERROR;
         this.message = e.getMessage();
 
