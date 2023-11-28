@@ -36,6 +36,6 @@ public class UpdateUserUseCase implements IUseCase<UserUpdateInputData, UserUpda
             throw new UseCaseException("ユーザー情報の更新に失敗しました");
         }
 
-        return new UserUpdateOutputData(true);
+        return new UserUpdateOutputData();
     }
 }

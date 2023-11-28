@@ -1,3 +1,3 @@
 package com.mokimaki.arput.presentation.user.update;
 
-public record UserUpdateOutputData(boolean isSuccess){ }
+public record UserUpdateOutputData(){ }
