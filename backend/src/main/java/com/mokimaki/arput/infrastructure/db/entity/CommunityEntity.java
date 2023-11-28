@@ -32,6 +32,8 @@ public class CommunityEntity {
         this.name = community.getName();
         this.description = community.getDescription();
         this.entryCode = community.getEntryCode().getEntryCode();
+        this.owner = new UserEntity();
+        this.owner.convert(community.getOwner());
     }
 
     public Community convert() {
@@ -39,7 +41,8 @@ public class CommunityEntity {
                 new CommunityId(this.id),
                 this.name,
                 this.description,
-                new EntryCode(this.entryCode)
+                new EntryCode(this.entryCode),
+                this.owner.convert()
         );
     }
 }

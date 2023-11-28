@@ -8,8 +8,10 @@ import lombok.Setter;
 public class CommunityIndexOutputData {
     public String name;
     public String description;
+    public String communityId;
 
-    public CommunityIndexOutputData(String name, String description) {
+    public CommunityIndexOutputData(String communityId, String name, String description) {
+        this.communityId = communityId;
         this.name = name;
         this.description = description;
     }

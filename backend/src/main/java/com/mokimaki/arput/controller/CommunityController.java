@@ -8,12 +8,17 @@ import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboar
 import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboardOutputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexInputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexOutputData;
+import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateInputData;
+import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateOutputData;
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
+import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.CommunityCreateResponse;
 import com.mokimaki.arput.presentation.response.community.CommunityDashboardResponse;
 import com.mokimaki.arput.presentation.response.community.CommunityIndexResponse;
+import com.mokimaki.arput.presentation.response.community.CommunityUpdateResponse;
 import com.mokimaki.arput.usecase.community.CommunityDashboardUseCase;
 import com.mokimaki.arput.usecase.community.CommunityIndexUseCase;
+import com.mokimaki.arput.usecase.community.CommunityUpdateUseCase;
 import com.mokimaki.arput.usecase.community.CreateCommunityUseCase;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,15 +31,18 @@ public class CommunityController implements CommunityRouting {
     private final CreateCommunityUseCase createCommunityUseCase;
     private final CommunityDashboardUseCase communityDashboardUseCase;
     private final CommunityIndexUseCase communityIndexUseCase;
+    private final CommunityUpdateUseCase communityUpdateUseCase;
 
     public CommunityController(
             CreateCommunityUseCase createCommunityUseCase,
             CommunityDashboardUseCase communityDashboardUseCase,
-            CommunityIndexUseCase communityIndexUseCase
+            CommunityIndexUseCase communityIndexUseCase,
+            CommunityUpdateUseCase communityUpdateUseCase
     ) {
         this.createCommunityUseCase = createCommunityUseCase;
         this.communityDashboardUseCase = communityDashboardUseCase;
         this.communityIndexUseCase = communityIndexUseCase;
+        this.communityUpdateUseCase = communityUpdateUseCase;
     }
 
     @Override
@@ -70,6 +78,19 @@ public class CommunityController implements CommunityRouting {
         var response = new CommunityIndexResponse();
         try {
             List<CommunityIndexOutputData> output = communityIndexUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public CommunityUpdateResponse updateCommunity(@PathVariable("userId") String userId, @PathVariable("communityId") String communityId, @RequestBody CommunityUpdateRequest requestBody) {
+        var input = new CommunityUpdateInputData(userId, communityId, requestBody.name(), requestBody.description());
+        var response = new CommunityUpdateResponse();
+        try {
+            CommunityUpdateOutputData output = communityUpdateUseCase.execute(input);
 
             return response.success(output);
         } catch (UseCaseException e) {

@@ -12,6 +12,7 @@ import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CommunityRepository implements ICommunityRepository {
@@ -56,5 +57,18 @@ public class CommunityRepository implements ICommunityRepository {
         List<CommunityEntity> communityEntities = joinedCommunityContext.findByUser(user).stream().map(JoinedCommunityEntity::getCommunity).toList();
 
         return communityEntities.stream().map(CommunityEntity::convert).toList();
+    }
+
+    @Override
+    public void update(Community community) {
+        var communityEntity = new CommunityEntity();
+        communityEntity.convert(community);
+
+        communityContext.save(communityEntity);
+    }
+
+    @Override
+    public Optional<Community> findById(String communityId) {
+        return communityContext.findById(communityId).map(CommunityEntity::convert);
     }
 }

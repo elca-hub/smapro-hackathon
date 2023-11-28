@@ -1,4 +1,4 @@
-package com.mokimaki.arput.domain.service.user;
+package com.mokimaki.arput.domain.service;
 
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
