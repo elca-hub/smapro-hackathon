@@ -27,6 +27,18 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public Optional<User> findById(String id) {
+        return userContext.findById(id).map(entity -> new User(
+                new UserId(entity.id),
+                entity.mailAddress,
+                entity.userName,
+                new EncryptPassword(entity.password),
+                entity.schoolName,
+                entity.bio
+        ));
+    }
+
+    @Override
     public Optional<User> findByMailAddress(String mailAddress) {
         return userContext.findByMailAddress(mailAddress).map(entity -> new User(
                 new UserId(entity.id),

@@ -40,6 +40,7 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
 
             userRepository.updateToken(email, contentToken);
 
+
             String token = JWT.create()
                     .withIssuer("arput")
                     .withIssuedAt(issuedAt)
@@ -48,7 +49,10 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
                     .withClaim("contentToken", contentToken)
                     .sign(Algorithm.HMAC256(secret));
 
+            var user = userRepository.findByMailAddress(email).orElseThrow(() -> new RuntimeException("ユーザーが見つかりません"));
+
             response.setHeader("X-AUTH-TOKEN", token);
+            response.setHeader("X-UID", user.getId().getId());
             response.setStatus(HttpServletResponse.SC_OK);
         });
 

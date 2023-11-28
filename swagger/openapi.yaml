@@ -102,6 +102,60 @@ paths:
                 type: string
                 description: "認証トークン"
                 example: "token"
+  "/user/{userId}":
+    get:
+      summary: "ユーザの情報取得"
+      tags: ["users"]
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "ユーザの情報取得に成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: "状態"
+                    example: "SUCCESS"
+                  message:
+                    type: string
+                    description: "メッセージ"
+                    example: ""
+                  data:
+                    type: object
+                    description: "ユーザの情報"
+                    properties:
+                      userId:
+                        type: string
+                        description: "ユーザID"
+                        example: "1"
+                      name:
+                        type: string
+                        description: "ユーザの名前"
+                        example: "arput"
+                      mailAddress:
+                        type: string
+                        description: "ユーザのメールアドレス"
+                        example: "test-swagger@ado.com"
+                      schoolName:
+                        type: string
+                        description: "ユーザの所属する学校名"
+                        example: "金沢工業大学"
+                      bio:
+                        type: string
+                        description: "ユーザの自己紹介"
+                        example: "こんにちは！"
   "/user/logout":
     get:
       tags: ["users"]
