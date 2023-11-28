@@ -51,7 +51,7 @@ public class MyAuthenticationUserDetailService implements AuthenticationUserDeta
             throw new IllegalAccessError("Authorization header token is invalid");
         }
 
-        UserSecurity user = new UserSecurity(username,"");
+        UserSecurity user = new UserSecurity(username,"passwordAdo");
 
         return new MyUserDetails(user);
     }

@@ -87,7 +87,7 @@ public class SecurityConfig {
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 
-        configuration.setExposedHeaders(List.of("X-AUTH-TOKEN"));
+        configuration.setExposedHeaders(List.of("X-AUTH-TOKEN", "X-UID"));
 
         var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
