@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.user.create;
+package com.mokimaki.arput.presentation.dto.user.create;
 
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;

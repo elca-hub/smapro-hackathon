@@ -3,7 +3,7 @@ package com.mokimaki.arput.presentation.response.user;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.response.ArputResponse;
 import com.mokimaki.arput.presentation.response.ResponseStatus;
-import com.mokimaki.arput.presentation.user.delete.UserDeleteOutputData;
+import com.mokimaki.arput.presentation.dto.user.delete.UserDeleteOutputData;
 
 public class UserDeleteResponse extends ArputResponse<UserDeleteOutputData> {
     @Override

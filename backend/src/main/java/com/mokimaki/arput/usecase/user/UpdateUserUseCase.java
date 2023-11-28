@@ -4,8 +4,8 @@ import com.mokimaki.arput.domain.model.user.password.RawPassword;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.DomainException;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.user.update.UserUpdateInputData;
-import com.mokimaki.arput.presentation.user.update.UserUpdateOutputData;
+import com.mokimaki.arput.presentation.dto.user.update.UserUpdateInputData;
+import com.mokimaki.arput.presentation.dto.user.update.UserUpdateOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 

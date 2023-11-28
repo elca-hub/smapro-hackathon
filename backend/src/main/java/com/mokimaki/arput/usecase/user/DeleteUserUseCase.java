@@ -4,8 +4,8 @@ import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.domain.service.user.UserService;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.user.delete.UserDeleteInputData;
-import com.mokimaki.arput.presentation.user.delete.UserDeleteOutputData;
+import com.mokimaki.arput.presentation.dto.user.delete.UserDeleteInputData;
+import com.mokimaki.arput.presentation.dto.user.delete.UserDeleteOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 

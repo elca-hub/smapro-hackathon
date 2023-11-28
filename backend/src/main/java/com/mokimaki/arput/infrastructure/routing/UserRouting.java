@@ -2,7 +2,7 @@ package com.mokimaki.arput.infrastructure.routing;
 
 import com.mokimaki.arput.presentation.request.user.UserUpdateRequest;
 import com.mokimaki.arput.presentation.response.user.*;
-import com.mokimaki.arput.presentation.user.create.UserCreateInputData;
+import com.mokimaki.arput.presentation.dto.user.create.UserCreateInputData;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/user")

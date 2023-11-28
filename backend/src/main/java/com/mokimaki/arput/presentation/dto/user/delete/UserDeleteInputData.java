@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.user.delete;
+package com.mokimaki.arput.presentation.dto.user.delete;
 
 import lombok.Getter;
 

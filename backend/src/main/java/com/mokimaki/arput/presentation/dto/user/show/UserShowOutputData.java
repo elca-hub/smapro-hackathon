@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.user.show;
+package com.mokimaki.arput.presentation.dto.user.show;
 
 import com.mokimaki.arput.domain.model.user.User;
 

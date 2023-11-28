@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.user.update;
+package com.mokimaki.arput.presentation.dto.user.update;
 
 import com.mokimaki.arput.presentation.request.user.UserUpdateRequest;
 import lombok.Getter;
