@@ -283,6 +283,22 @@ paths:
       responses:
         "200":
           description: "コミュニティの新規作成に成功した場合"
+    get:
+      tags: ["communities"]
+      summary: "ユーザが参加しているコミュニティの一覧を取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの一覧取得に成功した場合"
   "/user/{userId}/community/dashboard":
     get:
       tags: ["communities"]

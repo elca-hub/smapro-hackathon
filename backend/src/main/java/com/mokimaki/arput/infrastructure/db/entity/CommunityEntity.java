@@ -6,8 +6,11 @@ import com.mokimaki.arput.domain.model.community.EntryCode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -20,6 +23,9 @@ public class CommunityEntity {
     public String entryCode;
     @ManyToOne
     public UserEntity owner;
+
+    @OneToMany
+    public List<JoinedCommunityEntity> joinedCommunityEntity;
 
     public void convert(Community community) {
         this.id = community.getId().getId();

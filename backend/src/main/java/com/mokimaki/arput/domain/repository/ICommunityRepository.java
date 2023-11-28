@@ -11,4 +11,6 @@ public interface ICommunityRepository {
     void create(UserId userId, Community community);
 
     List<Community> findOwnCommunities(UserId userId);
+
+    List<Community> findByUserId(UserId userId);
 }
