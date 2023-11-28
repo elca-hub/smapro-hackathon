@@ -1,6 +1,8 @@
 package com.mokimaki.arput.infrastructure.db.entity;
 
 import com.mokimaki.arput.domain.model.community.Community;
+import com.mokimaki.arput.domain.model.community.CommunityId;
+import com.mokimaki.arput.domain.model.community.EntryCode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -24,5 +26,14 @@ public class CommunityEntity {
         this.name = community.getName();
         this.description = community.getDescription();
         this.entryCode = community.getEntryCode().getEntryCode();
+    }
+
+    public Community convert() {
+        return new Community(
+                new CommunityId(this.id),
+                this.name,
+                this.description,
+                new EntryCode(this.entryCode)
+        );
     }
 }

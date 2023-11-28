@@ -9,6 +9,8 @@ import com.mokimaki.arput.infrastructure.db.entity.CommunityEntity;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CommunityRepository implements ICommunityRepository {
     private final CommunityContext communityContext;
@@ -28,5 +30,12 @@ public class CommunityRepository implements ICommunityRepository {
         communityEntity.setOwner(user);
 
         communityContext.save(communityEntity);
+    }
+
+    @Override
+    public List<Community> findOwnCommunities(UserId userId) {
+        UserEntity user = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザーが存在しません"));
+
+        return communityContext.findByOwner(user).stream().map(CommunityEntity::convert).toList();
     }
 }
