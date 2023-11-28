@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CommunityController implements CommunityRouting {
-    private CreateCommunityUseCase createCommunityUseCase;
+    private final CreateCommunityUseCase createCommunityUseCase;
 
     public CommunityController(CreateCommunityUseCase createCommunityUseCase) {
         this.createCommunityUseCase = createCommunityUseCase;

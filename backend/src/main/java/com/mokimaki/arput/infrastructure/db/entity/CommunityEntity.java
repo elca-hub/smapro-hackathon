@@ -3,6 +3,7 @@ package com.mokimaki.arput.infrastructure.db.entity;
 import com.mokimaki.arput.domain.model.community.Community;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,8 @@ public class CommunityEntity {
     public String name;
     public String description;
     public String entryCode;
+    @ManyToOne
+    public UserEntity owner;
 
     public void convert(Community community) {
         this.id = community.getId().getId();

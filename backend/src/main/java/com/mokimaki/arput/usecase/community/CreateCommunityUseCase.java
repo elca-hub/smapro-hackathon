@@ -3,6 +3,7 @@ package com.mokimaki.arput.usecase.community;
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.community.CommunityId;
 import com.mokimaki.arput.domain.model.community.EntryCode;
+import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.ICommunityRepository;
 import com.mokimaki.arput.infrastructure.exception.DomainException;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
@@ -29,7 +30,7 @@ public class CreateCommunityUseCase implements IUseCase<CommunityCreateInputData
                     new EntryCode()
             );
 
-            communityRepository.create(community);
+            communityRepository.create(new UserId(inputData.userId), community);
 
             return new CommunityCreateOutputData();
         } catch (DomainException e) {
