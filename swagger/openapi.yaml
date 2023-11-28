@@ -102,6 +102,27 @@ paths:
                 type: string
                 description: "認証トークン"
                 example: "token"
+  "/user/logout":
+    get:
+      tags: ["users"]
+      summary: "ユーザのログアウト"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: "ユーザのログアウトに成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "メッセージ"
+                    example: "logout"
+        "403":
+          description: "ユーザのログアウトに失敗した場合"
   "/user/{userId}":
     get:
       summary: "ユーザの情報取得"
@@ -227,24 +248,3 @@ paths:
       responses:
         "200":
           description: "ユーザの削除に成功した場合"
-  "/user/logout":
-    get:
-      tags: ["users"]
-      summary: "ユーザのログアウト"
-      deprecated: false
-      security:
-        - ApiKeyAuth: []
-      responses:
-        "200":
-          description: "ユーザのログアウトに成功した場合"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: "メッセージ"
-                    example: "logout"
-        "403":
-          description: "ユーザのログアウトに失敗した場合"
