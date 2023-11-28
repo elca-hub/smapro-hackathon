@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Router } from 'next/router'
 
 export default function Home() {
   return (
@@ -100,6 +101,43 @@ export default function Home() {
       </div>
     </section>
 
+    <section className="text-gray-600 body-font">
+      <div className="container px-5 py-24 mx-auto">
+        <div className="flex flex-col text-center w-full mb-20">
+          <h2 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">お知らせ一覧</h2>
+        </div>
+        <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+          <table className="table-auto w-full text-left whitespace-no-wrap">
+            <thead>
+              <tr>
+                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">更新日時</th>
+                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">タイトル</th>
+                <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="px-4 py-3">2023/11/29</td>
+                <td className="px-4 py-3">トップページを作成しました。</td>
+              </tr>
+              <tr>
+                <td className="border-t-2 border-gray-200 px-4 py-3">2023/11/28</td>
+                <td className="border-t-2 border-gray-200 px-4 py-3">ここにお知らせを記入する。</td>
+              </tr>
+              <tr>
+                <td className="border-t-2 border-gray-200 px-4 py-3">2023/11/28</td>
+                <td className="border-t-2 border-gray-200 px-4 py-3">ここにお知らせを記入する。</td>
+              </tr>
+              <tr>
+                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">2023/11/27</td>
+                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">ここにお知らせを記入する。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <footer className="text-gray-600 body-font">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
@@ -108,6 +146,12 @@ export default function Home() {
           </svg>
           <span className="ml-3 text-xl">apt</span>
         </a>
+        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+          <a className="mr-5 hover:text-gray-900">お問い合わせ</a>
+          <a className="mr-5 hover:text-gray-900">利用規約</a>
+          <a className="mr-5 hover:text-gray-900">プライバシーポリシー</a>
+          <a className="mr-5 hover:text-gray-900">ヘルプ</a>
+        </p>
       </div>
     </footer>
   </>
