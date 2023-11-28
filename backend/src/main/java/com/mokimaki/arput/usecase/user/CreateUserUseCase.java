@@ -1,8 +1,8 @@
 package com.mokimaki.arput.usecase.user;
 
-import com.mokimaki.arput.domain.model.user.Password;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
+import com.mokimaki.arput.domain.model.user.password.RawPassword;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.domain.service.user.UserService;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
@@ -24,7 +24,7 @@ public class CreateUserUseCase implements IUseCase<UserCreateInputData, UserCrea
         var user = new User(
                 input.mailAddress(),
                 input.name(),
-                new Password(input.password(), false),
+                new RawPassword(input.password()),
                 input.schoolName(),
                 input.bio()
         );

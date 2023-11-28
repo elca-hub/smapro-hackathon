@@ -1,5 +1,6 @@
 package com.mokimaki.arput.domain.model.user;
 
+import com.mokimaki.arput.domain.model.user.password.Password;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

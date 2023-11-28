@@ -1,8 +1,8 @@
 package com.mokimaki.arput.infrastructure.db.repository;
 
-import com.mokimaki.arput.domain.model.user.Password;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
+import com.mokimaki.arput.domain.model.user.password.EncryptPassword;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
@@ -32,7 +32,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                new Password(entity.password, true),
+                new EncryptPassword(entity.password),
                 entity.schoolName,
                 entity.bio
        ));
@@ -44,7 +44,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                new Password(entity.password, true),
+                new EncryptPassword(entity.password),
                 entity.schoolName,
                 entity.bio
         ));

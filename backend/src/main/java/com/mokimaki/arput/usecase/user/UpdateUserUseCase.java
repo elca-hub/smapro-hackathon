@@ -1,6 +1,6 @@
 package com.mokimaki.arput.usecase.user;
 
-import com.mokimaki.arput.domain.model.user.Password;
+import com.mokimaki.arput.domain.model.user.password.RawPassword;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.DomainException;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
@@ -26,7 +26,7 @@ public class UpdateUserUseCase implements IUseCase<UserUpdateInputData, UserUpda
             user.setMailAddress(userUpdateInputData.mailAddress());
             user.setName(userUpdateInputData.name());
             user.setSchoolName(userUpdateInputData.schoolName());
-            user.setPassword(new Password(userUpdateInputData.password(), false));
+            user.setPassword(new RawPassword(userUpdateInputData.password()));
             user.setBio(userUpdateInputData.bio());
 
             userRepository.update(user);
