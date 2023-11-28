@@ -5,10 +5,10 @@ info:
   version: 1.0.0
 
 servers:
-  - url: "http://localhost:8003"
-    description: "モックサーバ"
   - url: "http://localhost:5050"
     description: "開発サーバ"
+  - url: "http://localhost:8003"
+    description: "モックサーバ"
 
 tags:
   - name: "users"
