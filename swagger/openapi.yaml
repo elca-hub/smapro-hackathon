@@ -156,34 +156,19 @@ paths:
                         type: string
                         description: "ユーザの自己紹介"
                         example: "こんにちは！"
-  "/user/logout":
-    get:
-      tags: ["users"]
-      summary: "ユーザのログアウト"
-      deprecated: false
-      security:
-        - ApiKeyAuth: []
-      responses:
-        "200":
-          description: "ユーザのログアウトに成功した場合"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: "メッセージ"
-                    example: "logout"
-        "403":
-          description: "ユーザのログアウトに失敗した場合"
-  "/user/update":
     put:
       tags: ["users"]
       summary: "ユーザの情報更新"
       deprecated: false
       security:
         - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
       requestBody:
         description: "ユーザの情報更新に必要な情報"
         required: true
@@ -226,3 +211,24 @@ paths:
                     example: "SUCCESS"
         "403":
           description: "ユーザの情報更新に失敗した場合"
+  "/user/logout":
+    get:
+      tags: ["users"]
+      summary: "ユーザのログアウト"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: "ユーザのログアウトに成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: "メッセージ"
+                    example: "logout"
+        "403":
+          description: "ユーザのログアウトに失敗した場合"

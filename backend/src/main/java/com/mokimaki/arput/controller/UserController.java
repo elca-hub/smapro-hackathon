@@ -2,6 +2,7 @@ package com.mokimaki.arput.controller;
 
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.infrastructure.routing.UserRouting;
+import com.mokimaki.arput.presentation.request.user.UserUpdateRequest;
 import com.mokimaki.arput.presentation.response.user.UserCreateResponse;
 import com.mokimaki.arput.presentation.response.user.UserLogoutResponse;
 import com.mokimaki.arput.presentation.response.user.UserShowResponse;
@@ -70,10 +71,11 @@ public class UserController implements UserRouting {
     }
 
     @Override
-    public UserUpdateResponse updateUser(@RequestBody UserUpdateInputData inputData) {
+    public UserUpdateResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest inputData) {
+        var input = new UserUpdateInputData(userId, inputData);
         var response = new UserUpdateResponse();
         try {
-            UserUpdateOutputData outputData = updateUserUseCase.execute(inputData);
+            UserUpdateOutputData outputData = updateUserUseCase.execute(input);
             return response.success(outputData);
         } catch (UseCaseException e) {
             return response.error(e);

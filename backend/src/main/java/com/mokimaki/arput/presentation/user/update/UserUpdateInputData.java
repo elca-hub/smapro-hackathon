@@ -1,21 +1,23 @@
 package com.mokimaki.arput.presentation.user.update;
 
-import jakarta.validation.constraints.Email;
-import org.hibernate.validator.constraints.Length;
+import com.mokimaki.arput.presentation.request.user.UserUpdateRequest;
+import lombok.Getter;
 
-public record UserUpdateInputData(
-        @Length(min = 1, max = 20)
-        String name,
+@Getter
+public class UserUpdateInputData{
+        private String userId;
+        private String name;
+        private String mailAddress;
+        private String schoolName;
+        private String bio;
+        private String password;
 
-        @Email
-        String mailAddress,
-
-        @Length(min = 8, max = 20)
-        String password,
-
-        @Length(min = 1, max = 30)
-        String schoolName,
-
-        @Length(min = 0, max = 100)
-        String bio
-) { }
+        public UserUpdateInputData(String userId, UserUpdateRequest userUpdateRequest) {
+                this.userId = userId;
+                this.name = userUpdateRequest.name();
+                this.mailAddress = userUpdateRequest.mailAddress();
+                this.schoolName = userUpdateRequest.schoolName();
+                this.bio = userUpdateRequest.bio();
+                this.password = userUpdateRequest.password();
+        }
+}

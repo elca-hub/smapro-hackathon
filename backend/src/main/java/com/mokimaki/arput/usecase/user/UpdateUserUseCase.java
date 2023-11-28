@@ -19,15 +19,15 @@ public class UpdateUserUseCase implements IUseCase<UserUpdateInputData, UserUpda
 
     @Override
     public UserUpdateOutputData execute(UserUpdateInputData userUpdateInputData) throws UseCaseException {
-        var user = userRepository.findByMailAddress(userUpdateInputData.mailAddress()).orElseThrow(() -> new UseCaseException("ユーザーが見つかりません"));
+        var user = userRepository.findById(userUpdateInputData.getUserId()).orElseThrow(() -> new UseCaseException("ユーザーが見つかりません"));
 
         try {
             // 情報を更新
-            user.setMailAddress(userUpdateInputData.mailAddress());
-            user.setName(userUpdateInputData.name());
-            user.setSchoolName(userUpdateInputData.schoolName());
-            user.setPassword(new RawPassword(userUpdateInputData.password()));
-            user.setBio(userUpdateInputData.bio());
+            user.setMailAddress(userUpdateInputData.getMailAddress());
+            user.setName(userUpdateInputData.getName());
+            user.setSchoolName(userUpdateInputData.getSchoolName());
+            user.setPassword(new RawPassword(userUpdateInputData.getPassword()));
+            user.setBio(userUpdateInputData.getBio());
 
             userRepository.update(user);
         } catch (DomainException e) {
