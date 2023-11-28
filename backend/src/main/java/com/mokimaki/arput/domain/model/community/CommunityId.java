@@ -3,6 +3,8 @@ package com.mokimaki.arput.domain.model.community;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.UUID;
+
 @Getter
 public class CommunityId {
     @NonNull
@@ -12,5 +14,9 @@ public class CommunityId {
             @NonNull String id
     ) {
         this.id = id;
+    }
+
+    public CommunityId() {
+        this.id = UUID.randomUUID().toString();
     }
 }

@@ -15,13 +15,13 @@ public class Community {
     @NonNull
     private final String description;
     @NonNull
-    private final String entryCode;
+    private final EntryCode entryCode;
 
     public Community(
             @NonNull CommunityId id,
             @NonNull String name,
             @NonNull String description,
-            @NonNull String entryCode
+            @NonNull EntryCode entryCode
     ) {
         this.id = id;
         this.name = name;
