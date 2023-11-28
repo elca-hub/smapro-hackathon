@@ -8,6 +8,7 @@ import com.mokimaki.arput.presentation.response.user.UserUpdateResponse;
 import com.mokimaki.arput.presentation.user.create.UserCreateInputData;
 import com.mokimaki.arput.presentation.user.create.UserCreateOutputData;
 import com.mokimaki.arput.presentation.user.update.UserUpdateInputData;
+import com.mokimaki.arput.presentation.user.update.UserUpdateOutputData;
 import com.mokimaki.arput.usecase.user.CreateUserUseCase;
 import com.mokimaki.arput.usecase.user.UpdateUserUseCase;
 import lombok.NonNull;
@@ -29,11 +30,12 @@ public class UserController implements UserRouting {
     }
     @Override
     public UserCreateResponse createUser(@RequestBody UserCreateInputData inputData) {
+        var response = new UserCreateResponse();
         try {
             UserCreateOutputData output = createUserUseCase.execute(inputData);
-            return new UserCreateResponse(output);
+            return response.success(output);
         } catch (UseCaseException e) {
-            return new UserCreateResponse(e);
+            return response.error(e);
         }
     }
 
@@ -44,7 +46,7 @@ public class UserController implements UserRouting {
 
     @Override
     public UserLogoutResponse logout() {
-        return new UserLogoutResponse("logout");
+        return new UserLogoutResponse().success("logout");
     }
 
     @Override
@@ -54,11 +56,12 @@ public class UserController implements UserRouting {
 
     @Override
     public UserUpdateResponse updateUser(@RequestBody UserUpdateInputData inputData) {
+        var response = new UserUpdateResponse();
         try {
-            updateUserUseCase.execute(inputData);
-            return new UserUpdateResponse();
+            UserUpdateOutputData outputData = updateUserUseCase.execute(inputData);
+            return response.success(outputData);
         } catch (UseCaseException e) {
-            return new UserUpdateResponse(e);
+            return response.error(e);
         }
     }
 }
