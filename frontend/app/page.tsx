@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Router } from 'next/router'
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -29,8 +29,12 @@ export default function Home() {
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">あーぷっと</h1>
         </div>
         <div className="flex justify-center pb-20">
+        <Link href='../components/signin.tsx'>
           <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">サインイン</button>
+        </Link>
+        <Link href='../components/signup.tsx'>
           <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">サインアップ</button>
+        </Link>
         </div>
         <h2 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 pb-8">あーぷっととは？</h2>
         <div className="flex flex-wrap -m-4">
