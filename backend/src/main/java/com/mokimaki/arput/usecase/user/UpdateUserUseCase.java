@@ -26,7 +26,7 @@ public class UpdateUserUseCase implements IUseCase<UserUpdateInputData, UserUpda
             user.setMailAddress(userUpdateInputData.mailAddress());
             user.setName(userUpdateInputData.name());
             user.setSchoolName(userUpdateInputData.schoolName());
-            user.setPassword(new Password(userUpdateInputData.password()));
+            user.setPassword(new Password(userUpdateInputData.password(), false));
             user.setBio(userUpdateInputData.bio());
 
             userRepository.update(user);

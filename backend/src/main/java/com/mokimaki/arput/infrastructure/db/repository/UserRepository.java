@@ -32,7 +32,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                new Password(entity.password),
+                new Password(entity.password, true),
                 entity.schoolName,
                 entity.bio
        ));
@@ -44,7 +44,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                new Password(entity.password),
+                new Password(entity.password, true),
                 entity.schoolName,
                 entity.bio
         ));

@@ -24,7 +24,7 @@ public class CreateUserUseCase implements IUseCase<UserCreateInputData, UserCrea
         var user = new User(
                 input.mailAddress(),
                 input.name(),
-                new Password(input.password()),
+                new Password(input.password(), false),
                 input.schoolName(),
                 input.bio()
         );
