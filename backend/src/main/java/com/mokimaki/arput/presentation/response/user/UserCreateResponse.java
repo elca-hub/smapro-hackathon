@@ -1,16 +1,12 @@
 package com.mokimaki.arput.presentation.response.user;
 
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.ResponseStatus;
+import com.mokimaki.arput.presentation.response.ArputResponse;
+import com.mokimaki.arput.presentation.response.ResponseStatus;
 import com.mokimaki.arput.presentation.user.create.UserCreateOutputData;
-import lombok.NonNull;
 
-public class UserCreateResponse {
+public class UserCreateResponse extends ArputResponse {
     public String userId = null;
-
-    @NonNull
-    public ResponseStatus status;
-    public String message = null;
 
     public UserCreateResponse(UserCreateOutputData userCreateOutputData) {
         this.userId = userCreateOutputData.userId();

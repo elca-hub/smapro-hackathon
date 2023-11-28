@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation;
+package com.mokimaki.arput.presentation.response;
 
 public enum ResponseStatus {
     SUCCESS,
