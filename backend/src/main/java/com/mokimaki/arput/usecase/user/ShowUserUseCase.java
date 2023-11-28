@@ -17,7 +17,7 @@ public class ShowUserUseCase implements IUseCase<UserShowInputData, UserShowOutp
     }
 
     @Override
-    public UserShowOutputData execute(UserShowInputData userShowInputData) {
+    public UserShowOutputData execute(UserShowInputData userShowInputData) throws UseCaseException {
         User user = userRepository.findById(userShowInputData.userId()).orElseThrow(() -> new UseCaseException("ユーザーが見つかりませんでした"));
 
         return new UserShowOutputData(user);

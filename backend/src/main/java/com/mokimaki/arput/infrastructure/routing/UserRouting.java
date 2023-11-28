@@ -1,10 +1,7 @@
 package com.mokimaki.arput.infrastructure.routing;
 
 import com.mokimaki.arput.presentation.request.user.UserUpdateRequest;
-import com.mokimaki.arput.presentation.response.user.UserCreateResponse;
-import com.mokimaki.arput.presentation.response.user.UserLogoutResponse;
-import com.mokimaki.arput.presentation.response.user.UserShowResponse;
-import com.mokimaki.arput.presentation.response.user.UserUpdateResponse;
+import com.mokimaki.arput.presentation.response.user.*;
 import com.mokimaki.arput.presentation.user.create.UserCreateInputData;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,4 +21,7 @@ public interface UserRouting {
 
     @PutMapping("/{userId}")
     UserUpdateResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest inputData);
+
+    @DeleteMapping("/{userId}")
+    UserDeleteResponse deleteUser(@PathVariable String userId);
 }

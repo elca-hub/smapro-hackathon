@@ -12,8 +12,7 @@ public interface IUserRepository {
     Optional<User> findByMailAddress(String mailAddress);
     Optional<User> findByToken(String token);
     void updateToken(String mailAddress, String token);
-
     void resetToken(String mailAddress);
-
     void update(User user);
+    void delete(String id);
 }

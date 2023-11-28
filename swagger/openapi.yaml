@@ -211,6 +211,22 @@ paths:
                     example: "SUCCESS"
         "403":
           description: "ユーザの情報更新に失敗した場合"
+    delete:
+      summary: "ユーザの削除"
+      tags: ["users"]
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "ユーザの削除に成功した場合"
   "/user/logout":
     get:
       tags: ["users"]

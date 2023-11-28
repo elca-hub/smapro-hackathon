@@ -88,4 +88,9 @@ public class UserRepository implements IUserRepository {
         userEntity.convert(user);
         userContext.save(userEntity);
     }
+
+    @Override
+    public void delete(String id) {
+        userContext.deleteById(id);
+    }
 }
