@@ -2,6 +2,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
+import com.mokimaki.arput.domain.model.user.password.EncryptPassword;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
@@ -26,12 +27,24 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public Optional<User> findById(String id) {
+        return userContext.findById(id).map(entity -> new User(
+                new UserId(entity.id),
+                entity.mailAddress,
+                entity.userName,
+                new EncryptPassword(entity.password),
+                entity.schoolName,
+                entity.bio
+        ));
+    }
+
+    @Override
     public Optional<User> findByMailAddress(String mailAddress) {
         return userContext.findByMailAddress(mailAddress).map(entity -> new User(
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                entity.password,
+                new EncryptPassword(entity.password),
                 entity.schoolName,
                 entity.bio
        ));
@@ -43,7 +56,7 @@ public class UserRepository implements IUserRepository {
                 new UserId(entity.id),
                 entity.mailAddress,
                 entity.userName,
-                entity.password,
+                new EncryptPassword(entity.password),
                 entity.schoolName,
                 entity.bio
         ));
@@ -65,5 +78,19 @@ public class UserRepository implements IUserRepository {
         );
         userEntity.setToken(null);
         userContext.save(userEntity);
+    }
+
+    @Override
+    public void update(User user) {
+        var userEntity = userContext.findById(user.getId().getId()).orElseThrow(
+                () -> new RuntimeException("user not found")
+        );
+        userEntity.convert(user);
+        userContext.save(userEntity);
+    }
+
+    @Override
+    public void delete(String id) {
+        userContext.deleteById(id);
     }
 }

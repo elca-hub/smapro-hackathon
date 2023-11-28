@@ -15,6 +15,6 @@ public class UserSecurity {
 
     public UserSecurity(User user) {
         this.mailAddress = user.getMailAddress();
-        this.password = user.getPassword();
+        this.password = user.getPassword().getPassword();
     }
 }

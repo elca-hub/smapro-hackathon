@@ -1,6 +1,7 @@
 package com.mokimaki.arput.domain.service.user;
 
 import com.mokimaki.arput.domain.model.user.User;
+import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,11 @@ public class UserService {
 
     public boolean isExistMailAddress(String mailAddress) {
         Optional<User> user = userRepository.findByMailAddress(mailAddress);
+        return user.isPresent();
+    }
+
+    public boolean isExist(UserId userId) {
+        Optional<User> user = userRepository.findById(userId.getId());
         return user.isPresent();
     }
 }

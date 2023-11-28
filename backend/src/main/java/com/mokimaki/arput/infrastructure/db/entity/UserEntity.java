@@ -1,7 +1,6 @@
 package com.mokimaki.arput.infrastructure.db.entity;
 
 import com.mokimaki.arput.domain.model.user.User;
-import com.mokimaki.arput.infrastructure.security.utils.CryptPasswordEncoder;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -24,7 +23,7 @@ public class UserEntity {
         this.id = user.getId().getId();
         this.mailAddress = user.getMailAddress();
         this.userName = user.getName();
-        this.password = CryptPasswordEncoder.fetch().encode(user.getPassword());
+        this.password = user.getPassword().getPassword();
         this.schoolName = user.getSchoolName();
         this.token = null;
         this.bio = user.getBio();
