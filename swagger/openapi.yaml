@@ -471,3 +471,26 @@ paths:
       responses:
         "200":
           description: "記事の評価に成功した場合"
+    delete:
+      tags: ["articles"]
+      summary: "記事の評価の削除"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "articleId"
+          in: "path"
+          description: "記事ID"
+          required: true
+          schema:
+            type: "string"
+        - name: "evaluationId"
+          in: "query"
+          description: "評価ID"
+          required: true
+          schema:
+            type: "number"
+            example: 1
+      responses:
+        "200":
+          description: "記事の評価の削除に成功した場合"

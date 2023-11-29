@@ -3,6 +3,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 import com.mokimaki.arput.domain.model.article.Article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.model.article.evaluation.Evaluation;
+import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
@@ -79,11 +80,53 @@ public class ArticleRepository implements IArticleRepository {
 
     @Override
     public void delete(Article article) {
+        var articleEntity = new ArticleEntity();
+        articleEntity.convert(article);
+
+        evaluatedArticleContext.deleteByArticle(articleEntity);
+
         articleContext.deleteById(article.getId().getId());
     }
 
     @Override
-    public void addEvaluation(Article article, Evaluation evaluation) {
+    public void addEvaluation(User user, Article article, Evaluation evaluation) {
+        EvaluatedArticleEntity evaluatedArticleEntity = convertArticleAndEvaluation(user, article, evaluation);
+
+        evaluatedArticleContext.save(evaluatedArticleEntity);
+    }
+
+    @Override
+    public void removeEvaluation(User user, Article article, Evaluation evaluation) {
+        var userEntity = new UserEntity();
+        userEntity.convert(user);
+
+        var articleEntity = new ArticleEntity();
+        articleEntity.convert(article);
+
+        var evaluationEntity = new EvaluationEntity();
+        evaluationEntity.convert(evaluation);
+
+        evaluatedArticleContext.deleteByUserAndArticleAndEvaluation(userEntity, articleEntity, evaluationEntity);
+    }
+
+    @Override
+    public boolean isAlreadyEvaluated(User user, Article article, Evaluation evaluation) {
+        var userEntity = new UserEntity();
+        userEntity.convert(user);
+
+        var articleEntity = new ArticleEntity();
+        articleEntity.convert(article);
+
+        var evaluationEntity = new EvaluationEntity();
+        evaluationEntity.convert(evaluation);
+
+        return evaluatedArticleContext.findByUserAndArticleAndEvaluation(userEntity, articleEntity, evaluationEntity).isPresent();
+    }
+
+    private EvaluatedArticleEntity convertArticleAndEvaluation(User user, Article article, Evaluation evaluation) {
+        var userEntity = new UserEntity();
+        userEntity.convert(user);
+
         var articleEntity = new ArticleEntity();
         articleEntity.convert(article);
 
@@ -93,8 +136,9 @@ public class ArticleRepository implements IArticleRepository {
         var evaluatedArticleEntity = new EvaluatedArticleEntity();
         evaluatedArticleEntity.setEvaluation(evaluationEntity);
         evaluatedArticleEntity.setArticle(articleEntity);
+        evaluatedArticleEntity.setUser(userEntity);
 
-        evaluatedArticleContext.save(evaluatedArticleEntity);
+        return evaluatedArticleEntity;
     }
 
     private Map<Evaluation, Long> countEvaluation(ArticleEntity articleEntity) {

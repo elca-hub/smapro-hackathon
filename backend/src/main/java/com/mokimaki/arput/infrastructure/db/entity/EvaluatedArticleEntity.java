@@ -17,4 +17,6 @@ public class EvaluatedArticleEntity {
 
     @ManyToOne
     private ArticleEntity article;
+    @ManyToOne
+    private UserEntity user;
 }

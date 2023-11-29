@@ -3,6 +3,7 @@ package com.mokimaki.arput.usecase.article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.domain.repository.IEvaluationRepository;
+import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.addEvaluation.AddEvaluationInputData;
 import com.mokimaki.arput.presentation.dto.article.addEvaluation.AddEvaluationOutputData;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class AddEvaluationUseCase implements IUseCase<AddEvaluationInputData, AddEvaluationOutputData> {
     private final IArticleRepository articleRepository;
     private final IEvaluationRepository evaluationRepository;
+    private final IUserRepository userRepository;
 
-    public AddEvaluationUseCase(IArticleRepository articleRepository, IEvaluationRepository evaluationRepository) {
+    public AddEvaluationUseCase(IArticleRepository articleRepository, IEvaluationRepository evaluationRepository, IUserRepository userRepository) {
         this.articleRepository = articleRepository;
         this.evaluationRepository = evaluationRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -24,8 +27,13 @@ public class AddEvaluationUseCase implements IUseCase<AddEvaluationInputData, Ad
         try {
             var article = articleRepository.findById(new ArticleId(input.articleId())).orElseThrow(() -> new UseCaseException("記事の取得に失敗しました"));
             var evaluation = evaluationRepository.findById(input.evaluationId()).orElseThrow(() -> new UseCaseException("評価の情報の取得に失敗しました"));
+            var user = userRepository.findById(input.userId()).orElseThrow(() -> new UseCaseException("ユーザの取得に失敗しました"));
 
-            articleRepository.addEvaluation(article, evaluation);
+            if (articleRepository.isAlreadyEvaluated(user, article, evaluation)) {
+                throw new UseCaseException("既に評価済みです");
+            }
+
+            articleRepository.addEvaluation(user, article, evaluation);
 
             return new AddEvaluationOutputData();
         } catch (Exception e) {
