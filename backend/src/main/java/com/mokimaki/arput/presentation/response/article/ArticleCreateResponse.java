@@ -1,7 +1,7 @@
 package com.mokimaki.arput.presentation.response.article;
 
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.dto.article.ArticleCreateOutputData;
+import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateOutputData;
 import com.mokimaki.arput.presentation.response.ArputResponse;
 import com.mokimaki.arput.presentation.response.ResponseStatus;
 

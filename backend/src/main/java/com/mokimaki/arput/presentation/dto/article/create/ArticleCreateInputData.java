@@ -1,4 +1,4 @@
-package com.mokimaki.arput.presentation.dto.article;
+package com.mokimaki.arput.presentation.dto.article.create;
 
 public record ArticleCreateInputData (
     String userId,

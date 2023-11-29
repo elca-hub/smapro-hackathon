@@ -6,8 +6,8 @@ import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.domain.repository.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
-import com.mokimaki.arput.presentation.dto.article.ArticleCreateInputData;
-import com.mokimaki.arput.presentation.dto.article.ArticleCreateOutputData;
+import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateInputData;
+import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 
