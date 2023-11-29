@@ -15,4 +15,6 @@ public interface IArticleRepository {
     Optional<Article> findByArticleIdAndUserId(ArticleId articleId, UserId userId);
 
     List<Article> findByUserId(UserId userId);
+
+    void update(Article article);
 }

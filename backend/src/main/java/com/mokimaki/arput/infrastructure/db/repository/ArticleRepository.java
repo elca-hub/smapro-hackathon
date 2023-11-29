@@ -48,4 +48,12 @@ public class ArticleRepository implements IArticleRepository {
 
         return articleContext.findByWriter(writer).stream().map(ArticleEntity::convert).toList();
     }
+
+    @Override
+    public void update(Article article) {
+        var articleEntity = new ArticleEntity();
+        articleEntity.convert(article);
+
+        articleContext.save(articleEntity);
+    }
 }

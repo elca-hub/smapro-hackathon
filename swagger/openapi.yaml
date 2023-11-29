@@ -398,3 +398,35 @@ paths:
       responses:
         "200":
           description: "記事の取得に成功した場合"
+    put:
+      tags: ["articles"]
+      summary: "記事の情報更新"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "articleId"
+          in: "path"
+          description: "記事ID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "記事の情報更新に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: "記事のタイトル"
+                  example: "テスト記事"
+                content:
+                  type: string
+                  description: "記事の内容"
+                  example: "テスト記事です"
+      responses:
+        "200":
+          description: "記事の情報更新に成功した場合"
