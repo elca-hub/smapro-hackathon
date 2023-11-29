@@ -32,7 +32,7 @@ export default function Home() {
               </div>
               <div className="flex-grow">
                 <p className="leading-relaxed text-base">説明をここに記入</p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">投稿ページはこちら
+                <a href = "post" className="mt-3 text-indigo-500 inline-flex items-center">投稿ページはこちら
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
@@ -53,7 +53,7 @@ export default function Home() {
               </div>
               <div className="flex-grow">
                 <p className="leading-relaxed text-base">ここに説明を記入</p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">記事一覧ページはこちら
+                <a href = "article" className="mt-3 text-indigo-500 inline-flex items-center">記事一覧ページはこちら
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
