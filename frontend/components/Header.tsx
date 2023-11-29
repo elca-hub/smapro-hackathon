@@ -11,7 +11,7 @@ const Header = () => {
           <span className="ml-3 text-xl">apt</span>
         </a>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-gray-900">ホーム</a>
+          <a href = "home" className="mr-5 hover:text-gray-900">ホーム</a>
           <a className="mr-5 hover:text-gray-900">投稿する</a>
           <a className="mr-5 hover:text-gray-900">記事一覧</a>
           <a className="mr-5 hover:text-gray-900">コミュニティ</a>

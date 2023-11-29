@@ -8,7 +8,7 @@ export default function Home() {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-10">
           <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">勉強アウトプットアプリ</h2>
-          <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">あーぷっと</h1>
+          <h1 className="sm:text-5xl text-4xl font-medium title-font text-gray-900">あーぷっと</h1>
         </div>
         <div className="flex justify-center pb-20">
         <Link href='signin'>
@@ -18,7 +18,7 @@ export default function Home() {
           <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">サインアップ</button>
         </Link>
         </div>
-        <h2 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 pb-8">あーぷっととは？</h2>
+        <h2 className="sm:text-4xl text-3xl font-medium title-font text-center text-gray-900 pb-8">あーぷっとの機能</h2>
         <div className="flex flex-wrap -m-4">
           <div className="p-4 md:w-1/3">
             <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
