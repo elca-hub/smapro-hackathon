@@ -10,6 +10,7 @@ import com.mokimaki.arput.infrastructure.db.entity.ArticleEntity;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,5 +40,12 @@ public class ArticleRepository implements IArticleRepository {
         UserEntity writer = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザが存在しません"));
 
         return articleContext.findByIdAndWriter(articleId.getId(), writer).map(ArticleEntity::convert);
+    }
+
+    @Override
+    public List<Article> findByUserId(UserId userId) {
+        UserEntity writer = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザが存在しません"));
+
+        return articleContext.findByWriter(writer).stream().map(ArticleEntity::convert).toList();
     }
 }

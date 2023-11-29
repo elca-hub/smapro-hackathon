@@ -412,6 +412,22 @@ paths:
       responses:
         "200":
           description: "記事の新規作成に成功した場合"
+    "get":
+      tags: ["articles"]
+      summary: "ユーザが作成した記事の一覧を取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "記事の一覧取得に成功した場合"
   "/user/{userId}/article/{articleId}":
     get:
       tags: ["articles"]

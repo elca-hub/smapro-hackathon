@@ -4,6 +4,7 @@ import com.mokimaki.arput.domain.model.article.Article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.model.user.UserId;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IArticleRepository {
@@ -12,4 +13,6 @@ public interface IArticleRepository {
     Optional<Article> findById(ArticleId id);
 
     Optional<Article> findByArticleIdAndUserId(ArticleId articleId, UserId userId);
+
+    List<Article> findByUserId(UserId userId);
 }
