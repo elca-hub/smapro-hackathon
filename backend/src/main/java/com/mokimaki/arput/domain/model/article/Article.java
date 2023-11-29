@@ -45,4 +45,8 @@ public class Article {
         }
         this.content = content;
     }
+
+    public boolean isWriter(User user) {
+        return this.writer.getId().getId().equals(user.getId().getId());
+    }
 }
