@@ -18,6 +18,8 @@ tags:
     description: "コミュニティに関する操作"
   - name: "articles"
     description: "記事に関する操作"
+  - name: "evaluations"
+    description: "評価に関する操作"
 
 components:
   securitySchemes:
@@ -449,7 +451,7 @@ paths:
 
   "/article/{articleId}/evaluation/":
     post:
-      tags: ["articles"]
+      tags: ["articles", "evaluations"]
       summary: "記事の評価"
       deprecated: false
       security:
@@ -472,7 +474,7 @@ paths:
         "200":
           description: "記事の評価に成功した場合"
     delete:
-      tags: ["articles"]
+      tags: ["articles", "evaluations"]
       summary: "記事の評価の削除"
       deprecated: false
       security:
