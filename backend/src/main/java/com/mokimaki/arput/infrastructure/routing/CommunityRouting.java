@@ -5,7 +5,7 @@ import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.*;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/user/{userId}/community")
+@RequestMapping("/community")
 public interface CommunityRouting {
     @PostMapping("/")
     CommunityCreateResponse createCommunity(String userId, @RequestBody CommunityCreateRequest requestBody);

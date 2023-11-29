@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/user/{userId}/article")
+@RequestMapping("/article")
 public interface ArticleRouting {
     @PostMapping("/")
     ArticleCreateResponse createArticle(String userId, @RequestBody ArticleCreateRequest articleCreateRequest);

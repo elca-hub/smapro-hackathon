@@ -16,6 +16,7 @@ import com.mokimaki.arput.usecase.article.CreateArticleUseCase;
 import com.mokimaki.arput.usecase.article.IndexArticleUseCase;
 import com.mokimaki.arput.usecase.article.ShowArticleUseCase;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class ArticleController implements ArticleRouting {
 
 
     @Override
-    public ArticleCreateResponse createArticle(@PathVariable String userId, @RequestBody ArticleCreateRequest articleCreateRequest) {
+    public ArticleCreateResponse createArticle(@RequestAttribute String userId, @RequestBody ArticleCreateRequest articleCreateRequest) {
         var input = new ArticleCreateInputData(userId, articleCreateRequest.title(), articleCreateRequest.content());
         var response = new ArticleCreateResponse();
 
@@ -53,7 +54,7 @@ public class ArticleController implements ArticleRouting {
     }
 
     @Override
-    public ArticleShowResponse showArticle(@PathVariable String userId, @PathVariable String articleId) {
+    public ArticleShowResponse showArticle(@RequestAttribute String userId, @PathVariable String articleId) {
         var input = new ArticleShowInputData(userId, articleId);
         var response = new ArticleShowResponse();
 
@@ -67,7 +68,7 @@ public class ArticleController implements ArticleRouting {
     }
 
     @Override
-    public ArticleIndexResponse indexArticle(@PathVariable String userId) {
+    public ArticleIndexResponse indexArticle(@RequestAttribute String userId) {
         var input = new ArticleIndexInputData(userId);
         var response = new ArticleIndexResponse();
 
