@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
     return (
         <>
@@ -85,7 +87,9 @@ export default function Home() {
                                 <p className="mt-1">いいね数</p>
                             </div>
                         </div>
-                        <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        <Link href='newarticls'>
+                            <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -164,7 +168,9 @@ export default function Home() {
                                 <p className="mt-1">いいね数</p>
                             </div>
                         </div>
-                        <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        <Link href= "recommendedarticles">
+                            <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -243,7 +249,9 @@ export default function Home() {
                                 <p className="mt-1">いいね数</p>
                             </div>
                         </div>
-                        <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        <Link href = "pastarticls">
+                            <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">＞</button>
+                        </Link>
                     </div>
                 </div>
             </section>
