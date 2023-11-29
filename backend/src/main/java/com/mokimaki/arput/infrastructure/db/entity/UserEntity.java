@@ -30,6 +30,9 @@ public class UserEntity {
     @OneToMany
     public List<JoinedCommunityEntity> joinedCommunityEntity;
 
+    @OneToMany
+    public List<ArticleEntity> articleEntity;
+
     public void convert(User user) {
         this.id = user.getId().getId();
         this.mailAddress = user.getMailAddress();

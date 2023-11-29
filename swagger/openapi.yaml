@@ -16,6 +16,8 @@ tags:
     description: "ユーザに関する操作"
   - name: "communities"
     description: "コミュニティに関する操作"
+  - name: "articles"
+    description: "記事に関する操作"
 
 components:
   securitySchemes:
@@ -23,7 +25,6 @@ components:
       type: apiKey
       in: header
       name: Authorization
-
 
 paths:
   "/user/create":
@@ -251,20 +252,13 @@ paths:
       responses:
         "200":
           description: "ユーザの削除に成功した場合"
-  "/user/{userId}/community/":
+  "/community/":
     post:
       tags: ["communities"]
       summary: "コミュニティの新規作成"
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       requestBody:
         description: "コミュニティの新規作成に必要な情報"
         required: true
@@ -290,34 +284,20 @@ paths:
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       responses:
         "200":
           description: "コミュニティの一覧取得に成功した場合"
-  "/user/{userId}/community/dashboard":
+  "/community/dashboard":
     get:
       tags: ["communities"]
       summary: "現在ユーザが登録したコミュニティの一覧を取得"
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       responses:
         "200":
           description: "コミュニティの一覧取得に成功した場合"
-  "/user/{userId}/community/{communityId}":
+  "/community/{communityId}":
     put:
       tags: ["communities"]
       summary: "コミュニティの情報更新"
@@ -325,12 +305,6 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
         - name: "communityId"
           in: "path"
           description: "コミュニティID"
@@ -363,12 +337,6 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
         - name: "communityId"
           in: "path"
           description: "コミュニティID"
@@ -378,3 +346,103 @@ paths:
       responses:
         "200":
           description: "コミュニティの削除に成功した場合"
+  "/article/":
+    "post":
+      tags: ["articles"]
+      summary: "記事の新規作成"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: "記事の新規作成に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: "記事のタイトル"
+                  example: "テスト記事"
+                content:
+                  type: string
+                  description: "記事の内容"
+                  example: "テスト記事です"
+      responses:
+        "200":
+          description: "記事の新規作成に成功した場合"
+    "get":
+      tags: ["articles"]
+      summary: "ユーザが作成した記事の一覧を取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: "記事の一覧取得に成功した場合"
+  "/article/{articleId}":
+    get:
+      tags: ["articles"]
+      summary: "ユーザが作成した記事の取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "articleId"
+          in: "path"
+          description: "記事ID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "記事の取得に成功した場合"
+    put:
+      tags: ["articles"]
+      summary: "記事の情報更新"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "articleId"
+          in: "path"
+          description: "記事ID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "記事の情報更新に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: "記事のタイトル"
+                  example: "テスト記事"
+                content:
+                  type: string
+                  description: "記事の内容"
+                  example: "テスト記事です"
+      responses:
+        "200":
+          description: "記事の情報更新に成功した場合"
+    delete:
+      tags: ["articles"]
+      summary: "記事の削除"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "articleId"
+          in: "path"
+          description: "記事ID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "記事の削除に成功した場合"
