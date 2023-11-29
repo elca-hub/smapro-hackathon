@@ -17,4 +17,5 @@ public interface IArticleRepository {
     List<Article> findByUserId(UserId userId);
 
     void update(Article article);
+    void delete(Article article);
 }

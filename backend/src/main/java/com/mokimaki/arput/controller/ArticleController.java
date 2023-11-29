@@ -4,6 +4,8 @@ import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.infrastructure.routing.ArticleRouting;
 import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateInputData;
 import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateOutputData;
+import com.mokimaki.arput.presentation.dto.article.delete.ArticleDeleteInputData;
+import com.mokimaki.arput.presentation.dto.article.delete.ArticleDeleteOutputData;
 import com.mokimaki.arput.presentation.dto.article.index.ArticleIndexInputData;
 import com.mokimaki.arput.presentation.dto.article.index.ArticleIndexOutputData;
 import com.mokimaki.arput.presentation.dto.article.show.ArticleShowInputData;
@@ -12,14 +14,8 @@ import com.mokimaki.arput.presentation.dto.article.update.ArticleUpdateInputData
 import com.mokimaki.arput.presentation.dto.article.update.ArticleUpdateOutputData;
 import com.mokimaki.arput.presentation.request.article.ArticleCreateRequest;
 import com.mokimaki.arput.presentation.request.article.ArticleUpdateRequest;
-import com.mokimaki.arput.presentation.response.article.ArticleCreateResponse;
-import com.mokimaki.arput.presentation.response.article.ArticleIndexResponse;
-import com.mokimaki.arput.presentation.response.article.ArticleShowResponse;
-import com.mokimaki.arput.presentation.response.article.ArticleUpdateResponse;
-import com.mokimaki.arput.usecase.article.CreateArticleUseCase;
-import com.mokimaki.arput.usecase.article.IndexArticleUseCase;
-import com.mokimaki.arput.usecase.article.ShowArticleUseCase;
-import com.mokimaki.arput.usecase.article.UpdateArticleUseCase;
+import com.mokimaki.arput.presentation.response.article.*;
+import com.mokimaki.arput.usecase.article.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,17 +29,20 @@ public class ArticleController implements ArticleRouting {
     private final ShowArticleUseCase showArticleUseCase;
     private final IndexArticleUseCase indexArticleUseCase;
     private final UpdateArticleUseCase updateArticleUseCase;
+    private final DeleteArticleUseCase deleteArticleUseCase;
 
     public ArticleController(
             CreateArticleUseCase createArticleUseCase,
             ShowArticleUseCase showArticleUseCase,
             IndexArticleUseCase indexArticleUseCase,
-            UpdateArticleUseCase updateArticleUseCase
+            UpdateArticleUseCase updateArticleUseCase,
+            DeleteArticleUseCase deleteArticleUseCase
     ) {
         this.createArticleUseCase = createArticleUseCase;
         this.showArticleUseCase = showArticleUseCase;
         this.indexArticleUseCase = indexArticleUseCase;
         this.updateArticleUseCase = updateArticleUseCase;
+        this.deleteArticleUseCase = deleteArticleUseCase;
     }
 
 
@@ -96,6 +95,20 @@ public class ArticleController implements ArticleRouting {
 
         try {
             ArticleUpdateOutputData output = updateArticleUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public ArticleDeleteResponse deleteArticle(@RequestAttribute String userId, @PathVariable String articleId) {
+        var input = new ArticleDeleteInputData(userId, articleId);
+
+        var response = new ArticleDeleteResponse();
+        try {
+            ArticleDeleteOutputData output = deleteArticleUseCase.execute(input);
 
             return response.success(output);
         } catch (UseCaseException e) {

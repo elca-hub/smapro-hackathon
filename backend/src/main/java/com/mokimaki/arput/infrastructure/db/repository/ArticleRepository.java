@@ -56,4 +56,9 @@ public class ArticleRepository implements IArticleRepository {
 
         articleContext.save(articleEntity);
     }
+
+    @Override
+    public void delete(Article article) {
+        articleContext.deleteById(article.getId().getId());
+    }
 }
