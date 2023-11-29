@@ -75,7 +75,7 @@ export default function Home() {
               </div>
               <div className="flex-grow">
                 <p className="leading-relaxed text-base">ここに説明を記入</p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">コミュニティページはこちら
+                <a href = "community" className="mt-3 text-indigo-500 inline-flex items-center">コミュニティページはこちら
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
