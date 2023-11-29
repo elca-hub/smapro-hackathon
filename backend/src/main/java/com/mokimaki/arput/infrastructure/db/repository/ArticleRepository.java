@@ -7,7 +7,6 @@ import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.EvaluatedArticleContext;
-import com.mokimaki.arput.infrastructure.db.context.EvaluationContext;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
 import com.mokimaki.arput.infrastructure.db.entity.ArticleEntity;
 import com.mokimaki.arput.infrastructure.db.entity.EvaluatedArticleEntity;
@@ -15,25 +14,24 @@ import com.mokimaki.arput.infrastructure.db.entity.EvaluationEntity;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public class ArticleRepository implements IArticleRepository {
     private final ArticleContext articleContext;
     private final UserContext userContext;
-    private final EvaluationContext evaluationContext;
     private final EvaluatedArticleContext evaluatedArticleContext;
 
     public ArticleRepository(
             ArticleContext articleContext,
             UserContext userContext,
-            EvaluationContext evaluationContext,
             EvaluatedArticleContext evaluatedArticleContext
     ) {
         this.articleContext = articleContext;
         this.userContext = userContext;
-        this.evaluationContext = evaluationContext;
         this.evaluatedArticleContext = evaluatedArticleContext;
     }
 
@@ -53,14 +51,22 @@ public class ArticleRepository implements IArticleRepository {
     public Optional<Article> findByArticleIdAndUserId(ArticleId articleId, UserId userId) {
         UserEntity writer = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザが存在しません"));
 
-        return articleContext.findByIdAndWriter(articleId.getId(), writer).map(ArticleEntity::convert);
+        return articleContext.findByIdAndWriter(articleId.getId(), writer).map(articleEntity -> {
+            Article article = articleEntity.convert();
+            article.setEvaluationLongMap(this.countEvaluation(articleEntity));
+            return article;
+        });
     }
 
     @Override
     public List<Article> findByUserId(UserId userId) {
         UserEntity writer = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザが存在しません"));
 
-        return articleContext.findByWriter(writer).stream().map(ArticleEntity::convert).toList();
+        return articleContext.findByWriter(writer).stream().map(articleEntity -> {
+            Article article = articleEntity.convert();
+            article.setEvaluationLongMap(this.countEvaluation(articleEntity));
+            return article;
+        }).toList();
     }
 
     @Override
@@ -76,6 +82,7 @@ public class ArticleRepository implements IArticleRepository {
         articleContext.deleteById(article.getId().getId());
     }
 
+    @Override
     public void addEvaluation(Article article, Evaluation evaluation) {
         var articleEntity = new ArticleEntity();
         articleEntity.convert(article);
@@ -88,5 +95,19 @@ public class ArticleRepository implements IArticleRepository {
         evaluatedArticleEntity.setArticle(articleEntity);
 
         evaluatedArticleContext.save(evaluatedArticleEntity);
+    }
+
+    private Map<Evaluation, Long> countEvaluation(ArticleEntity articleEntity) {
+        // 二次元目は[評価ID, 評価数]の配列
+        Object[][] objects = evaluatedArticleContext.countEvaluation(articleEntity);
+
+        Map<Evaluation, Long> mapper = new HashMap<>();
+
+        for (Object[] object : objects) {
+            EvaluationEntity evaluationEntity = (EvaluationEntity) object[0];
+            mapper.put(evaluationEntity.convert(), (Long) object[1]);
+        }
+
+        return mapper;
     }
 }

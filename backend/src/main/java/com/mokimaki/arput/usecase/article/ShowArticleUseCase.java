@@ -12,6 +12,9 @@ import com.mokimaki.arput.presentation.dto.article.show.ArticleShowOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class ShowArticleUseCase implements IUseCase<ArticleShowInputData, ArticleShowOutputData> {
     private final IArticleRepository articleRepository;
@@ -37,6 +40,12 @@ public class ShowArticleUseCase implements IUseCase<ArticleShowInputData, Articl
                     new WriterOutputData(
                             article.getWriter().getId().getId(),
                             article.getWriter().getName()
+                    ),
+                    article.getEvaluationLongMap().entrySet().stream().collect(
+                            Collectors.toMap(
+                                    entry -> entry.getKey().getName(),
+                                    Map.Entry::getValue
+                            )
                     )
             );
         } catch (Exception e) {
