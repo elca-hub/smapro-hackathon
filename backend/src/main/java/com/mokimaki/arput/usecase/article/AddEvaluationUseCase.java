@@ -33,6 +33,10 @@ public class AddEvaluationUseCase implements IUseCase<AddEvaluationInputData, Ad
                 throw new UseCaseException("既に評価済みです");
             }
 
+            if (article.getWriter().getId().getId().equals(user.getId().getId())) {
+                throw new UseCaseException("自分の記事には評価できません");
+            }
+
             articleRepository.addEvaluation(user, article, evaluation);
 
             return new AddEvaluationOutputData();

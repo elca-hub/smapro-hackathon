@@ -32,6 +32,10 @@ public class RemoveEvaluationUseCase implements IUseCase<RemoveEvaluationInputDa
             Evaluation evaluation = evaluationRepository.findById(input.evaluationId()).orElseThrow(() -> new UseCaseException("評価が見つかりませんでした"));
             User user = userRepository.findById(input.userId()).orElseThrow(() -> new UseCaseException("ユーザが見つかりませんでした"));
 
+            if (article.getWriter().getId().getId().equals(user.getId().getId())) {
+                throw new UseCaseException("自分の記事には評価できません");
+            }
+
             articleRepository.removeEvaluation(user, article, evaluation);
 
             return new RemoveEvaluationOutputData();
