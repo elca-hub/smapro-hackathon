@@ -252,20 +252,13 @@ paths:
       responses:
         "200":
           description: "ユーザの削除に成功した場合"
-  "/user/{userId}/community/":
+  "/community/":
     post:
       tags: ["communities"]
       summary: "コミュニティの新規作成"
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       requestBody:
         description: "コミュニティの新規作成に必要な情報"
         required: true
@@ -291,34 +284,20 @@ paths:
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       responses:
         "200":
           description: "コミュニティの一覧取得に成功した場合"
-  "/user/{userId}/community/dashboard":
+  "/community/dashboard":
     get:
       tags: ["communities"]
       summary: "現在ユーザが登録したコミュニティの一覧を取得"
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       responses:
         "200":
           description: "コミュニティの一覧取得に成功した場合"
-  "/user/{userId}/community/{communityId}":
+  "/community/{communityId}":
     put:
       tags: ["communities"]
       summary: "コミュニティの情報更新"
@@ -326,12 +305,6 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
         - name: "communityId"
           in: "path"
           description: "コミュニティID"
@@ -364,12 +337,6 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
         - name: "communityId"
           in: "path"
           description: "コミュニティID"
@@ -379,20 +346,13 @@ paths:
       responses:
         "200":
           description: "コミュニティの削除に成功した場合"
-  "/user/{userId}/article/":
+  "/article/":
     "post":
       tags: ["articles"]
       summary: "記事の新規作成"
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       requestBody:
         description: "記事の新規作成に必要な情報"
         required: true
@@ -418,17 +378,10 @@ paths:
       deprecated: false
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
       responses:
         "200":
           description: "記事の一覧取得に成功した場合"
-  "/user/{userId}/article/{articleId}":
+  "/article/{articleId}":
     get:
       tags: ["articles"]
       summary: "ユーザが作成した記事の取得"
@@ -436,12 +389,6 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: "userId"
-          in: "path"
-          description: "ユーザID"
-          required: true
-          schema:
-            type: "string"
         - name: "articleId"
           in: "path"
           description: "記事ID"

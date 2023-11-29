@@ -17,6 +17,7 @@ import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.*;
 import com.mokimaki.arput.usecase.community.*;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +46,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityCreateResponse createCommunity(@PathVariable("userId") String userId, @RequestBody CommunityCreateRequest requestBody) {
+    public CommunityCreateResponse createCommunity(@RequestAttribute String userId, @RequestBody CommunityCreateRequest requestBody) {
         var input = new CommunityCreateInputData(userId, requestBody.name(), requestBody.description());
         var communityCreateResponse = new CommunityCreateResponse();
 
@@ -59,7 +60,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityDashboardResponse dashboard(@PathVariable("userId") String userId) {
+    public CommunityDashboardResponse dashboard(@RequestAttribute String userId) {
         var input = new CommunityDashboardInputData(userId);
         var communityDashboardResponse = new CommunityDashboardResponse();
         try {
@@ -72,7 +73,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityIndexResponse index(@PathVariable String userId) {
+    public CommunityIndexResponse index(@RequestAttribute String userId) {
         var input = new CommunityIndexInputData(userId);
         var response = new CommunityIndexResponse();
         try {
@@ -85,7 +86,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityUpdateResponse updateCommunity(@PathVariable("userId") String userId, @PathVariable("communityId") String communityId, @RequestBody CommunityUpdateRequest requestBody) {
+    public CommunityUpdateResponse updateCommunity(@RequestAttribute String userId, @PathVariable("communityId") String communityId, @RequestBody CommunityUpdateRequest requestBody) {
         var input = new CommunityUpdateInputData(userId, communityId, requestBody.name(), requestBody.description());
         var response = new CommunityUpdateResponse();
         try {
@@ -98,7 +99,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityDeleteResponse deleteCommunity(@PathVariable String userId, @PathVariable String communityId) {
+    public CommunityDeleteResponse deleteCommunity(@RequestAttribute String userId, @PathVariable String communityId) {
         var input = new CommunityDeleteInputData(userId, communityId);
         var response = new CommunityDeleteResponse();
 
