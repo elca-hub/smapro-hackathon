@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,6 +21,9 @@ public class ArticleEntity {
 
     @ManyToOne
     private UserEntity writer;
+
+    @OneToMany
+    private List<EvaluatedArticleEntity> evaluatedArticleEntities;
 
     public void convert(Article article) {
         this.id = article.getId().getId();
