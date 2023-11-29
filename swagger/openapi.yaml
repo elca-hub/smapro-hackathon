@@ -16,6 +16,8 @@ tags:
     description: "ユーザに関する操作"
   - name: "communities"
     description: "コミュニティに関する操作"
+  - name: "articles"
+    description: "記事に関する操作"
 
 components:
   securitySchemes:
@@ -23,7 +25,6 @@ components:
       type: apiKey
       in: header
       name: Authorization
-
 
 paths:
   "/user/create":
@@ -378,3 +379,36 @@ paths:
       responses:
         "200":
           description: "コミュニティの削除に成功した場合"
+  "/user/{userId}/article/":
+    "post":
+      tags: ["articles"]
+      summary: "記事の新規作成"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ユーザID"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        description: "記事の新規作成に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: "記事のタイトル"
+                  example: "テスト記事"
+                content:
+                  type: string
+                  description: "記事の内容"
+                  example: "テスト記事です"
+      responses:
+        "200":
+          description: "記事の新規作成に成功した場合"
