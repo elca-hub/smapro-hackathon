@@ -9,6 +9,8 @@ import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class IndexArticleUseCase implements IUseCase<ArticleIndexInputData, List<ArticleIndexOutputData>> {
@@ -24,7 +26,13 @@ public class IndexArticleUseCase implements IUseCase<ArticleIndexInputData, List
             return articleRepository.findByUserId(new UserId(input.userId())).stream().map(article -> new ArticleIndexOutputData(
                     article.getId().getId(),
                     article.getTitle(),
-                    article.getContent()
+                    article.getContent(),
+                    article.getEvaluationLongMap().entrySet().stream().collect(
+                            Collectors.toMap(
+                                    entry -> entry.getKey().getName(),
+                                    Map.Entry::getValue
+                            )
+                    )
             )).toList();
         } catch (Exception e) {
             throw new UseCaseException("記事の取得に失敗しました：" + e.getMessage());

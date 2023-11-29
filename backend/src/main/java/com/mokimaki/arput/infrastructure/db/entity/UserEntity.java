@@ -32,6 +32,8 @@ public class UserEntity {
 
     @OneToMany
     public List<ArticleEntity> articleEntity;
+    @OneToMany
+    public List<EvaluatedArticleEntity> evaluatedArticleEntity;
 
     public void convert(User user) {
         this.id = user.getId().getId();
