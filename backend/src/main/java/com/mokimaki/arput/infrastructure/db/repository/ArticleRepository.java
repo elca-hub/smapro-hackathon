@@ -9,10 +9,7 @@ import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.EvaluatedArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
-import com.mokimaki.arput.infrastructure.db.entity.ArticleEntity;
-import com.mokimaki.arput.infrastructure.db.entity.EvaluatedArticleEntity;
-import com.mokimaki.arput.infrastructure.db.entity.EvaluationEntity;
-import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
+import com.mokimaki.arput.infrastructure.db.entity.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -49,12 +46,17 @@ public class ArticleRepository implements IArticleRepository {
         return articleContext.findById(id.getId()).map(ArticleEntity::convert);
     }
 
+    @Override
     public Optional<Article> findByArticleIdAndUserId(ArticleId articleId, UserId userId) {
         UserEntity writer = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザが存在しません"));
 
         return articleContext.findByIdAndWriter(articleId.getId(), writer).map(articleEntity -> {
             Article article = articleEntity.convert();
             article.setEvaluationLongMap(this.countEvaluation(articleEntity));
+
+            CommunityEntity communityEntity = articleEntity.getCommunity();
+
+            article.setCommunity(communityEntity == null ? Optional.empty() : Optional.of(communityEntity.convert()));
             return article;
         });
     }

@@ -3,6 +3,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.ICommunityRepository;
+import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.CommunityContext;
 import com.mokimaki.arput.infrastructure.db.context.JoinedCommunityContext;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
@@ -19,11 +20,13 @@ public class CommunityRepository implements ICommunityRepository {
     private final CommunityContext communityContext;
     private final UserContext userContext;
     private final JoinedCommunityContext joinedCommunityContext;
+    private final ArticleContext articleContext;
 
-    public CommunityRepository(CommunityContext communityContext, UserContext userContext, JoinedCommunityContext joinedCommunityContext) {
+    public CommunityRepository(CommunityContext communityContext, UserContext userContext, JoinedCommunityContext joinedCommunityContext, ArticleContext articleContext) {
         this.communityContext = communityContext;
         this.userContext = userContext;
         this.joinedCommunityContext = joinedCommunityContext;
+        this.articleContext = articleContext;
     }
 
     @Override
@@ -79,6 +82,9 @@ public class CommunityRepository implements ICommunityRepository {
 
         var joinedCommunityEntities = joinedCommunityContext.findByCommunityEntity(communityEntity);
         joinedCommunityContext.deleteAll(joinedCommunityEntities);
+
+        var articleEntities = articleContext.findByCommunity(communityEntity);
+        articleContext.deleteAll(articleEntities);
 
         communityContext.delete(communityEntity);
     }

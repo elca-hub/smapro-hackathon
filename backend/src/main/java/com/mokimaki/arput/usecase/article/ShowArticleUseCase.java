@@ -46,6 +46,11 @@ public class ShowArticleUseCase implements IUseCase<ArticleShowInputData, Articl
                                     entry -> entry.getKey().getName(),
                                     Map.Entry::getValue
                             )
+                    ),
+                    article.getCommunity().isEmpty() ? null : new com.mokimaki.arput.presentation.dto.article.CommunityOutputData(
+                            article.getCommunity().get().getId().getId(),
+                            article.getCommunity().get().getName(),
+                            article.getCommunity().get().getDescription()
                     )
             );
         } catch (Exception e) {

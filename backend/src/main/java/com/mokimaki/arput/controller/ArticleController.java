@@ -48,7 +48,7 @@ public class ArticleController implements ArticleRouting {
 
     @Override
     public ArticleCreateResponse createArticle(@RequestAttribute String userId, @RequestBody ArticleCreateRequest articleCreateRequest) {
-        var input = new ArticleCreateInputData(userId, articleCreateRequest.title(), articleCreateRequest.content());
+        var input = new ArticleCreateInputData(userId, articleCreateRequest.title(), articleCreateRequest.content(), articleCreateRequest.communityId());
         var response = new ArticleCreateResponse();
 
         try {
@@ -90,7 +90,7 @@ public class ArticleController implements ArticleRouting {
 
     @Override
     public ArticleUpdateResponse updateArticle(@RequestAttribute String userId, @PathVariable String articleId, @RequestBody ArticleUpdateRequest articleUpdateRequest) {
-        var input = new ArticleUpdateInputData(userId, articleId, articleUpdateRequest.title(), articleUpdateRequest.content());
+        var input = new ArticleUpdateInputData(userId, articleId, articleUpdateRequest.title(), articleUpdateRequest.content(), articleUpdateRequest.communityId());
         var response = new ArticleUpdateResponse();
 
         try {
