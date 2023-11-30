@@ -5,6 +5,8 @@ services:
     build: ./backend
     ports:
       - "5050:5050"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/arput"
     depends_on:
       - db
   db:
