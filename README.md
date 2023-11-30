@@ -4,18 +4,30 @@
 
 あーぷっと（仮）
 
+## What's あーぷっと?
+
+大学内で学んだ知識や、趣味で得た内容を誰かにアウトプットしたいときに利用。
+コミュニティを形成して、特定のジャンルの記事を閲覧・投稿することが可能。
+
+### Qiitaとの差別化
+
+[qiita](https://qiita.com)も技術系の記事を投稿できる。
+今回は、qiitaよりもよりラフで、気軽に投稿できるようなwebアプリを目指した。
+
 ## 技術スタック
 
 ### バックエンド
 
-- Go
-  - Gin
+Spring Boot(Java)
 
 ### フロントエンド
 
-- Next.js
-  - TypeScript
+Next.js(TypeScript)
 
 ### インフラ
 
-- Docker
+Docker
+
+### その他ツール
+
+- Swagger

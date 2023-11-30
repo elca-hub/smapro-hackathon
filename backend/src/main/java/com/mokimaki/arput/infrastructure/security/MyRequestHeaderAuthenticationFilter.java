@@ -11,17 +11,19 @@ public class MyRequestHeaderAuthenticationFilter extends RequestHeaderAuthentica
         setPrincipalRequestHeader("Authorization");
         setExceptionIfHeaderMissing(false); // ヘッダにauthorizationがなくても認証処理を続行する
         setAuthenticationManager(authenticationManager);
-        setRequiresAuthenticationRequestMatcher(
-                new RegexRequestMatcher("/user/.*", null)
-        );
+        setRequiresAuthenticationRequestMatcher(new RegexRequestMatcher(".*", null));
 
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
-            if (request.getRequestURI().equals("/user/logout")) {
-                String email = authentication.getName();
+            String email = authentication.getName();
 
+            if (request.getRequestURI().equals("/user/logout")) {
                 userRepository.resetToken(email);
                 return;
             }
+
+            String userId = userRepository.findByMailAddress(email).orElseThrow().getId().getId();
+            request.setAttribute("userId", userId);
+
             logger.info("auth success");
         });
 
