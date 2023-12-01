@@ -3,7 +3,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.model.user.password.EncryptPassword;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.db.context.UserContext;
 import com.mokimaki.arput.infrastructure.db.entity.UserEntity;
 import lombok.NonNull;

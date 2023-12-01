@@ -27,13 +27,14 @@ public class CommunityEntity {
     @OneToMany
     public List<JoinedCommunityEntity> joinedCommunityEntity;
 
-    public void convert(Community community) {
+    public CommunityEntity convert(Community community) {
         this.id = community.getId().getId();
         this.name = community.getName();
         this.description = community.getDescription();
         this.entryCode = community.getEntryCode().getEntryCode();
         this.owner = new UserEntity();
         this.owner.convert(community.getOwner());
+        return this;
     }
 
     public Community convert() {

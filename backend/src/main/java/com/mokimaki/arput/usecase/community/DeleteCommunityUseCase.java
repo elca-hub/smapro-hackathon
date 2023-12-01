@@ -2,8 +2,8 @@ package com.mokimaki.arput.usecase.community;
 
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.user.User;
-import com.mokimaki.arput.domain.repository.ICommunityRepository;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.ICommunityRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteInputData;
 import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteOutputData;

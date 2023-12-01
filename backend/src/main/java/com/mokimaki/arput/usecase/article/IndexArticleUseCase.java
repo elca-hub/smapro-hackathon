@@ -1,8 +1,9 @@
 package com.mokimaki.arput.usecase.article;
 
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.IArticleRepository;
+import com.mokimaki.arput.domain.repository.db.IArticleRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
+import com.mokimaki.arput.presentation.dto.article.CommunityOutputData;
 import com.mokimaki.arput.presentation.dto.article.index.ArticleIndexInputData;
 import com.mokimaki.arput.presentation.dto.article.index.ArticleIndexOutputData;
 import com.mokimaki.arput.usecase.IUseCase;
@@ -32,6 +33,11 @@ public class IndexArticleUseCase implements IUseCase<ArticleIndexInputData, List
                                     entry -> entry.getKey().getName(),
                                     Map.Entry::getValue
                             )
+                    ),
+                    article.getCommunity().isEmpty() ? null : new CommunityOutputData(
+                            article.getCommunity().get().getId().getId(),
+                            article.getCommunity().get().getName(),
+                            article.getCommunity().get().getDescription()
                     )
             )).toList();
         } catch (Exception e) {

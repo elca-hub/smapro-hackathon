@@ -1,4 +1,4 @@
-package com.mokimaki.arput.domain.repository;
+package com.mokimaki.arput.domain.repository.db;
 
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.user.UserId;

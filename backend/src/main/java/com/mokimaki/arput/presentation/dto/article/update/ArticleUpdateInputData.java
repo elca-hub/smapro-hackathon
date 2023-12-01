@@ -4,5 +4,6 @@ public record ArticleUpdateInputData (
         String userId,
         String articleId,
         String articleTitle,
-        String articleContent
+        String articleContent,
+        String communityId
 ) { }

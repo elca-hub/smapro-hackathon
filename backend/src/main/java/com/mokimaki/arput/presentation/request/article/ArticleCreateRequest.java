@@ -9,5 +9,6 @@ public record ArticleCreateRequest(
         String title,
         @NonNull
         @Length(min = 1, max = 3000)
-        String content
+        String content,
+        String communityId
 ) { }

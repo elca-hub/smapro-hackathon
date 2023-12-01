@@ -1,4 +1,4 @@
-package com.mokimaki.arput.domain.repository;
+package com.mokimaki.arput.domain.repository.db;
 
 import com.mokimaki.arput.domain.model.user.User;
 import org.springframework.stereotype.Repository;

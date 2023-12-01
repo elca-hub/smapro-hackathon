@@ -1,6 +1,6 @@
 package com.mokimaki.arput.infrastructure.security;
 
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.CryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +60,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/user/create", "user/login").permitAll()
+                .requestMatchers("/user/create", "user/login", "/").permitAll()
                 .anyRequest().authenticated()
         );
 

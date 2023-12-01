@@ -2,7 +2,7 @@ package com.mokimaki.arput.domain.service;
 
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
