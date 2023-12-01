@@ -20,11 +20,13 @@ export default function SignInPage() {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
+
+    const headerToken = response.headers.get("X-AUTH-TOKEN");
+    if (headerToken) localStorage.setItem("token", headerToken);
+
     const redirectPath = "home";
-    response.ok ? router.push(redirectPath) : alert(data.errors);
+    response.ok && router.push(redirectPath);
     setPassword("");
-    console.log(data);
   }
 
   return (
