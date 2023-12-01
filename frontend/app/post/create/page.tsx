@@ -16,15 +16,28 @@ export default function CreateArticlePage () {
       content
     }
 
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+      router.push('/signin')
+      return
+    }
+
     const res = await fetch('http://localhost:5050/article/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token
       },
       body: JSON.stringify(sendData)
     })
 
     const data = await res.json()
+
+    if (data.status === 'SUCCESS' && res.ok) {
+      router.push('/article')
+      return
+    }
   }
 
   return (
@@ -62,6 +75,15 @@ export default function CreateArticlePage () {
               onChange={(e) => setContent(e.target.value)}
               required
             ></textarea>
+          </div>
+
+          <div className="text-center my-6">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+            >
+              投稿する
+            </button>
           </div>
         </form>
       </div>
