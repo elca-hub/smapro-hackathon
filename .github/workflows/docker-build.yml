@@ -2,8 +2,6 @@ name: docker-build
 on:
   pull_request:
     branches: ["main"]
-  push:
-    branches: ["main"]
 jobs:
   app-build:
     runs-on: ubuntu-latest
@@ -12,6 +10,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: build app
-        run: docker-compose build backend
+        run: docker-compose build
       - name: compose up app
-        run: docker-compose up -d backend
+        run: docker-compose up -d frontend
