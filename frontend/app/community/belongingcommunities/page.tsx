@@ -1,12 +1,18 @@
-import Articles from "@/components/Articles";
+import Communities from "@/components/Communities";
 
-const articleList = [
+const communityList = [
   {
     id: "tset",
   },
+  {
+    id: "tset1",
+  },
+  {
+    id: "tset2",
+  },
 ];
 
-export default function RecommendArticlePage() {
+export default function BelongingCommunitiesPage() {
   return (
     <>
       <label className="relative block px-52 mt-6">
@@ -24,12 +30,12 @@ export default function RecommendArticlePage() {
 
       <section className="text-gray-600 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          おすすめの記事一覧
+          所属コミュニティ一覧
         </h2>
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
-          {articleList.map((val) => {
-              return <Articles key={val.id}></Articles>;
+            {communityList.map((val) => {
+              return <Communities key={val.id}></Communities>;
             })}
           </div>
         </div>

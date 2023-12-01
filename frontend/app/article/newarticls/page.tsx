@@ -1,5 +1,11 @@
 import Articles from "@/components/Articles";
 
+const articleList = [
+  {
+    id: "tset",
+  },
+];
+
 export default function NewArticlePage() {
   return (
     <>
@@ -22,8 +28,10 @@ export default function NewArticlePage() {
         </h2>
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
-            <Articles></Articles>
-          </div>
+          {articleList.map((val) => {
+              return <Articles key={val.id}></Articles>;
+            })}
+            </div>
         </div>
       </section>
     </>
