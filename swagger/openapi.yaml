@@ -373,6 +373,10 @@ paths:
                   type: string
                   description: "記事の内容"
                   example: "テスト記事です"
+                communityId:
+                  type: string
+                  description: "コミュニティID"
+                  example: "1"
       responses:
         "200":
           description: "記事の新規作成に成功した場合"
@@ -431,6 +435,10 @@ paths:
                   type: string
                   description: "記事の内容"
                   example: "テスト記事です"
+                communityId:
+                  type: string
+                  description: "コミュニティID"
+                  example: "1"
       responses:
         "200":
           description: "記事の情報更新に成功した場合"
