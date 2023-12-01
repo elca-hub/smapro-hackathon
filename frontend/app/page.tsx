@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { BsFileEarmarkPlus } from "react-icons/bs";
+import { BsJournalRichtext } from "react-icons/bs";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 
 export default function TopPage() {
   return (
@@ -33,24 +36,16 @@ export default function TopPage() {
               <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
                 <div className="flex items-center mb-3">
                   <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
+                    <BsFileEarmarkPlus />
                   </div>
                   <h2 className="text-gray-900 text-lg title-font font-medium">
                     記事の投稿機能
                   </h2>
                 </div>
                 <div className="flex-grow">
-                  <p className="leading-relaxed text-base">説明をここに記入</p>
+                  <p className="leading-relaxed text-base">
+                    自身が勉強したことを記事にして投稿できます。投稿した記事は多くの人が閲覧でき、評価をしてくれます。
+                  </p>
                   <a
                     href="post"
                     className="mt-3 text-indigo-500 inline-flex items-center"
@@ -75,25 +70,16 @@ export default function TopPage() {
               <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
                 <div className="flex items-center mb-3">
                   <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <BsJournalRichtext />
                   </div>
                   <h2 className="text-gray-900 text-lg title-font font-medium">
                     記事の閲覧機能
                   </h2>
                 </div>
                 <div className="flex-grow">
-                  <p className="leading-relaxed text-base">ここに説明を記入</p>
+                  <p className="leading-relaxed text-base">
+                    他の人の記事を閲覧できます。記事を通して、自身の知見を深めることやリアクションで評価することができます。
+                  </p>
                   <a
                     href="article"
                     className="mt-3 text-indigo-500 inline-flex items-center"
@@ -118,26 +104,16 @@ export default function TopPage() {
               <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
                 <div className="flex items-center mb-3">
                   <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="6" cy="6" r="3"></circle>
-                      <circle cx="6" cy="18" r="3"></circle>
-                      <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                    </svg>
+                    <BsFillPersonPlusFill />
                   </div>
                   <h2 className="text-gray-900 text-lg title-font font-medium">
                     コミュニティ機能
                   </h2>
                 </div>
                 <div className="flex-grow">
-                  <p className="leading-relaxed text-base">ここに説明を記入</p>
+                  <p className="leading-relaxed text-base">
+                    多くのコミュニティに参加することができます。同じ学校で同じことを勉強している仲間を見つけ、自身の勉強の効率を高めていきましょう。
+                  </p>
                   <a
                     href="community"
                     className="mt-3 text-indigo-500 inline-flex items-center"

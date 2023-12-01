@@ -1,6 +1,7 @@
 import Articles from "@/components/Articles";
 import Communities from "@/components/Communities";
 import Link from "next/link";
+import { BsChevronDoubleRight } from "react-icons/bs";
 
 export default function HomePage() {
   return (
@@ -32,8 +33,8 @@ export default function HomePage() {
               <Articles></Articles>
             </div>
             <Link href="article/recommendedarticles">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>
@@ -49,8 +50,8 @@ export default function HomePage() {
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Articles></Articles>
             </div>{" "}
-            <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-              ＞
+            <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+              <BsChevronDoubleRight />
             </button>
           </div>
         </div>
@@ -66,8 +67,8 @@ export default function HomePage() {
               <Communities></Communities>
             </div>
             <Link href="community/recommendedcommunities">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-12 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>

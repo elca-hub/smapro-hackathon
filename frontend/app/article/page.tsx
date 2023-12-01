@@ -1,5 +1,6 @@
 import Articles from "@/components/Articles";
 import Link from "next/link";
+import { BsChevronDoubleRight } from "react-icons/bs";
 
 export default function ArticleTopPage() {
   return (
@@ -31,8 +32,8 @@ export default function ArticleTopPage() {
               <Articles></Articles>
             </div>
             <Link href="article/newarticls">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>
@@ -49,8 +50,8 @@ export default function ArticleTopPage() {
               <Articles></Articles>
             </div>
             <Link href="article/recommendedarticles">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>
@@ -67,8 +68,8 @@ export default function ArticleTopPage() {
               <Articles></Articles>
             </div>
             <Link href="article/recommendedarticles">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>
