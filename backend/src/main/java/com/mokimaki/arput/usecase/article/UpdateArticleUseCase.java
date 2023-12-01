@@ -43,7 +43,7 @@ public class UpdateArticleUseCase implements IUseCase<ArticleUpdateInputData, Ar
 
             articleRepository.update(article);
 
-            elasticSearchRepository.save(new ArticleIndex(article));
+            elasticSearchRepository.save(new ArticleIndex().convert(article));
 
             return new ArticleUpdateOutputData();
         } catch (Exception e) {

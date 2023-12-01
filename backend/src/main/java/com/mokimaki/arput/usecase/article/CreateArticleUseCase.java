@@ -55,7 +55,7 @@ public class CreateArticleUseCase implements IUseCase<ArticleCreateInputData, Ar
 
             articleRepository.create(article);
 
-            elasticSearchRepository.save(new ArticleIndex(article));
+            elasticSearchRepository.save(new ArticleIndex().convert(article));
 
             return new ArticleCreateOutputData();
         } catch (Exception e) {

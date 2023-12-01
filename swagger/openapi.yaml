@@ -20,6 +20,8 @@ tags:
     description: "記事に関する操作"
   - name: "evaluations"
     description: "評価に関する操作"
+  - name: "search"
+    description: "検索に関する操作"
 
 components:
   securitySchemes:
@@ -496,3 +498,27 @@ paths:
       responses:
         "200":
           description: "記事の評価の削除に成功した場合"
+  "/article/search":
+    "get":
+      tags: ["articles", "search"]
+      summary: "記事の検索"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "q"
+          in: "query"
+          description: "検索キーワード"
+          required: false
+          schema:
+            type: "string"
+            example: ""
+        - name: "communityId"
+          in: "query"
+          description: "コミュニティID"
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "記事の検索に成功した場合"

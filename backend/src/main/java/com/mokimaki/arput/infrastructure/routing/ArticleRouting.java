@@ -21,4 +21,7 @@ public interface ArticleRouting {
 
     @DeleteMapping("/{articleId}")
     ArticleDeleteResponse deleteArticle(String userId, String articleId);
+
+    @GetMapping("/search")
+    SearchArticleResponse searchArticle(String communityId, String query);
 }
