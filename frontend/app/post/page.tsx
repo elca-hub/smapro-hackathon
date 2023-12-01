@@ -1,5 +1,7 @@
 import Articles from "@/components/Articles";
 import Link from "next/link";
+import { BsChevronDoubleRight } from "react-icons/bs";
+import { BsFilePlus } from "react-icons/bs";
 
 export default function PostTopPage() {
   return (
@@ -13,8 +15,8 @@ export default function PostTopPage() {
           投稿する
         </h2>
         <div className="container px-5 py-4 mx-auto">
-          <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full w-14 h-14">
-            +
+          <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
+          <BsFilePlus />
           </button>
         </div>
       </section>
@@ -29,8 +31,8 @@ export default function PostTopPage() {
               <Articles></Articles>
             </div>
             <Link href="post/pastposts">
-              <button className="inline-flex items-center bg-gray-100 border-0 px-6 focus:outline-none hover:bg-gray-200 rounded-full mt-20 w-14 h-14">
-                ＞
+              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <BsChevronDoubleRight />
               </button>
             </Link>
           </div>
