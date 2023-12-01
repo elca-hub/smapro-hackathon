@@ -3,8 +3,8 @@ package com.mokimaki.arput.usecase.article;
 import com.mokimaki.arput.domain.model.article.Article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.repository.db.IArticleRepository;
+import com.mokimaki.arput.domain.repository.elasticsearch.IElasticSearchRepository;
 import com.mokimaki.arput.infrastructure.elasticsearch.ArticleIndex;
-import com.mokimaki.arput.infrastructure.elasticsearch.ElasticSearchRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.search.ArticleSearchInputData;
 import com.mokimaki.arput.presentation.dto.article.search.ArticleSearchItem;
@@ -19,9 +19,9 @@ import java.util.List;
 @Slf4j
 public class SearchArticleUseCase implements IUseCase<ArticleSearchInputData, ArticleSearchOutputData> {
     private final IArticleRepository articleRepository;
-    private final ElasticSearchRepository elasticSearchRepository;
+    private final IElasticSearchRepository<ArticleIndex> elasticSearchRepository;
 
-    public SearchArticleUseCase(IArticleRepository articleRepository, ElasticSearchRepository elasticSearchRepository) {
+    public SearchArticleUseCase(IArticleRepository articleRepository, IElasticSearchRepository<ArticleIndex> elasticSearchRepository) {
         this.articleRepository = articleRepository;
         this.elasticSearchRepository = elasticSearchRepository;
     }
@@ -29,7 +29,7 @@ public class SearchArticleUseCase implements IUseCase<ArticleSearchInputData, Ar
     @Override
     public ArticleSearchOutputData execute(ArticleSearchInputData input) throws UseCaseException {
         try {
-            List<ArticleIndex> articleIndexList = elasticSearchRepository.findByTitleOrContent(input.getSearchWord(), input.getSearchWord());
+            List<ArticleIndex> articleIndexList = elasticSearchRepository.search(input.getSearchWord());
 
             var articleIndexFilteredList = articleIndexList.stream().filter(articleIndex ->
                     input.getCommunityId() == null || (articleIndex.getCommunityId() != null && articleIndex.getCommunityId().equals(input.getCommunityId()))

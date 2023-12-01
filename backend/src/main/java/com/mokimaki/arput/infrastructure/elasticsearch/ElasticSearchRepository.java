@@ -1,15 +1,31 @@
 package com.mokimaki.arput.infrastructure.elasticsearch;
 
-
-import org.springframework.data.repository.Repository;
+import com.mokimaki.arput.domain.model.article.Article;
+import com.mokimaki.arput.domain.repository.elasticsearch.IElasticSearchRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ElasticSearchRepository extends Repository<ArticleIndex, String> {
-    List<ArticleIndex> findByTitleOrContent(String title, String content);
-    void deleteById(String id);
+@Repository
+public class ElasticSearchRepository implements IElasticSearchRepository<ArticleIndex> {
+    private final ElasticSearchContext elasticSearchContext;
 
-    void save(ArticleIndex articleIndex);
+    public ElasticSearchRepository(ElasticSearchContext elasticSearchContext) {
+        this.elasticSearchContext = elasticSearchContext;
+    }
 
-    List<ArticleIndex> findAll();
+    @Override
+    public void save(Article article) {
+        elasticSearchContext.save(new ArticleIndex().convert(article));
+    }
+
+    @Override
+    public void delete(Article article) {
+        elasticSearchContext.deleteById(article.getId().getId());
+    }
+
+    @Override
+    public List<ArticleIndex> search(String query) {
+        return elasticSearchContext.findByTitleOrContent(query, query);
+    }
 }

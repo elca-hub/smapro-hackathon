@@ -4,7 +4,8 @@ import com.mokimaki.arput.domain.model.article.Article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.db.IArticleRepository;
-import com.mokimaki.arput.infrastructure.elasticsearch.ElasticSearchRepository;
+import com.mokimaki.arput.domain.repository.elasticsearch.IElasticSearchRepository;
+import com.mokimaki.arput.infrastructure.elasticsearch.ArticleIndex;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.delete.ArticleDeleteInputData;
 import com.mokimaki.arput.presentation.dto.article.delete.ArticleDeleteOutputData;
@@ -14,9 +15,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteArticleUseCase implements IUseCase<ArticleDeleteInputData, ArticleDeleteOutputData> {
     private final IArticleRepository articleRepository;
-    private final ElasticSearchRepository elasticSearchRepository;
+    private final IElasticSearchRepository<ArticleIndex>  elasticSearchRepository;
 
-    public DeleteArticleUseCase(IArticleRepository articleRepository, ElasticSearchRepository elasticSearchRepository) {
+    public DeleteArticleUseCase(
+            IArticleRepository articleRepository,
+            IElasticSearchRepository<ArticleIndex> elasticSearchRepository
+    ) {
         this.articleRepository = articleRepository;
         this.elasticSearchRepository = elasticSearchRepository;
     }
@@ -28,7 +32,7 @@ public class DeleteArticleUseCase implements IUseCase<ArticleDeleteInputData, Ar
 
             articleRepository.delete(article);
 
-            elasticSearchRepository.deleteById(article.getId().getId());
+            elasticSearchRepository.delete(article);
 
             return new ArticleDeleteOutputData();
         } catch (Exception e) {
