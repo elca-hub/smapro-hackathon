@@ -1,19 +1,60 @@
 "use client";
 
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
+
+type Community = {
+  id: String,
+  name: String
+}
+
+const fetchCommunities = async (): Promise<Community[]> => {
+  const token = localStorage.getItem('token')
+
+  if (!token) throw new Error('token is not found')
+  const res = await fetch('http://localhost:5050/community/', {
+    method: 'GET',
+    headers: {
+      'Authorization': token
+    }
+  });
+  const data = await res.json()
+  if (data.status === 'SUCCESS' && res.ok) {
+    const communityData = data.data
+    return communityData.map((community: any) => {
+      return {
+        id: community.communityId,
+        name: community.name
+      }
+    });
+  }
+
+  throw new Error('failed to fetch community')
+}
 
 export default function CreateArticlePage () {
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [community, setCommunity] = useState('')
+
+  const [communities, setCommunities] = useState<Community[]>([])
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchCommunities();
+
+      setCommunities(data);
+    })()
+  })
 
   async function onSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     const sendData = {
       title,
-      content
+      content,
+      communityId: community.length > 0 ? community : null
     }
 
     const token = localStorage.getItem('token')
@@ -83,6 +124,26 @@ export default function CreateArticlePage () {
               onChange={(e) => setContent(e.target.value)}
               required
             ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              コミュニティ
+            </label>
+            <select
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+              id="community"
+              value={community}
+              onChange={(e) => setCommunity(e.target.value)}
+              required
+            >
+              <option value="">選択してください</option>
+              {communities.map((community) => {
+                return (
+                  <option value={community.id} key={community.id}>{community.name}</option>
+                )
+              })}
+            </select>
           </div>
 
           <div className="text-center my-6">
