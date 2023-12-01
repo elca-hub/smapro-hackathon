@@ -1,7 +1,7 @@
 package com.mokimaki.arput.usecase.user;
 
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.domain.service.UserService;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.user.delete.UserDeleteInputData;

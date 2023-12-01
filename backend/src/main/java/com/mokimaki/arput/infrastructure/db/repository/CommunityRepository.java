@@ -2,7 +2,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.ICommunityRepository;
+import com.mokimaki.arput.domain.repository.db.ICommunityRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.CommunityContext;
 import com.mokimaki.arput.infrastructure.db.context.JoinedCommunityContext;

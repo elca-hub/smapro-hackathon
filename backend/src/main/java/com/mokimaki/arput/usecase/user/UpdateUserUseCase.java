@@ -1,7 +1,7 @@
 package com.mokimaki.arput.usecase.user;
 
 import com.mokimaki.arput.domain.model.user.password.RawPassword;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.exception.DomainException;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.user.update.UserUpdateInputData;

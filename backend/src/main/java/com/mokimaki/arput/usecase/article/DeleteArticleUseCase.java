@@ -3,7 +3,7 @@ package com.mokimaki.arput.usecase.article;
 import com.mokimaki.arput.domain.model.article.Article;
 import com.mokimaki.arput.domain.model.article.ArticleId;
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.IArticleRepository;
+import com.mokimaki.arput.domain.repository.db.IArticleRepository;
 import com.mokimaki.arput.infrastructure.elasticsearch.ElasticSearchRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.delete.ArticleDeleteInputData;

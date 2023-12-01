@@ -1,7 +1,7 @@
 package com.mokimaki.arput.infrastructure.security;
 
 import com.mokimaki.arput.domain.model.user.User;
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.UserSecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -6,7 +6,7 @@ import com.mokimaki.arput.domain.model.article.evaluation.Evaluation;
 import com.mokimaki.arput.domain.model.community.CommunityId;
 import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
-import com.mokimaki.arput.domain.repository.IArticleRepository;
+import com.mokimaki.arput.domain.repository.db.IArticleRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
 import com.mokimaki.arput.infrastructure.db.context.CommunityContext;
 import com.mokimaki.arput.infrastructure.db.context.EvaluatedArticleContext;

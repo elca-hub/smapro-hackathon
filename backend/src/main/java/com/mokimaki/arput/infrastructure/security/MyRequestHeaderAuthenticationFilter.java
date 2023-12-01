@@ -1,6 +1,6 @@
 package com.mokimaki.arput.infrastructure.security;
 
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;

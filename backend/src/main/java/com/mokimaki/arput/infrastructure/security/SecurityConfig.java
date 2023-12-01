@@ -1,6 +1,6 @@
 package com.mokimaki.arput.infrastructure.security;
 
-import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.domain.repository.db.IUserRepository;
 import com.mokimaki.arput.infrastructure.security.utils.CryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

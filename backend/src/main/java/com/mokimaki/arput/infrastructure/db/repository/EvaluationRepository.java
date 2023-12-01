@@ -1,7 +1,7 @@
 package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.article.evaluation.Evaluation;
-import com.mokimaki.arput.domain.repository.IEvaluationRepository;
+import com.mokimaki.arput.domain.repository.db.IEvaluationRepository;
 import com.mokimaki.arput.infrastructure.db.context.EvaluationContext;
 import com.mokimaki.arput.infrastructure.db.entity.EvaluationEntity;
 import org.springframework.stereotype.Repository;
