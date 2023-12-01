@@ -3,10 +3,7 @@ package com.mokimaki.arput.infrastructure.db.entity;
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.community.CommunityId;
 import com.mokimaki.arput.domain.model.community.EntryCode;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@Table(name = "community")
 public class CommunityEntity {
     @Id
     public String id;
@@ -22,9 +20,11 @@ public class CommunityEntity {
     public String description;
     public String entryCode;
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     public UserEntity owner;
 
-    @OneToMany
+    @OneToMany()
+    @JoinColumn(name = "community_id")
     public List<JoinedCommunityEntity> joinedCommunityEntity;
 
     public CommunityEntity convert(Community community) {
@@ -43,7 +43,8 @@ public class CommunityEntity {
                 this.name,
                 this.description,
                 new EntryCode(this.entryCode),
-                this.owner.convert()
+                this.owner.convert(),
+                joinedCommunityEntity.stream().map(joinedEntity -> joinedEntity.getUserEntity().convert()).toList()
         );
     }
 }

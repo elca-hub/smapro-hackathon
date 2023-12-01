@@ -302,6 +302,22 @@ paths:
         "200":
           description: "コミュニティの一覧取得に成功した場合"
   "/community/{communityId}":
+    get:
+      tags: ["communities"]
+      summary: "コミュニティの情報取得"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: "communityId"
+          in: "path"
+          description: "コミュニティID"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "コミュニティの情報取得に成功した場合"
     put:
       tags: ["communities"]
       summary: "コミュニティの情報更新"

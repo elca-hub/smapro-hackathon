@@ -10,6 +10,8 @@ import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteInput
 import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteOutputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexInputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexOutputData;
+import com.mokimaki.arput.presentation.dto.community.show.CommunityShowInputData;
+import com.mokimaki.arput.presentation.dto.community.show.CommunityShowOutputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateInputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateOutputData;
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
@@ -30,19 +32,22 @@ public class CommunityController implements CommunityRouting {
     private final CommunityIndexUseCase communityIndexUseCase;
     private final CommunityUpdateUseCase communityUpdateUseCase;
     private final DeleteCommunityUseCase communityDeleteUseCase;
+    private final CommunityShowUseCase communityShowUseCase;
 
     public CommunityController(
             CreateCommunityUseCase createCommunityUseCase,
             CommunityDashboardUseCase communityDashboardUseCase,
             CommunityIndexUseCase communityIndexUseCase,
             CommunityUpdateUseCase communityUpdateUseCase,
-            DeleteCommunityUseCase communityDeleteUseCase
+            DeleteCommunityUseCase communityDeleteUseCase,
+            CommunityShowUseCase communityShowUseCase
     ) {
         this.createCommunityUseCase = createCommunityUseCase;
         this.communityDashboardUseCase = communityDashboardUseCase;
         this.communityIndexUseCase = communityIndexUseCase;
         this.communityUpdateUseCase = communityUpdateUseCase;
         this.communityDeleteUseCase = communityDeleteUseCase;
+        this.communityShowUseCase = communityShowUseCase;
     }
 
     @Override
@@ -105,6 +110,20 @@ public class CommunityController implements CommunityRouting {
 
         try {
             CommunityDeleteOutputData output = communityDeleteUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public CommunityShowResponse showCommunity(@RequestAttribute String userId, @PathVariable String communityId) {
+        var input = new CommunityShowInputData(userId, communityId);
+        var response = new CommunityShowResponse();
+
+        try {
+            CommunityShowOutputData output = communityShowUseCase.execute(input);
 
             return response.success(output);
         } catch (UseCaseException e) {
