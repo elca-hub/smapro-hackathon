@@ -25,7 +25,9 @@ public class CommunityDashboardUseCase implements IUseCase<CommunityDashboardInp
             List<Community> communities = communityRepository.findOwnCommunities(new UserId(input.getUserId()));
 
             return communities.stream().map((community ->
-                    new CommunityDashboardOutputData(community.getName(),
+                    new CommunityDashboardOutputData(
+                            community.getId().getId(),
+                            community.getName(),
                             community.getDescription(),
                             community.getEntryCode().getEntryCode()))
             ).toList();

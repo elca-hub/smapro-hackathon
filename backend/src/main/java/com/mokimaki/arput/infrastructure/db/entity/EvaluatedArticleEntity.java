@@ -7,16 +7,20 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "evaluated_article")
 public class EvaluatedArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
+    @JoinColumn(name = "evaluation_id", referencedColumnName = "id")
     private EvaluationEntity evaluation;
 
     @ManyToOne
+    @JoinColumn(name = "article_id", referencedColumnName = "id")
     private ArticleEntity article;
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 }

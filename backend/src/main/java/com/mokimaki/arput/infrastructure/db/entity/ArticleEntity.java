@@ -13,6 +13,7 @@ import java.util.Optional;
 @Entity
 @Getter
 @Setter
+@Table(name = "article")
 public class ArticleEntity {
     @Id
     private String id;
@@ -22,12 +23,15 @@ public class ArticleEntity {
     private String content;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity writer;
 
     @OneToMany
+    @JoinColumn(name = "article_id")
     private List<EvaluatedArticleEntity> evaluatedArticleEntities;
     @ManyToOne
     @Nullable
+    @JoinColumn(name = "community_id", referencedColumnName = "id")
     private CommunityEntity community;
 
     public void convert(Article article) {

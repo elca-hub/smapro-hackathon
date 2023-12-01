@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@Table(name = "evaluation")
 public class EvaluationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,7 @@ public class EvaluationEntity {
     private String emoji;
 
     @OneToMany
+    @JoinColumn(name = "evaluation_id")
     private List<EvaluatedArticleEntity> evaluatedArticleEntities;
 
     public void convert(Evaluation evaluation) {

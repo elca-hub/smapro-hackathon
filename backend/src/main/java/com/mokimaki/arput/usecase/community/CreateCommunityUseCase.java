@@ -14,6 +14,8 @@ import com.mokimaki.arput.presentation.dto.community.create.CommunityCreateOutpu
 import com.mokimaki.arput.usecase.IUseCase;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class CreateCommunityUseCase implements IUseCase<CommunityCreateInputData, CommunityCreateOutputData> {
     private final ICommunityRepository communityRepository;
@@ -28,12 +30,14 @@ public class CreateCommunityUseCase implements IUseCase<CommunityCreateInputData
     public CommunityCreateOutputData execute(CommunityCreateInputData inputData) throws UseCaseException {
         try {
             User user = userRepository.findById(inputData.userId).orElseThrow(() -> new UseCaseException("ユーザーが見つかりませんでした"));
+
             var community = new Community(
                     new CommunityId(),
                     inputData.name,
                     inputData.description,
                     new EntryCode(),
-                    user
+                    user,
+                    new ArrayList<>()
             );
 
             communityRepository.create(new UserId(inputData.userId), community);

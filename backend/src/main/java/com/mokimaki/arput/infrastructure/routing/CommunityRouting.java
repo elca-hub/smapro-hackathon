@@ -21,4 +21,7 @@ public interface CommunityRouting {
 
     @DeleteMapping("/{communityId}")
     CommunityDeleteResponse deleteCommunity(String userId, String communityId);
+
+    @GetMapping("/{communityId}")
+    CommunityShowResponse showCommunity(String userId, String communityId);
 }

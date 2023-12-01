@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class Community {
@@ -18,19 +20,22 @@ public class Community {
     @NonNull
     private final EntryCode entryCode;
     private final User owner;
+    private final List<User> members;
 
     public Community(
             @NonNull CommunityId id,
             @NonNull String name,
             @NonNull String description,
             @NonNull EntryCode entryCode,
-            User owner
+            User owner,
+            List<User> members
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.entryCode = entryCode;
         this.owner = owner;
+        this.members = members;
     }
 
     public boolean isOwner(User user) {
