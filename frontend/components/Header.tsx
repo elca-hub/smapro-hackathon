@@ -33,7 +33,7 @@ export default function Header() {
           <a href="community" className="mr-5 hover:text-indigo-500">
             コミュニティ
           </a>
-          <a className="mr-5 hover:text-text-indigo-500">お知らせ</a>
+          {/* <a className="mr-5 hover:text-text-indigo-500">お知らせ</a> */}
         </nav>
         <button className="inline-flex items-center bg-gray-100 border-0 py-3 px-5 focus:outline-none hover:bg-gray-200 rounded-full mt-4 md:mt-0">
           i
