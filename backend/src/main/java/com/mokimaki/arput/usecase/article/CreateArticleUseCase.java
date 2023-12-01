@@ -7,6 +7,8 @@ import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.domain.repository.ICommunityRepository;
 import com.mokimaki.arput.domain.repository.IUserRepository;
+import com.mokimaki.arput.infrastructure.elasticsearch.ArticleIndex;
+import com.mokimaki.arput.infrastructure.elasticsearch.ElasticSearchRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateInputData;
 import com.mokimaki.arput.presentation.dto.article.create.ArticleCreateOutputData;
@@ -20,15 +22,18 @@ public class CreateArticleUseCase implements IUseCase<ArticleCreateInputData, Ar
     private final IArticleRepository articleRepository;
     private final IUserRepository userRepository;
     private final ICommunityRepository communityRepository;
+    private final ElasticSearchRepository elasticSearchRepository;
 
     public CreateArticleUseCase(
             IArticleRepository articleRepository,
             IUserRepository userRepository,
-            ICommunityRepository communityRepository
+            ICommunityRepository communityRepository,
+            ElasticSearchRepository elasticSearchRepository
     ) {
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.communityRepository = communityRepository;
+        this.elasticSearchRepository = elasticSearchRepository;
     }
 
     @Override
@@ -49,6 +54,8 @@ public class CreateArticleUseCase implements IUseCase<ArticleCreateInputData, Ar
             );
 
             articleRepository.create(article);
+
+            elasticSearchRepository.save(new ArticleIndex(article));
 
             return new ArticleCreateOutputData();
         } catch (Exception e) {
