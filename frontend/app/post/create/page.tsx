@@ -1,5 +1,8 @@
 "use client";
 
+import AuthRequest from "@/request/AuthRequest";
+import AuthResponse from "@/request/model/AuthResponse";
+import AuthToken from "@/request/model/AuthToken";
 import { useRouter } from "next/navigation"
 import { FormEvent, useEffect, useState } from "react"
 
@@ -8,18 +11,12 @@ type Community = {
   name: string
 }
 
-const fetchCommunities = async (): Promise<Community[]> => {
-  const token = localStorage.getItem('token')
+const authRequest = new AuthRequest(new AuthToken())
 
-  if (!token) throw new Error('token is not found')
-  const res = await fetch('http://localhost:5050/community/', {
-    method: 'GET',
-    headers: {
-      'Authorization': token
-    }
-  });
-  const data = await res.json()
-  if (data.status === 'SUCCESS' && res.ok) {
+const fetchCommunities = async (): Promise<Community[]> => {
+  const res: AuthResponse = await authRequest.request('community/', 'GET')
+  const data = res.json;
+  if (data.status === 'SUCCESS' && res.status === 200) {
     const communityData = data.data
     return communityData.map((community: any) => {
       return {
@@ -46,7 +43,7 @@ export default function CreateArticlePage () {
 
       setCommunities(data);
     })()
-  })
+  }, [])
 
   async function onSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -64,22 +61,16 @@ export default function CreateArticlePage () {
       return
     }
 
-    const res = await fetch('http://localhost:5050/article/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      },
-      body: JSON.stringify(sendData)
-    })
+    const res = await authRequest.request('article/', 'POST', sendData)
 
-    const data = await res.json()
+    const data = res.json
+    const status = res.status
 
-    if (data.status === 'SUCCESS' && res.ok) {
+    if (data.status === 'SUCCESS' && status === 200) {
       router.push('/article')
       return
     } else {
-      if (res.ok && data.status === 'ERROR') {
+      if (status === 200 && data.status === 'ERROR') {
         alert(data.message)
         return
       } else {

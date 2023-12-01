@@ -1,4 +1,12 @@
+"use client";
+
 export default function Header() {
+  async function logout() {
+    await fetch("http://localhost:5050/user/logout", {
+      method: "GET",
+    });
+  }
+
   return (
     <header className="bg-black text-white body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -32,6 +40,9 @@ export default function Header() {
           </a>
           <a href="/community" className="mr-5 hover:text-indigo-500">
             コミュニティ
+          </a>
+          <a className="mr-5 hover:text-indigo-500" onClick={logout}>
+            ログアウト
           </a>
           {/* <a className="mr-5 hover:text-text-indigo-500">お知らせ</a> */}
         </nav>
