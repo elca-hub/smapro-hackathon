@@ -6,6 +6,8 @@ import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.IArticleRepository;
 import com.mokimaki.arput.domain.repository.ICommunityRepository;
+import com.mokimaki.arput.infrastructure.elasticsearch.ArticleIndex;
+import com.mokimaki.arput.infrastructure.elasticsearch.ElasticSearchRepository;
 import com.mokimaki.arput.infrastructure.exception.UseCaseException;
 import com.mokimaki.arput.presentation.dto.article.update.ArticleUpdateInputData;
 import com.mokimaki.arput.presentation.dto.article.update.ArticleUpdateOutputData;
@@ -18,10 +20,12 @@ import java.util.Optional;
 public class UpdateArticleUseCase implements IUseCase<ArticleUpdateInputData, ArticleUpdateOutputData> {
     private final IArticleRepository articleRepository;
     private final ICommunityRepository communityRepository;
+    private final ElasticSearchRepository elasticSearchRepository;
 
-    public UpdateArticleUseCase(IArticleRepository articleRepository, ICommunityRepository communityRepository) {
+    public UpdateArticleUseCase(IArticleRepository articleRepository, ICommunityRepository communityRepository, ElasticSearchRepository elasticSearchRepository) {
         this.articleRepository = articleRepository;
         this.communityRepository = communityRepository;
+        this.elasticSearchRepository = elasticSearchRepository;
     }
 
     @Override
@@ -38,6 +42,8 @@ public class UpdateArticleUseCase implements IUseCase<ArticleUpdateInputData, Ar
             article.setCommunity(community);
 
             articleRepository.update(article);
+
+            elasticSearchRepository.save(new ArticleIndex(article));
 
             return new ArticleUpdateOutputData();
         } catch (Exception e) {
