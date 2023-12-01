@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation"
 import { FormEvent, useEffect, useState } from "react"
 
 type Community = {
-  id: String,
-  name: String
+  id: string,
+  name: string
 }
 
 const fetchCommunities = async (): Promise<Community[]> => {
