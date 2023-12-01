@@ -21,16 +21,16 @@ export default function Header() {
           <span className="ml-3 text-xl">apt</span>
         </a>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <a href="home" className="mr-5 hover:text-indigo-500">
+          <a href="/home" className="mr-5 hover:text-indigo-500">
             ホーム
           </a>
-          <a href="post" className="mr-5 hover:text-indigo-500">
+          <a href="/post" className="mr-5 hover:text-indigo-500">
             投稿する
           </a>
-          <a href="article" className="mr-5 hover:text-indigo-500">
+          <a href="/article" className="mr-5 hover:text-indigo-500">
             記事一覧
           </a>
-          <a href="community" className="mr-5 hover:text-indigo-500">
+          <a href="/community" className="mr-5 hover:text-indigo-500">
             コミュニティ
           </a>
           {/* <a className="mr-5 hover:text-text-indigo-500">お知らせ</a> */}
