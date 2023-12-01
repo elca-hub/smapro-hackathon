@@ -37,6 +37,14 @@ export default function CreateArticlePage () {
     if (data.status === 'SUCCESS' && res.ok) {
       router.push('/article')
       return
+    } else {
+      if (res.ok && data.status === 'ERROR') {
+        alert(data.message)
+        return
+      } else {
+        alert('エラーが発生しました')
+        return
+      }
     }
   }
 
