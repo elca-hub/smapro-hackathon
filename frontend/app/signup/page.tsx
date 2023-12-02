@@ -10,6 +10,8 @@ export default function SignUpPage() {
   const [schoolName, setSchoolName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordonfirmation] = useState("");
+  const [bio, setBio] = useState("");
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const sendData = {
@@ -18,7 +20,7 @@ export default function SignUpPage() {
       schoolName: schoolName,
       password: password,
       passwordConfirmation: passwordConfirmation,
-      bio: "自己紹介文"
+      bio: bio
     };
     const response = await fetch("http://localhost:5050/user/create", {
       method: "POST",
@@ -28,7 +30,7 @@ export default function SignUpPage() {
       },
     });
     const data = await response.json();
-    const redirectPath = "home";
+    const redirectPath = "/signin";
     response.ok ? router.push(redirectPath) : alert(data.errors);
     setPassword("");
     console.log(data);
@@ -91,7 +93,7 @@ export default function SignUpPage() {
                   パスワード
                 </span>
                 <input
-                  type="text"
+                  type="password"
                   className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   placeholder="ここにパスワードを入力してください"
                   id="password"
@@ -105,7 +107,7 @@ export default function SignUpPage() {
                   パスワード（確認用）
                 </span>
                 <input
-                  type="text"
+                  type="password"
                   className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   placeholder="ここにパスワードを入力してください"
                   id="password"
@@ -116,12 +118,26 @@ export default function SignUpPage() {
                   }
                 />
               </div>
-              <button
-                className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                type="submit"
-              >
-                サインアップ
-              </button>
+              <div className="relative mb-4">
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                  自己紹介文
+                </span>
+                <textarea
+                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  placeholder="ここに自己紹介文を入力してください"
+                  id="bio"
+                  onChange={(event) => setBio(event.target.value)}
+                  value={bio}
+                ></textarea>
+              </div>
+              <div className="text-center my-6">
+                <button
+                  className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  type="submit"
+                >
+                  サインアップ
+                </button>
+              </div>
             </div>
           </div>
         </form>

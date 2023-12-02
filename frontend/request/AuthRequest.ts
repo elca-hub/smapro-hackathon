@@ -1,3 +1,4 @@
+import AuthRequestError from "./model/AuthRequestError";
 import AuthResponse from "./model/AuthResponse";
 import AuthToken from "./model/AuthToken";
 
@@ -24,10 +25,11 @@ export default class AuthRequest {
       body: JSON.stringify(body)
     });
 
-    if (res.status === 401) {
-      throw new Error('Unauthorized');
-    } else if (res.status === 403) {
-      throw new Error('Forbidden');
+    if (res.status === 401) throw new AuthRequestError('Unauthorized');
+    else if (res.status === 403) throw new AuthRequestError('Forbidden');
+
+    if (res.status == 500) {
+      window.location.href = '/signin';
     }
 
     return {
