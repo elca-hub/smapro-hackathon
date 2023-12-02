@@ -27,12 +27,12 @@ export default function ArticleTopPage() {
           最新の記事一覧
         </h2>
         <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap -m-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Articles></Articles>
             </div>
-            <Link href="article/newarticls">
-              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+            <Link href="article/newarticles">
+              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
             </Link>
@@ -45,12 +45,12 @@ export default function ArticleTopPage() {
           おすすめの記事一覧
         </h2>
         <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap -m-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Articles></Articles>
             </div>
             <Link href="article/recommendedarticles">
-              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
             </Link>
@@ -60,15 +60,15 @@ export default function ArticleTopPage() {
 
       <section className="text-gray-600 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          閲覧記事一覧
+          閲覧した記事一覧
         </h2>
-        <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-wrap -m-4">
+        <div className="container px-5 py-4 mb-5 mx-auto">
+          <div className="flex flex-wrap -m-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Articles></Articles>
             </div>
-            <Link href="article/recommendedarticles">
-              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+            <Link href="article/pastarticles">
+              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
             </Link>

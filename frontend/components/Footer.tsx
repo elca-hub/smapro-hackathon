@@ -15,7 +15,7 @@ export default function Footer() {
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">apt</span>
+          <span className="ml-3 text-xl">あーぷっと</span>
         </a>
         <p className="text-sm text-white sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
           <a className="mr-5 hover:text-indigo-500">お問い合わせ</a>

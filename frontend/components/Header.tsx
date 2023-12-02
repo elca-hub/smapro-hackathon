@@ -26,7 +26,7 @@ export default function Header() {
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">apt</span>
+          <span className="ml-3 text-xl">あーぷっと</span>
         </a>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <a href="/home" className="mr-5 hover:text-indigo-500">
@@ -46,9 +46,18 @@ export default function Header() {
           </a>
           {/* <a className="mr-5 hover:text-text-indigo-500">お知らせ</a> */}
         </nav>
-        <button className="inline-flex items-center bg-gray-100 border-0 py-3 px-5 focus:outline-none hover:bg-gray-200 rounded-full mt-4 md:mt-0">
-          i
-        </button>
+        <svg
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          className="w-10 h-10"
+          viewBox="0 0 24 24"
+        >
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
       </div>
     </header>
   );
