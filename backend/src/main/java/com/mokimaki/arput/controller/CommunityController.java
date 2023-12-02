@@ -8,13 +8,19 @@ import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboar
 import com.mokimaki.arput.presentation.dto.community.dashboard.CommunityDashboardOutputData;
 import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteInputData;
 import com.mokimaki.arput.presentation.dto.community.delete.CommunityDeleteOutputData;
+import com.mokimaki.arput.presentation.dto.community.entry.CommunityEntryInputData;
+import com.mokimaki.arput.presentation.dto.community.entry.CommunityEntryOutputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexInputData;
 import com.mokimaki.arput.presentation.dto.community.index.CommunityIndexOutputData;
+import com.mokimaki.arput.presentation.dto.community.join.CommunityJoinInputData;
+import com.mokimaki.arput.presentation.dto.community.join.CommunityJoinOutputData;
 import com.mokimaki.arput.presentation.dto.community.show.CommunityShowInputData;
 import com.mokimaki.arput.presentation.dto.community.show.CommunityShowOutputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateInputData;
 import com.mokimaki.arput.presentation.dto.community.update.CommunityUpdateOutputData;
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
+import com.mokimaki.arput.presentation.request.community.CommunityEntryRequest;
+import com.mokimaki.arput.presentation.request.community.CommunityJoinRequest;
 import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.*;
 import com.mokimaki.arput.usecase.community.*;
@@ -33,6 +39,8 @@ public class CommunityController implements CommunityRouting {
     private final CommunityUpdateUseCase communityUpdateUseCase;
     private final DeleteCommunityUseCase communityDeleteUseCase;
     private final CommunityShowUseCase communityShowUseCase;
+    private final CommunityEntryUseCase communityEntryUseCase;
+    private final CommunityJoinUseCase communityJoinUseCase;
 
     public CommunityController(
             CreateCommunityUseCase createCommunityUseCase,
@@ -40,7 +48,9 @@ public class CommunityController implements CommunityRouting {
             CommunityIndexUseCase communityIndexUseCase,
             CommunityUpdateUseCase communityUpdateUseCase,
             DeleteCommunityUseCase communityDeleteUseCase,
-            CommunityShowUseCase communityShowUseCase
+            CommunityShowUseCase communityShowUseCase,
+            CommunityEntryUseCase communityEntryUseCase,
+            CommunityJoinUseCase communityJoinUseCase
     ) {
         this.createCommunityUseCase = createCommunityUseCase;
         this.communityDashboardUseCase = communityDashboardUseCase;
@@ -48,6 +58,8 @@ public class CommunityController implements CommunityRouting {
         this.communityUpdateUseCase = communityUpdateUseCase;
         this.communityDeleteUseCase = communityDeleteUseCase;
         this.communityShowUseCase = communityShowUseCase;
+        this.communityEntryUseCase = communityEntryUseCase;
+        this.communityJoinUseCase = communityJoinUseCase;
     }
 
     @Override
@@ -124,6 +136,34 @@ public class CommunityController implements CommunityRouting {
 
         try {
             CommunityShowOutputData output = communityShowUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public CommunityEntryResponse entryCommunity(@RequestAttribute String userId, @RequestBody CommunityEntryRequest entryRequest) {
+        var input = new CommunityEntryInputData(userId, entryRequest.entryCode());
+        var response = new CommunityEntryResponse();
+
+        try {
+            CommunityEntryOutputData output = communityEntryUseCase.execute(input);
+
+            return response.success(output);
+        } catch (UseCaseException e) {
+            return response.error(e);
+        }
+    }
+
+    @Override
+    public CommunityJoinResponse joinCommunity(@RequestAttribute String userId, @RequestBody CommunityJoinRequest joinRequest) {
+        var input = new CommunityJoinInputData(userId, joinRequest.communityId(), joinRequest.entryCode());
+        var response = new CommunityJoinResponse();
+
+        try {
+            CommunityJoinOutputData output = communityJoinUseCase.execute(input);
 
             return response.success(output);
         } catch (UseCaseException e) {

@@ -23,8 +23,7 @@ public class CommunityEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     public UserEntity owner;
 
-    @OneToMany()
-    @JoinColumn(name = "community_id")
+    @OneToMany(mappedBy = "communityEntity")
     public List<JoinedCommunityEntity> joinedCommunityEntity;
 
     public CommunityEntity convert(Community community) {
@@ -32,8 +31,14 @@ public class CommunityEntity {
         this.name = community.getName();
         this.description = community.getDescription();
         this.entryCode = community.getEntryCode().getEntryCode();
-        this.owner = new UserEntity();
-        this.owner.convert(community.getOwner());
+        this.owner = new UserEntity().convert(community.getOwner());
+        this.joinedCommunityEntity = community.getMembers().stream().map(user -> {
+            var joinedCommunityEntity = new JoinedCommunityEntity();
+            joinedCommunityEntity.setUserEntity(new UserEntity().convert(user));
+            joinedCommunityEntity.setCommunityEntity(this);
+
+            return joinedCommunityEntity;
+        }).toList();
         return this;
     }
 

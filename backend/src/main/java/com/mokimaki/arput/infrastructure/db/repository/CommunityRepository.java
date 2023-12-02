@@ -1,6 +1,8 @@
 package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.community.Community;
+import com.mokimaki.arput.domain.model.community.EntryCode;
+import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.db.ICommunityRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
@@ -37,8 +39,6 @@ public class CommunityRepository implements ICommunityRepository {
         communityEntity.convert(community);
         communityEntity.setOwner(user);
 
-        communityContext.save(communityEntity);
-
         JoinedCommunityEntity joinedCommunityEntity = new JoinedCommunityEntity();
         joinedCommunityEntity.setCommunityEntity(communityEntity);
         joinedCommunityEntity.setUserEntity(user);
@@ -58,7 +58,6 @@ public class CommunityRepository implements ICommunityRepository {
         UserEntity user = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザーが存在しません"));
 
         List<CommunityEntity> communityEntities = joinedCommunityContext.findByUserEntity(user).stream().map(JoinedCommunityEntity::getCommunityEntity).toList();
-
         return communityEntities.stream().map(CommunityEntity::convert).toList();
     }
 
@@ -87,5 +86,22 @@ public class CommunityRepository implements ICommunityRepository {
         articleContext.deleteAll(articleEntities);
 
         communityContext.delete(communityEntity);
+    }
+
+    @Override
+    public Optional<Community> findByEntryCode(EntryCode entryCode) {
+        return communityContext.findByEntryCode(entryCode.getEntryCode()).map(CommunityEntity::convert);
+    }
+
+    @Override
+    public void join(User user, Community community) {
+        var userEntity = new UserEntity().convert(user);
+        var communityEntity = new CommunityEntity().convert(community);
+
+        var joinedCommunityEntity = new JoinedCommunityEntity();
+        joinedCommunityEntity.setUserEntity(userEntity);
+        joinedCommunityEntity.setCommunityEntity(communityEntity);
+
+        joinedCommunityContext.save(joinedCommunityEntity);
     }
 }

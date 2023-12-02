@@ -14,10 +14,10 @@ public class JoinedCommunityEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
     @ManyToOne
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @JoinColumn(name = "community_id")
     private CommunityEntity communityEntity;
 }

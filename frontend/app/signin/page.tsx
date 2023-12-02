@@ -21,6 +21,7 @@ export default function SignInPage() {
       },
     });
 
+
     const headerToken = response.headers.get("X-AUTH-TOKEN");
     if (headerToken) localStorage.setItem("token", headerToken);
 

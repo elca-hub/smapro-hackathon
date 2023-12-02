@@ -366,6 +366,54 @@ paths:
       responses:
         "200":
           description: "コミュニティの削除に成功した場合"
+  "/community/entry":
+    post:
+      tags: ["communities"]
+      summary: "コミュニティへの参加"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: "コミュニティへの参加に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entryCode:
+                  type: string
+                  description: "コミュニティID"
+                  example: "1"
+      responses:
+        "200":
+          description: "コミュニティへの参加に成功した場合"
+  "/community/join":
+    "post":
+      tags: ["communities"]
+      summary: "コミュニティへの参加"
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: "コミュニティへの参加に必要な情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entryCode:
+                  type: string
+                  description: "エントリーコード"
+                  example: "entrycode"
+                communityId:
+                  type: string
+                  description: "コミュニティID"
+                  example: "1"
+      responses:
+        "200":
+          description: "コミュニティへの参加に成功した場合"
   "/article/":
     "post":
       tags: ["articles"]

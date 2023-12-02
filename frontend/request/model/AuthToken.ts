@@ -1,3 +1,5 @@
+"use client";
+
 import AuthRequestError from "./AuthRequestError";
 
 export default class AuthToken {
@@ -6,7 +8,8 @@ export default class AuthToken {
   private token;
 
   constructor() {
-    const storageTokenValue = localStorage.getItem(this.tokenStorageKey);
+    let storageTokenValue = localStorage.getItem(this.tokenStorageKey);
+    if (!storageTokenValue) storageTokenValue = '';
 
     this.token = storageTokenValue;
   }

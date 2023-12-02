@@ -1,6 +1,8 @@
 package com.mokimaki.arput.domain.repository.db;
 
 import com.mokimaki.arput.domain.model.community.Community;
+import com.mokimaki.arput.domain.model.community.EntryCode;
+import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +22,8 @@ public interface ICommunityRepository {
     void update(Community community);
 
     void delete(Community community);
+
+    Optional<Community> findByEntryCode(EntryCode entryCode);
+
+    void join(User user, Community community);
 }
