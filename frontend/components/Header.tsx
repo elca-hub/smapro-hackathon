@@ -3,9 +3,9 @@
 import AuthRequest from "@/request/AuthRequest";
 import AuthToken from "@/request/model/AuthToken";
 
-const authRequest = new AuthRequest(new AuthToken());
-
 export default function Header() {
+  const authRequest = new AuthRequest(new AuthToken());
+
   async function logout() {
     const res = await authRequest.request("user/logout", "GET");
     const data = res.json;
@@ -26,9 +26,9 @@ export default function Header() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
             viewBox="0 0 24 24"
           >
@@ -57,9 +57,9 @@ export default function Header() {
         <svg
           fill="none"
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           className="w-10 h-10"
           viewBox="0 0 24 24"
         >
