@@ -36,6 +36,7 @@ export default function UpdateCommunityPage({ params }: { params: { communityId:
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const router = useRouter()
+  const authRequest = new AuthRequest(new AuthToken())
 
   useEffect(() => {
     (async () => {
@@ -51,6 +52,26 @@ export default function UpdateCommunityPage({ params }: { params: { communityId:
     })()
   }, [params.communityId, router])
 
+  async function deleteCommunity () {
+    const res = await authRequest.request(`community/${params.communityId}`, 'DELETE')
+
+    const data = res.json
+    const status = res.status
+
+    if (data.status === 'SUCCESS' && status === 200) {
+      router.push('/community')
+      return
+    } else {
+      if (status === 200 && data.status === 'ERROR') {
+        alert(data.message)
+        return
+      } else {
+        alert('エラーが発生しました')
+        return
+      }
+    }
+  }
+
   async function onSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
@@ -58,8 +79,6 @@ export default function UpdateCommunityPage({ params }: { params: { communityId:
       name,
       description
     }
-
-    const authRequest = new AuthRequest(new AuthToken())
 
     const res = await authRequest.request(`community/${params.communityId}`, 'PUT', sendData)
 
@@ -133,6 +152,15 @@ export default function UpdateCommunityPage({ params }: { params: { communityId:
                 </button>
               </div>
             </form>
+
+            <div className="text-center my-6">
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                onClick={deleteCommunity}
+              >
+                削除する
+              </button>
+            </div>
           </div>
         </div>
       </div>
