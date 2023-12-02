@@ -1,6 +1,6 @@
 type Props = {
   title: string;
-  id:string;
+  id: string;
 };
 
 export default function Articles({ title, id }: Props) {
@@ -11,7 +11,9 @@ export default function Articles({ title, id }: Props) {
           最終更新日時
         </h3>
         <h2 className="text-gray-900 title-font text-lg font-medium">
-          <a href={`article/[articled]/${id}`}>{title}</a>
+          <a href={`article/${id}`}>
+            {title.replace("article/[articled]/", "")}
+          </a>
         </h2>
         <p className="mt-1">リアクション数</p>
       </div>

@@ -46,9 +46,6 @@ export default function ArticleTopPage() {
   useEffect(() => {
     (async () => {
       const data = await fetchArticles();
-
-      console.log(data);
-
       setArticles(data);
     })();
   }, []);
@@ -84,7 +81,7 @@ export default function ArticleTopPage() {
                   <Articles
                     title={article.title}
                     key={article.id}
-                    id={""}
+                    id={article.id}
                   ></Articles>
                 );
               })}
