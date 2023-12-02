@@ -29,7 +29,7 @@ export default function PastArticlePage() {
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
             {articleList.map((val) => {
-              return <Articles key={val.id} title={""}></Articles>;
+              return <Articles key={val.id} title={""} id={""}></Articles>;
             })}
           </div>
         </div>
