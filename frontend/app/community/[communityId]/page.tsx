@@ -85,7 +85,7 @@ export default function ShowCommunityPage({ params }: { params: { communityId: s
         </p>
       </section>
 
-      <section className="text-gray-600 body-font text-center">
+      <section className={`${community && community.isOwner ? 'block' : 'hidden'} text-gray-600 body-font text-center`}>
         <a href={`/community/${params.communityId}/update`} className="text-center">
           <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full">
             編集

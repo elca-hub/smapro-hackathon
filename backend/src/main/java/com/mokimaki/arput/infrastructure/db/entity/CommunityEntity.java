@@ -31,8 +31,7 @@ public class CommunityEntity {
         this.name = community.getName();
         this.description = community.getDescription();
         this.entryCode = community.getEntryCode().getEntryCode();
-        this.owner = new UserEntity();
-        this.owner.convert(community.getOwner());
+        this.owner = new UserEntity().convert(community.getOwner());
         this.joinedCommunityEntity = community.getMembers().stream().map(user -> {
             var joinedCommunityEntity = new JoinedCommunityEntity();
             joinedCommunityEntity.setUserEntity(new UserEntity().convert(user));

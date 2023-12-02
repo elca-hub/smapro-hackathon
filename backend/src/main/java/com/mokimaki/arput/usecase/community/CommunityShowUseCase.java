@@ -38,7 +38,7 @@ public class CommunityShowUseCase implements IUseCase<CommunityShowInputData, Co
                     community.getName(),
                     community.getDescription(),
                     community.isOwner(user),
-                    community.getEntryCode().getEntryCode(),
+                    community.isOwner(user) ? community.getEntryCode().getEntryCode() : "参加コードはオーナーのみ表示できます",
                     community.getMembers().stream().map(member -> new CommunityUserItem(
                             member.getId().getId(),
                             member.getName()

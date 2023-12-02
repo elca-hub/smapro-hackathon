@@ -18,7 +18,7 @@ const fetchCommunity = async (communityId: string): Promise<Community> => {
   const res = await authRequest.request(`community/${communityId}`, 'GET')  
 
   const data = res.json
-  if (data.status === 'SUCCESS' && res.status === 200) {
+  if (data.status === 'SUCCESS' && res.status === 200 && data.data.isOwner) {
     const communityData = data.data
 
     return {
