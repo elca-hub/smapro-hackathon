@@ -46,9 +46,6 @@ export default function ArticleTopPage() {
   useEffect(() => {
     (async () => {
       const data = await fetchArticles();
-
-      console.log(data);
-
       setArticles(data);
     })();
   }, []);
@@ -77,19 +74,23 @@ export default function ArticleTopPage() {
           最新の記事一覧
         </h2>
         <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-wrap -m-4 items-center">
-            <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
+          <div className="-m-4">
+            <div className="flex flex-wrap lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto items-center">
               {articles.map((article) => {
                 return (
-                  <Articles title={article.title} key={article.id}></Articles>
+                  <Articles
+                    title={article.title}
+                    key={article.id}
+                    id={article.id}
+                  ></Articles>
                 );
               })}
+              <Link href="article/newarticles">
+                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                  <BsChevronDoubleRight />
+                </button>
+              </Link>
             </div>
-            <Link href="article/newarticles">
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
-            </Link>
           </div>
         </div>
       </section>

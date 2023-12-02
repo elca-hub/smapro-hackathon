@@ -3,13 +3,7 @@ import Communities from "@/components/Communities";
 const communityList = [
   {
     id: "tset",
-  },
-  {
-    id: "tset1",
-  },
-  {
-    id: "tset2",
-  },
+  }
 ];
 
 export default function BelongingCommunitiesPage() {
