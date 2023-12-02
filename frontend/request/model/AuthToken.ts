@@ -7,7 +7,6 @@ export default class AuthToken {
 
   constructor() {
     const storageTokenValue = localStorage.getItem(this.tokenStorageKey);
-    if (!storageTokenValue) throw new AuthRequestError('No token found');
 
     this.token = storageTokenValue;
   }
