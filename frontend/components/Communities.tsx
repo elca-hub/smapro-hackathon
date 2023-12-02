@@ -11,7 +11,7 @@ export default function Communities({title, number}: Props) {
           {title}
         </h2>
         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-          {number}
+          参加人数：{number}名
         </h3>
       </div>
     </div>

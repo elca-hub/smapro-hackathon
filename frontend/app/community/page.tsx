@@ -84,26 +84,16 @@ export default function CommunityTopPage() {
         </h2>
         <div className="container px-1 py-1 mx-auto">
           <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4 items-center">
-            <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              <Communities title={"title"} number={1}></Communities>
-            </div>
-            <Link href={"community/belongingcommunities"}>
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="text-gray-600 mb-5 body-font">
-        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          おすすめのコミュニティ一覧
-        </h2>
-        <div className="container px-1 py-1 mx-auto">
-          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4 items-center">
-            <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              <Communities></Communities>
+            <div className="flex lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
+              {communities.map((community) => {
+                return (
+                  <Communities
+                    title={community.name}
+                    number={1}
+                    key={community.id}
+                  ></Communities>
+                );
+              })}
             </div>
             <Link href={"community/belongingcommunities"}>
               <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
