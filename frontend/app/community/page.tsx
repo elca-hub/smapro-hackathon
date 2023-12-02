@@ -1,7 +1,34 @@
 import Communities from "@/components/Communities";
+import AuthRequest from "@/request/AuthRequest";
+import AuthResponse from "@/request/model/AuthResponse";
+import AuthToken from "@/request/model/AuthToken";
 import Link from "next/link";
 import { BsChevronDoubleRight } from "react-icons/bs";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+
+const authRequest = new AuthRequest(new AuthToken());
+
+type Community = {
+  id: string;
+  name: string;
+  description: string;
+}
+
+const fetchCommunities = async (): Promise<Community[]> => {
+  const res: AuthResponse = await authRequest.request("community/", "GET");
+  const data = res.json;
+
+  if (data.status === "SUCCESS" && res.status === 200) {
+    const communityData = data.data;
+    return communityData.map((community: any) => {
+      return {
+        id: community.communityId,
+        name: community.name,
+        description: community.description,
+      };
+    });
+  }
+}
 
 export default function CommunityTopPage() {
   return (
