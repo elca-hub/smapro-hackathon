@@ -17,7 +17,7 @@ public class JoinedCommunityEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "community_id")
     private CommunityEntity communityEntity;
 }

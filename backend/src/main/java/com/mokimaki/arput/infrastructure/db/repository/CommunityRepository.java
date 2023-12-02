@@ -2,6 +2,7 @@ package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.community.Community;
 import com.mokimaki.arput.domain.model.community.EntryCode;
+import com.mokimaki.arput.domain.model.user.User;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.db.ICommunityRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
@@ -90,5 +91,17 @@ public class CommunityRepository implements ICommunityRepository {
     @Override
     public Optional<Community> findByEntryCode(EntryCode entryCode) {
         return communityContext.findByEntryCode(entryCode.getEntryCode()).map(CommunityEntity::convert);
+    }
+
+    @Override
+    public void join(User user, Community community) {
+        var userEntity = new UserEntity().convert(user);
+        var communityEntity = new CommunityEntity().convert(community);
+
+        var joinedCommunityEntity = new JoinedCommunityEntity();
+        joinedCommunityEntity.setUserEntity(userEntity);
+        joinedCommunityEntity.setCommunityEntity(communityEntity);
+
+        joinedCommunityContext.save(joinedCommunityEntity);
     }
 }

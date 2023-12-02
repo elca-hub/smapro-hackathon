@@ -41,6 +41,7 @@ export default function CommunityTopPage() {
   const authRequest = new AuthRequest(new AuthToken());
   const [communities, setCommunities] = useState<Community[]>([]);
   const [entryCode, setEntryCode] = useState("");
+  const [community, setCommunity] = useState<Community>();
 
   useEffect(() => {
     (async () => {
@@ -51,6 +52,57 @@ export default function CommunityTopPage() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const sendData = {
+      entryCode,
+    };
+
+    const res: AuthResponse = await authRequest.request(
+      "community/entry",
+      "POST",
+      sendData
+    );
+
+    const data = res.json;
+
+    if (data.status === "SUCCESS" && res.status === 200) {
+      const communityData = data.data;
+
+      setCommunity({
+        id: communityData.id,
+        name: communityData.name,
+        member: -1
+      });
+    } else {
+      setCommunity(undefined);
+    }
+  }
+
+  async function joinCommunity() {
+    const sendData = {
+      entryCode,
+      communityId: community?.id
+    };
+
+    console.log(sendData);
+
+    const res: AuthResponse = await authRequest.request(
+      "community/join",
+      "POST",
+      sendData
+    );
+
+    const data = res.json;
+
+    console.log(data);
+
+    if (data.status === "SUCCESS" && res.status === 200) {
+      setEntryCode("");
+      const data = await fetchCommunities();
+      setCommunities(data);
+    }
+
+    setCommunity(undefined);
   }
 
   return (
@@ -70,8 +122,26 @@ export default function CommunityTopPage() {
             value={entryCode}
             onChange={(e) => setEntryCode(e.target.value)}
           />
+
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+            <button
+              type="submit"
+              className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full"
+            >
+              参加
+            </button>
+          </div>
         </form>
       </label>
+
+      <div className={`${community ? 'block' : 'hidden'} text-center mt-3`}>
+        <h4>以下のコミュニティが見つかりました。</h4>
+        <h3 className="my-3">{community?.name}</h3>
+
+        <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full" onClick={joinCommunity}>
+          参加する
+        </button>
+      </div>
 
       <h2 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 p-8">
         コミュニティ

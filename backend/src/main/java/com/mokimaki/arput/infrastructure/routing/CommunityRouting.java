@@ -2,6 +2,7 @@ package com.mokimaki.arput.infrastructure.routing;
 
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
 import com.mokimaki.arput.presentation.request.community.CommunityEntryRequest;
+import com.mokimaki.arput.presentation.request.community.CommunityJoinRequest;
 import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.*;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +29,7 @@ public interface CommunityRouting {
 
     @PostMapping("/entry")
     CommunityEntryResponse entryCommunity(String userId, CommunityEntryRequest entryRequest);
+
+    @PostMapping("/join")
+    CommunityJoinResponse joinCommunity(String userId, CommunityJoinRequest joinRequest);
 }
