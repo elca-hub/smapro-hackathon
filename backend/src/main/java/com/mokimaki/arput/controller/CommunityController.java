@@ -138,7 +138,7 @@ public class CommunityController implements CommunityRouting {
     }
 
     @Override
-    public CommunityEntryResponse entryCommunity(String userId, @RequestBody CommunityEntryRequest entryRequest) {
+    public CommunityEntryResponse entryCommunity(@RequestAttribute String userId, @RequestBody CommunityEntryRequest entryRequest) {
         var input = new CommunityEntryInputData(userId, entryRequest.entryCode());
         var response = new CommunityEntryResponse();
 
