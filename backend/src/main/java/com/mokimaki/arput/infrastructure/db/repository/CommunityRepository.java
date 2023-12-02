@@ -58,7 +58,6 @@ public class CommunityRepository implements ICommunityRepository {
         UserEntity user = userContext.findById(userId.getId()).orElseThrow(() -> new RuntimeException("ユーザーが存在しません"));
 
         List<CommunityEntity> communityEntities = joinedCommunityContext.findByUserEntity(user).stream().map(JoinedCommunityEntity::getCommunityEntity).toList();
-
         return communityEntities.stream().map(CommunityEntity::convert).toList();
     }
 
