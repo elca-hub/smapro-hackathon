@@ -119,7 +119,7 @@ export default function SignUpPage() {
                 />
               </div>
               <div className="relative mb-4">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                <span className="block text-sm font-medium text-slate-700">
                   自己紹介文
                 </span>
                 <textarea
