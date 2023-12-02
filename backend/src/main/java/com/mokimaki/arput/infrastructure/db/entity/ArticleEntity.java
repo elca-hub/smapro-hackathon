@@ -23,15 +23,15 @@ public class ArticleEntity {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private UserEntity writer;
 
-    @OneToMany
-    @JoinColumn(name = "article_id")
+    @OneToMany(mappedBy = "article")
     private List<EvaluatedArticleEntity> evaluatedArticleEntities;
+
     @ManyToOne
     @Nullable
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @JoinColumn(name = "community_id")
     private CommunityEntity community;
 
     public void convert(Article article) {

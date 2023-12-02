@@ -85,6 +85,14 @@ export default function ShowCommunityPage({ params }: { params: { communityId: s
         </p>
       </section>
 
+      <section className="text-gray-600 body-font text-center">
+        <a href={`/community/${params.communityId}/update`} className="text-center">
+          <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full">
+            編集
+          </button>
+        </a>
+      </section>
+
       <section className="text-gray-600 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-3 text-center">
           所属ユーザ一覧

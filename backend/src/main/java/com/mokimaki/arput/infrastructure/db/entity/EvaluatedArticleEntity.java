@@ -14,7 +14,7 @@ public class EvaluatedArticleEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "evaluation_id", referencedColumnName = "id")
+    @JoinColumn(name = "evaluation_id")
     private EvaluationEntity evaluation;
 
     @ManyToOne

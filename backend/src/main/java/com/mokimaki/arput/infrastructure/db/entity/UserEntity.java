@@ -27,19 +27,16 @@ public class UserEntity {
     @JoinColumn(name = "user_id")
     public List<CommunityEntity> communityEntity;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "userEntity")
     public List<JoinedCommunityEntity> joinedCommunityEntity;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "writer")
     public List<ArticleEntity> articleEntity;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user")
     public List<EvaluatedArticleEntity> evaluatedArticleEntity;
 
-    public void convert(User user) {
+    public UserEntity convert(User user) {
         this.id = user.getId().getId();
         this.mailAddress = user.getMailAddress();
         this.userName = user.getName();
@@ -47,6 +44,8 @@ public class UserEntity {
         this.schoolName = user.getSchoolName();
         this.token = null;
         this.bio = user.getBio();
+
+        return this;
     }
 
     public User convert() {

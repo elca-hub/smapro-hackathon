@@ -46,7 +46,7 @@ public class CreateCommunityUseCase implements IUseCase<CommunityCreateInputData
         } catch (DomainException e) {
             throw new UseCaseException(e.getMessage());
         } catch (Exception e) {
-            throw new UseCaseException("コミュニティの作成に失敗しました");
+            throw new UseCaseException("コミュニティの作成に失敗しました: " + e.getMessage());
         }
     }
 }

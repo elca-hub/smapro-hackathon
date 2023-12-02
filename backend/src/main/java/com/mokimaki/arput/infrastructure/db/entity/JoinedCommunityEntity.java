@@ -13,11 +13,11 @@ public class JoinedCommunityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "community_id")
     private CommunityEntity communityEntity;
 }
