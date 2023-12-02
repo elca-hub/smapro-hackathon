@@ -28,8 +28,8 @@ export default function RecommendArticlePage() {
         </h2>
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
-          {articleList.map((val) => {
-              return <Articles key={val.id}></Articles>;
+            {articleList.map((val) => {
+              return <Articles key={val.id} title={""}></Articles>;
             })}
           </div>
         </div>

@@ -1,8 +1,58 @@
+"use client";
+
 import Articles from "@/components/Articles";
+import AuthRequest from "@/request/AuthRequest";
+import AuthResponse from "@/request/model/AuthResponse";
+import AuthToken from "@/request/model/AuthToken";
 import Link from "next/link";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { useState, useEffect } from "react";
+
+const authRequest: AuthRequest = new AuthRequest(new AuthToken());
+
+type Article = {
+  id: string;
+  title: string;
+  content: string;
+  reactionCount: number;
+};
+
+const fetchArticles = async (): Promise<Article[]> => {
+  const res: AuthResponse = await authRequest.request("article/", "GET");
+  const data = res.json;
+  if (data.status === "SUCCESS" && res.status === 200) {
+    const articleData = data.data;
+    return articleData.map((article: any) => {
+      const values: number[] = Object.values(article.evaluations);
+
+      return {
+        id: article.articleId,
+        title: article.title,
+        content: article.content,
+        reactionCount: values.reduce(
+          (sum: number, ele: number) => sum + ele,
+          0
+        ),
+      };
+    });
+  }
+
+  throw new Error("failed to fetch articles.");
+};
 
 export default function ArticleTopPage() {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchArticles();
+
+      console.log(data);
+
+      setArticles(data);
+    })();
+  }, []);
+
   return (
     <>
       <label className="relative block px-52 mt-6">
@@ -29,45 +79,13 @@ export default function ArticleTopPage() {
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              <Articles></Articles>
+              {articles.map((article) => {
+                return (
+                  <Articles title={article.title} key={article.id}></Articles>
+                );
+              })}
             </div>
             <Link href="article/newarticles">
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="text-gray-600 body-font">
-        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          おすすめの記事一覧
-        </h2>
-        <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-wrap -m-4 items-center">
-            <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              <Articles></Articles>
-            </div>
-            <Link href="article/recommendedarticles">
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="text-gray-600 body-font">
-        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          閲覧した記事一覧
-        </h2>
-        <div className="container px-5 py-4 mb-5 mx-auto">
-          <div className="flex flex-wrap -m-4 items-center">
-            <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              <Articles></Articles>
-            </div>
-            <Link href="article/pastarticles">
               <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
