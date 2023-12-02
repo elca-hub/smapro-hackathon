@@ -14,4 +14,6 @@ public interface ArticleContext extends CrudRepository<ArticleEntity, String> {
     List<ArticleEntity> findByWriter(UserEntity writer);
 
     List<ArticleEntity> findByCommunity(CommunityEntity communityEntity);
+
+    List<ArticleEntity> findByTitleLikeAndContentLike(String title, String content);
 }

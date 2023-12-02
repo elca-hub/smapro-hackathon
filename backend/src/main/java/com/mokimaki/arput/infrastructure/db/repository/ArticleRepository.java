@@ -172,4 +172,17 @@ public class ArticleRepository implements IArticleRepository {
 
         return mapper;
     }
+
+    @Override
+    public List<Article> search(String keyword) {
+        return articleContext.findByTitleLikeAndContentLike("%" + keyword + "%", "%" + keyword + "%").stream().map(articleEntity -> {
+            Article article = articleEntity.convert();
+            article.setEvaluationLongMap(this.countEvaluation(articleEntity));
+
+            CommunityEntity communityEntity = articleEntity.getCommunity();
+
+            article.setCommunity(communityEntity == null ? Optional.empty() : Optional.of(communityEntity.convert()));
+            return article;
+        }).toList();
+    }
 }

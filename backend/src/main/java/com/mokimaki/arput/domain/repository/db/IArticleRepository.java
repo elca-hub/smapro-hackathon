@@ -24,4 +24,6 @@ public interface IArticleRepository {
     void removeEvaluation(User user, Article article, Evaluation evaluation);
     boolean isAlreadyEvaluated(User user, Article article, Evaluation evaluation);
     List<Article> findByCommunityId(CommunityId communityId);
+
+    List<Article> search(String keyword);
 }
