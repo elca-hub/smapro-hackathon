@@ -29,7 +29,9 @@ public class CommunityDashboardUseCase implements IUseCase<CommunityDashboardInp
                             community.getId().getId(),
                             community.getName(),
                             community.getDescription(),
-                            community.getEntryCode().getEntryCode()))
+                            community.getEntryCode().getEntryCode(),
+                            community.getMembers().size()
+                    ))
             ).toList();
         } catch (Exception e) {
             throw new UseCaseException("コミュニティの取得に失敗しました。");
