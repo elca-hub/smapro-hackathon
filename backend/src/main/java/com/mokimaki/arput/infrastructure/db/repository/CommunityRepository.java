@@ -1,6 +1,7 @@
 package com.mokimaki.arput.infrastructure.db.repository;
 
 import com.mokimaki.arput.domain.model.community.Community;
+import com.mokimaki.arput.domain.model.community.EntryCode;
 import com.mokimaki.arput.domain.model.user.UserId;
 import com.mokimaki.arput.domain.repository.db.ICommunityRepository;
 import com.mokimaki.arput.infrastructure.db.context.ArticleContext;
@@ -84,5 +85,10 @@ public class CommunityRepository implements ICommunityRepository {
         articleContext.deleteAll(articleEntities);
 
         communityContext.delete(communityEntity);
+    }
+
+    @Override
+    public Optional<Community> findByEntryCode(EntryCode entryCode) {
+        return communityContext.findByEntryCode(entryCode.getEntryCode()).map(CommunityEntity::convert);
     }
 }

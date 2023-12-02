@@ -1,6 +1,7 @@
 package com.mokimaki.arput.infrastructure.routing;
 
 import com.mokimaki.arput.presentation.request.community.CommunityCreateRequest;
+import com.mokimaki.arput.presentation.request.community.CommunityEntryRequest;
 import com.mokimaki.arput.presentation.request.community.CommunityUpdateRequest;
 import com.mokimaki.arput.presentation.response.community.*;
 import org.springframework.web.bind.annotation.*;
@@ -24,4 +25,7 @@ public interface CommunityRouting {
 
     @GetMapping("/{communityId}")
     CommunityShowResponse showCommunity(String userId, String communityId);
+
+    @PostMapping("/entry")
+    CommunityEntryResponse entryCommunity(String userId, CommunityEntryRequest entryRequest);
 }
