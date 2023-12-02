@@ -7,5 +7,6 @@ public record CommunityShowOutputData(
         String name,
         String description,
         boolean isOwner,
+        String entryCode,
         List<CommunityUserItem> members
 ) { }
