@@ -69,7 +69,7 @@ export default function CommunityTopPage() {
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           コミュニティを作成する
         </h2>
-        <div className="container px-5 py-4 mx-auto">
+        <div className="container px-10 py-4">
           <Link href="community/create">
             <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
               <BsFillPersonPlusFill />
@@ -83,12 +83,12 @@ export default function CommunityTopPage() {
           所属コミュニティ一覧
         </h2>
         <div className="container px-1 py-1 mx-auto">
-          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4">
+          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Communities></Communities>
             </div>
             <Link href={"community/belongingcommunities"}>
-              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
             </Link>
@@ -96,17 +96,17 @@ export default function CommunityTopPage() {
         </div>
       </section>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 mb-5 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           おすすめのコミュニティ一覧
         </h2>
         <div className="container px-1 py-1 mx-auto">
-          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4">
+          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4 items-center">
             <div className="lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
               <Communities></Communities>
             </div>
             <Link href={"community/belongingcommunities"}>
-              <button className="w-12 h-12 mr-3 mt-20 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <BsChevronDoubleRight />
               </button>
             </Link>
