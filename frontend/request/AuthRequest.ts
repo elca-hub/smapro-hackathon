@@ -1,3 +1,5 @@
+"use client";
+
 import AuthRequestError from "./model/AuthRequestError";
 import AuthResponse from "./model/AuthResponse";
 import AuthToken from "./model/AuthToken";
@@ -25,15 +27,15 @@ export default class AuthRequest {
       body: JSON.stringify(body)
     });
 
-    switch (res.status) {
-      case 401:
-        throw new AuthRequestError('Unauthorized');
-      case 403:
-        throw new AuthRequestError('Forbidden');
-      case 500:
-        throw new AuthRequestError('Internal Server Error');
-      default:
-        window.location.href = '/signin';
+    if (res.status === 401) {
+      window.location.href = '/signin';
+      throw new AuthRequestError('Unauthorized');
+    } else if (res.status === 403) {
+      window.location.href = '/signin';
+      throw new AuthRequestError('Forbidden');
+    } else if (res.status === 500) {
+      window.location.href = '/signin';
+      throw new AuthRequestError('Internal Server Error');
     }
 
     return {

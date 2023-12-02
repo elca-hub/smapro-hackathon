@@ -4,9 +4,9 @@ import AuthRequest from "@/request/AuthRequest";
 import AuthToken from "@/request/model/AuthToken";
 
 export default function Header() {
-  const authRequest = new AuthRequest(new AuthToken());
-
   async function logout() {
+    const authRequest = new AuthRequest(new AuthToken());
+    
     const res = await authRequest.request("user/logout", "GET");
     const data = res.json;
     if (data.status === "SUCCESS" && res.status === 200) {

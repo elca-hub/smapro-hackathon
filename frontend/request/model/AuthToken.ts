@@ -1,3 +1,5 @@
+"use client";
+
 import AuthRequestError from "./AuthRequestError";
 
 export default class AuthToken {
