@@ -1,18 +1,21 @@
+"use client";
+
 import Communities from "@/components/Communities";
 import AuthRequest from "@/request/AuthRequest";
 import AuthResponse from "@/request/model/AuthResponse";
 import AuthToken from "@/request/model/AuthToken";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { BsChevronDoubleRight } from "react-icons/bs";
 import { BsFillPersonPlusFill } from "react-icons/bs";
-
-const authRequest = new AuthRequest(new AuthToken());
 
 type Community = {
   id: string;
   name: string;
   description: string;
 }
+
+const authRequest = new AuthRequest(new AuthToken());
 
 const fetchCommunities = async (): Promise<Community[]> => {
   const res: AuthResponse = await authRequest.request("community/", "GET");
@@ -27,10 +30,22 @@ const fetchCommunities = async (): Promise<Community[]> => {
         description: community.description,
       };
     });
+  } else {
+    alert("エラーが発生しました");
+    throw new Error("failed to fetch community");
   }
 }
 
 export default function CommunityTopPage() {
+  const [communities, setCommunities] = useState<Community[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchCommunities();
+      setCommunities(data);
+    })();
+  }, []);
+
   return (
     <>
       <label className="relative block px-52 mt-6">
