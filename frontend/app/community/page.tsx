@@ -12,7 +12,7 @@ import { BsFillPersonPlusFill } from "react-icons/bs";
 type Community = {
   id: string;
   name: string;
-  description: string;
+  member: number;
 }
 
 const authRequest = new AuthRequest(new AuthToken());
@@ -27,7 +27,7 @@ const fetchCommunities = async (): Promise<Community[]> => {
       return {
         id: community.communityId,
         name: community.name,
-        description: community.description,
+        member: community.memberCount,
       };
     });
   } else {
@@ -89,7 +89,7 @@ export default function CommunityTopPage() {
                 return (
                   <Communities
                     title={community.name}
-                    number={1}
+                    number={community.member}
                     key={community.id}
                   ></Communities>
                 );
