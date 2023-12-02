@@ -25,11 +25,15 @@ export default class AuthRequest {
       body: JSON.stringify(body)
     });
 
-    if (res.status === 401) throw new AuthRequestError('Unauthorized');
-    else if (res.status === 403) throw new AuthRequestError('Forbidden');
-
-    if (res.status == 500) {
-      window.location.href = '/signin';
+    switch (res.status) {
+      case 401:
+        throw new AuthRequestError('Unauthorized');
+      case 403:
+        throw new AuthRequestError('Forbidden');
+      case 500:
+        throw new AuthRequestError('Internal Server Error');
+      default:
+        window.location.href = '/signin';
     }
 
     return {
