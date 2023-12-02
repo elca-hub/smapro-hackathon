@@ -1,6 +1,7 @@
 import Communities from "@/components/Communities";
 import Link from "next/link";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 
 export default function CommunityTopPage() {
   return (
@@ -21,6 +22,19 @@ export default function CommunityTopPage() {
       <h2 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 p-8">
         コミュニティ
       </h2>
+
+      <section className="text-gray-600 body-font">
+        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
+          コミュニティを作成する
+        </h2>
+        <div className="container px-5 py-4 mx-auto">
+          <Link href="community/create">
+            <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
+              <BsFillPersonPlusFill />
+            </button>
+          </Link>
+        </div>
+      </section>
 
       <section className="text-gray-600 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">

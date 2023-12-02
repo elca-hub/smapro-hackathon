@@ -3,79 +3,79 @@
 import AuthRequest from "@/request/AuthRequest";
 import AuthResponse from "@/request/model/AuthResponse";
 import AuthToken from "@/request/model/AuthToken";
-import { useRouter } from "next/navigation"
-import { FormEvent, useEffect, useState } from "react"
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 type Community = {
-  id: string,
-  name: string
-}
+  id: string;
+  name: string;
+};
 
-const authRequest = new AuthRequest(new AuthToken())
+const authRequest = new AuthRequest(new AuthToken());
 
 const fetchCommunities = async (): Promise<Community[]> => {
-  const res: AuthResponse = await authRequest.request('community/', 'GET')
+  const res: AuthResponse = await authRequest.request("community/", "GET");
   const data = res.json;
-  if (data.status === 'SUCCESS' && res.status === 200) {
-    const communityData = data.data
+  if (data.status === "SUCCESS" && res.status === 200) {
+    const communityData = data.data;
     return communityData.map((community: any) => {
       return {
         id: community.communityId,
-        name: community.name
-      }
+        name: community.name,
+      };
     });
   }
 
-  throw new Error('failed to fetch community')
-}
+  throw new Error("failed to fetch community");
+};
 
-export default function CreateArticlePage () {
-  const router = useRouter()
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [community, setCommunity] = useState('')
+export default function CreateArticlePage() {
+  const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [community, setCommunity] = useState("");
 
-  const [communities, setCommunities] = useState<Community[]>([])
+  const [communities, setCommunities] = useState<Community[]>([]);
 
   useEffect(() => {
     (async () => {
       const data = await fetchCommunities();
 
       setCommunities(data);
-    })()
-  }, [])
+    })();
+  }, []);
 
-  async function onSubmit (e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
     const sendData = {
       title,
       content,
-      communityId: community.length > 0 ? community : null
-    }
+      communityId: community.length > 0 ? community : null,
+    };
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
 
     if (!token) {
-      router.push('/signin')
-      return
+      router.push("/signin");
+      return;
     }
 
-    const res = await authRequest.request('article/', 'POST', sendData)
+    const res = await authRequest.request("article/", "POST", sendData);
 
-    const data = res.json
-    const status = res.status
+    const data = res.json;
+    const status = res.status;
 
-    if (data.status === 'SUCCESS' && status === 200) {
-      router.push('/article')
-      return
+    if (data.status === "SUCCESS" && status === 200) {
+      router.push("/article");
+      return;
     } else {
-      if (status === 200 && data.status === 'ERROR') {
-        alert(data.message)
-        return
+      if (status === 200 && data.status === "ERROR") {
+        alert(data.message);
+        return;
       } else {
-        alert('エラーが発生しました')
-        return
+        alert("エラーが発生しました");
+        return;
       }
     }
   }
@@ -131,8 +131,10 @@ export default function CreateArticlePage () {
               <option value="">選択してください</option>
               {communities.map((community) => {
                 return (
-                  <option value={community.id} key={community.id}>{community.name}</option>
-                )
+                  <option value={community.id} key={community.id}>
+                    {community.name}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -148,5 +150,5 @@ export default function CreateArticlePage () {
         </form>
       </div>
     </>
-  )
+  );
 }
