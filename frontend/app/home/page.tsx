@@ -115,9 +115,11 @@ export default function HomePage() {
                   ></Articles>
                 );
               })}
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
+              <Link href="post/pastposts">
+                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                  <BsChevronDoubleRight />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

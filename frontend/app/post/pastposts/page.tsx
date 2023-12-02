@@ -1,12 +1,52 @@
+"use client";
+
 import Articles from "@/components/Articles";
+import AuthRequest from "@/request/AuthRequest";
+import AuthResponse from "@/request/model/AuthResponse";
+import AuthToken from "@/request/model/AuthToken";
+import { useState, useEffect } from "react";
 
-const articleList = [
-  {
-    id: "tset",
-  },
-];
+const authRequest: AuthRequest = new AuthRequest(new AuthToken());
 
+type Article = {
+  id: string;
+  title: string;
+  content: string;
+  reactionCount: number;
+};
+
+const fetchArticles = async (): Promise<Article[]> => {
+  const res: AuthResponse = await authRequest.request("article/", "GET");
+  const data = res.json;
+  if (data.status === "SUCCESS" && res.status === 200) {
+    const articleData = data.data;
+    return articleData.map((article: any) => {
+      const values: number[] = Object.values(article.evaluations);
+
+      return {
+        id: article.articleId,
+        title: article.title,
+        content: article.content,
+        reactionCount: values.reduce(
+          (sum: number, ele: number) => sum + ele,
+          0
+        ),
+      };
+    });
+  }
+
+  throw new Error("failed to fetch articles.");
+};
 export default function PastPostsPage() {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchArticles();
+      setArticles(data);
+    })();
+  }, []);
+
   return (
     <>
       <label className="relative block px-52 mt-6">
@@ -28,8 +68,14 @@ export default function PastPostsPage() {
         </h2>
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
-            {articleList.map((val) => {
-              return <Articles key={val.id} title={""} id={""}></Articles>;
+            {articles.map((article) => {
+              return (
+                <Articles
+                  title={article.title}
+                  key={article.id}
+                  id={""}
+                ></Articles>
+              );
             })}
           </div>
         </div>
