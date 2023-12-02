@@ -24,7 +24,7 @@ export default function PastPostsPage() {
 
       <section className="text-gray-600 body-font">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
-          過去の投稿記事一覧
+          投稿した記事一覧
         </h2>
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-wrap -m-4">
