@@ -15,9 +15,10 @@ type Community = {
   member: number;
 }
 
-const authRequest = new AuthRequest(new AuthToken());
 
 const fetchCommunities = async (): Promise<Community[]> => {
+  const authRequest = new AuthRequest(new AuthToken());
+
   const res: AuthResponse = await authRequest.request("community/", "GET");
   const data = res.json;
 
@@ -90,6 +91,7 @@ export default function CommunityTopPage() {
                   <Communities
                     title={community.name}
                     number={community.member}
+                    id={community.id}
                     key={community.id}
                   ></Communities>
                 );

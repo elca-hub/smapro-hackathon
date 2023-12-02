@@ -1,9 +1,10 @@
+"use client";
+
 import AuthRequest from "@/request/AuthRequest";
 import AuthToken from "@/request/model/AuthToken";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const authRequest: AuthRequest = new AuthRequest(new AuthToken());
+import JoinedUser from "./_components/JoinedUser";
 
 type User = {
   id: string;
@@ -14,11 +15,13 @@ type Community = {
   id: string;
   name: string;
   desciption: string;
-  member: User[];
+  members: User[];
   isOwner: boolean;
 }
 
 const fetchCommunity = async (communityId: string): Promise<Community> => {
+  const authRequest: AuthRequest = new AuthRequest(new AuthToken());
+
   const res = await authRequest.request(`community/${communityId}`, 'GET')
   const data = res.json
   if (data.status === 'SUCCESS' && res.status === 200) {
@@ -29,7 +32,7 @@ const fetchCommunity = async (communityId: string): Promise<Community> => {
       name: communityData.name,
       desciption: communityData.description,
       isOwner: communityData.isOwner,
-      member: communityData.member.map((member: any) => {
+      members: communityData.members.map((member: any) => {
         return {
           id: member.userId,
           name: member.name
@@ -42,7 +45,7 @@ const fetchCommunity = async (communityId: string): Promise<Community> => {
 }
 
 export default function ShowCommunityPage({ params }: { params: { communityId: string } }) {
-  const [community, setCommunity] = useState<Community>( {} as Community)
+  const [community, setCommunity] = useState<Community>()
   const router = useRouter()
 
   useEffect(() => {
@@ -60,13 +63,27 @@ export default function ShowCommunityPage({ params }: { params: { communityId: s
   return (
     <>
       <h2 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 p-8">
-        {community.name}
+        {community?.name}
       </h2>
+      
+      <section className="text-gray-600 body-font">
+        <p className="leading-relaxed p-3 ml-3">
+          {community?.desciption}
+        </p>
+      </section>
 
       <section className="text-gray-600 body-font">
-        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
+        <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-3 text-center">
           所属ユーザ一覧
         </h2>
+
+        <ul className="list-none text-center m-4">
+          {
+            community?.members.map(member => {
+              return <JoinedUser id={member.id} name={member.name} key={member.id}></JoinedUser>
+            })
+          }
+        </ul>
       </section>
     </>
   )
