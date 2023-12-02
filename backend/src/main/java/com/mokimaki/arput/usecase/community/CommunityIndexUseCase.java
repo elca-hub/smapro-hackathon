@@ -27,7 +27,8 @@ public class CommunityIndexUseCase implements IUseCase<CommunityIndexInputData, 
             return communities.stream().map((community -> new CommunityIndexOutputData(
                     community.getId().getId(),
                     community.getName(),
-                    community.getDescription()
+                    community.getDescription(),
+                    community.getMembers().size()
             ))).toList();
         } catch (Exception e) {
             throw new UseCaseException(e.getMessage());
