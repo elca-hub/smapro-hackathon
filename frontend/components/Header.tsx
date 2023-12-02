@@ -1,10 +1,18 @@
 "use client";
 
+import AuthRequest from "@/request/AuthRequest";
+import AuthToken from "@/request/model/AuthToken";
+
+const authRequest = new AuthRequest(new AuthToken());
+
 export default function Header() {
   async function logout() {
-    await fetch("http://localhost:5050/user/logout", {
-      method: "GET",
-    });
+    const res = await authRequest.request("user/logout", "GET");
+    const data = res.json;
+    if (data.status === "SUCCESS" && res.status === 200) {
+      localStorage.removeItem("token");
+      location.href = "/";
+    }
   }
 
   return (
