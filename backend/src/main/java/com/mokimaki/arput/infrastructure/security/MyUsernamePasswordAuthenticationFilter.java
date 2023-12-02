@@ -32,9 +32,9 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
 
         setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/user/login"));
 
-        var issuedAt = new Date();
-
         this.setAuthenticationSuccessHandler((request, response, authentication) -> {
+            var issuedAt = new Date();
+
             String email = authentication.getName(); // メールアドレスを取得
             String contentToken = UUID.randomUUID().toString();
 
