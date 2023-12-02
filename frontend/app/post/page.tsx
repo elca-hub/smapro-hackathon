@@ -15,9 +15,11 @@ export default function PostTopPage() {
           投稿する
         </h2>
         <div className="container px-5 py-4 mx-auto">
-          <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
-          <BsFilePlus />
-          </button>
+          <Link href="post/create">
+            <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
+              <BsFilePlus />
+            </button>
+          </Link>
         </div>
       </section>
 
