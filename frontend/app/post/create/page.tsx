@@ -126,7 +126,6 @@ export default function CreateArticlePage() {
               id="community"
               value={community}
               onChange={(e) => setCommunity(e.target.value)}
-              required
             >
              <option value="">選択してください</option>
               {communities.map((community) => {
