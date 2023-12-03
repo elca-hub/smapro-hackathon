@@ -160,23 +160,31 @@ export default function TopPage() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="px-4 py-3">2023/11/29</td>
-                  <td className="px-4 py-3">トップページを作成しました。</td>
+                  <td className="px-4 py-3">2023/12/3</td>
+                  <td className="px-4 py-3">ウェブページのUIを改善しました。</td>
                 </tr>
                 <tr>
                   <td className="border-t-2 border-gray-200 px-4 py-3">
-                    2023/11/28
+                    2023/12/2
                   </td>
                   <td className="border-t-2 border-gray-200 px-4 py-3">
-                    ここにお知らせを記入する。
+                    コミュニティの作成機能を実装しました。
                   </td>
                 </tr>
                 <tr>
                   <td className="border-t-2 border-gray-200 px-4 py-3">
-                    2023/11/28
+                    2023/12/2
                   </td>
                   <td className="border-t-2 border-gray-200 px-4 py-3">
-                    ここにお知らせを記入する。
+                    記事の投稿機能を実装しました。
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">
+                    2023/12/2
+                  </td>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">
+                    スマプロハッカソン１日目
                   </td>
                 </tr>
                 <tr>
@@ -184,7 +192,7 @@ export default function TopPage() {
                     2023/11/27
                   </td>
                   <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    ここにお知らせを記入する。
+                    あーぷっとのページを作成しました。
                   </td>
                 </tr>
               </tbody>
