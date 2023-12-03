@@ -47,9 +47,6 @@ export default function ArticleTopPage() {
   useEffect(() => {
     (async () => {
       const data = await fetchArticles();
-
-      console.log(data);
-
       setArticles(data);
     })();
   }, []);
@@ -60,20 +57,20 @@ export default function ArticleTopPage() {
         投稿ページ
       </h2>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font pl-8">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           投稿する
         </h2>
-        <div className="container px-10 pt-4 ">
+        <div className="container px-10 pt-4">
           <Link href="post/create">
-            <button className="w-16 h-16 mr-3 mb-8 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
+            <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white text-3xl flex-shrink-0">
               <BsFillSendPlusFill />
             </button>
           </Link>
         </div>
       </section>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font pl-8">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           投稿した記事一覧
         </h2>
@@ -90,7 +87,7 @@ export default function ArticleTopPage() {
                 );
               })}
               <Link href="post/pastposts">
-                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white flex-shrink-0">
                   <BsChevronDoubleRight />
                 </button>
               </Link>

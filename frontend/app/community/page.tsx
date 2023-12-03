@@ -13,8 +13,7 @@ type Community = {
   id: string;
   name: string;
   member: number;
-}
-
+};
 
 const fetchCommunities = async (): Promise<Community[]> => {
   const authRequest = new AuthRequest(new AuthToken());
@@ -35,7 +34,7 @@ const fetchCommunities = async (): Promise<Community[]> => {
     alert("エラーが発生しました");
     throw new Error("failed to fetch community");
   }
-}
+};
 
 export default function CommunityTopPage() {
   const authRequest = new AuthRequest(new AuthToken());
@@ -71,7 +70,7 @@ export default function CommunityTopPage() {
       setCommunity({
         id: communityData.id,
         name: communityData.name,
-        member: -1
+        member: -1,
       });
     } else {
       setCommunity(undefined);
@@ -81,7 +80,7 @@ export default function CommunityTopPage() {
   async function joinCommunity() {
     const sendData = {
       entryCode,
-      communityId: community?.id
+      communityId: community?.id,
     };
 
     console.log(sendData);
@@ -134,11 +133,14 @@ export default function CommunityTopPage() {
         </form>
       </label>
 
-      <div className={`${community ? 'block' : 'hidden'} text-center mt-3`}>
+      <div className={`${community ? "block" : "hidden"} text-center mt-3`}>
         <h4>以下のコミュニティが見つかりました。</h4>
         <h3 className="my-3">{community?.name}</h3>
 
-        <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full" onClick={joinCommunity}>
+        <button
+          className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full"
+          onClick={joinCommunity}
+        >
           参加する
         </button>
       </div>
@@ -147,42 +149,40 @@ export default function CommunityTopPage() {
         コミュニティ
       </h2>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font pl-8">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           コミュニティを作成する
         </h2>
         <div className="container px-10 py-4">
           <Link href="community/create">
-            <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white text-3xl flex-shrink-0">
+            <button className="w-16 h-16 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white text-3xl flex-shrink-0">
               <BsFillPersonPlusFill />
             </button>
           </Link>
         </div>
       </section>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font pl-8">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           所属コミュニティ一覧
         </h2>
-        <div className="container px-1 py-1 mx-auto">
-          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 px-4 items-center">
-            <div className="flex lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto">
-              {communities.map((community) => {
-                return (
-                  <Communities
-                    title={community.name}
-                    number={community.member}
-                    id={community.id}
-                    key={community.id}
-                  ></Communities>
-                );
-              })}
+        <div className="container px-5 py-4 mx-auto">
+          <div className="-m-4 mb-8">
+            <div className="flex flex-wrap lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto items-center">
+              {communities.map((community) => (
+                <Communities
+                  title={community.name}
+                  number={community.member}
+                  id={community.id}
+                  key={community.id}
+                />
+              ))}
+              <Link href={"community/belongingcommunities"}>
+                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white flex-shrink-0">
+                  <BsChevronDoubleRight />
+                </button>
+              </Link>
             </div>
-            <Link href={"community/belongingcommunities"}>
-              <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                <BsChevronDoubleRight />
-              </button>
-            </Link>
           </div>
         </div>
       </section>

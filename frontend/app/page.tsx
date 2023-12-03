@@ -48,7 +48,7 @@ export default function TopPage() {
                   </p>
                   <a
                     href="post"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
+                    className="mt-3 text-indigo-500 hover:text-indigo-600 inline-flex items-center"
                   >
                     投稿ページはこちら
                     <svg
@@ -82,7 +82,7 @@ export default function TopPage() {
                   </p>
                   <a
                     href="article"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
+                    className="mt-3 text-indigo-500 hover:text-indigo-600 inline-flex items-center"
                   >
                     記事一覧ページはこちら
                     <svg
@@ -116,7 +116,7 @@ export default function TopPage() {
                   </p>
                   <a
                     href="community"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
+                    className="mt-3 text-indigo-500 hover:text-indigo-600 inline-flex items-center"
                   >
                     コミュニティページはこちら
                     <svg

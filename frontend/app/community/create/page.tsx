@@ -79,7 +79,7 @@ export default function CreateArticlePage () {
 
           <div className="text-center my-6">
             <button
-              className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-indigo-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               type="submit"
             >
               作成する

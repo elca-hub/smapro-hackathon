@@ -69,24 +69,22 @@ export default function ArticleTopPage() {
         記事一覧
       </h2>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font pl-8">
         <h2 className="sm:text-2xl sm:text-1xl font-medium title-font text-gray-900 p-8">
           最新の記事一覧
         </h2>
-        <div className="container px-5 py-4 mx-auto">
+        <div className="container px-5 py-4 pb-8 mx-auto">
           <div className="-m-4">
             <div className="flex flex-wrap lg:w-1/7 md:w-1/7 p-4 max-w-full h-auto items-center">
-              {articles.map((article) => {
-                return (
-                  <Articles
-                    title={article.title}
-                    key={article.id}
-                    id={article.id}
-                  ></Articles>
-                );
-              })}
+              {articles.map((article) => (
+                <Articles
+                  title={article.title}
+                  key={article.id}
+                  id={article.id}
+                />
+              ))}
               <Link href="article/newarticles">
-                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                <button className="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white flex-shrink-0">
                   <BsChevronDoubleRight />
                 </button>
               </Link>
