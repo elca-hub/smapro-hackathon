@@ -39,6 +39,8 @@ public class CommunityRepository implements ICommunityRepository {
         communityEntity.convert(community);
         communityEntity.setOwner(user);
 
+        communityContext.save(communityEntity);
+
         JoinedCommunityEntity joinedCommunityEntity = new JoinedCommunityEntity();
         joinedCommunityEntity.setCommunityEntity(communityEntity);
         joinedCommunityEntity.setUserEntity(user);
